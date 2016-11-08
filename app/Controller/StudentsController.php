@@ -2,6 +2,11 @@
 
 class StudentsController extends AppController{
 
+  public $components = [
+    'Search.Prg',
+  ];
+  public $presetVars = true;
+
   public function beforeFilter(){
     parent::beforeFilter();
 
@@ -9,7 +14,7 @@ class StudentsController extends AppController{
   }
 
   public function index(){
-
+    $this->Prg->commonProcess();
   }
 
   public function add(){
