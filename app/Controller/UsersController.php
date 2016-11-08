@@ -91,12 +91,12 @@ class UsersController extends AppController{
         $email->to($user_email);
         $email->template('reset_password');
         $email->subject('生徒管理システム パスワードのリセット');
+        $email->viewVars(compact('new_password'));
         $email->send();
         $this->Flash->success('登録されているアドレスにメールを送信しました');
-        var_dump($userId);
+        $aaaa = 'hogehoge';
         var_dump($new_password);
         var_dump($hashed_password);
-        $this->set('userId', $userId);
       } else {
         //セキュリティ保護のため、存在しないアドレスでもsuccessさせる
         $this->Flash->success('登録されているアドレスにメールを送信しました');
