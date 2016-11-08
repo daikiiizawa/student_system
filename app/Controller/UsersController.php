@@ -45,6 +45,10 @@ class UsersController extends AppController{
     $this->redirect($this->Auth->logout());
   }
 
+  public function delete(){
+
+  }
+
   public function edit(){
     if($this->request->is(['post', 'put'])){
 
