@@ -42,7 +42,7 @@
 				</div>
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li><?= $this->Html->link('生徒情報管理システム', '/'); ?></li>
+						<li><?= $this->Html->link('生徒情報管理システム(クリック時の動作は別途対応)', '/'); ?></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
             <?php if($currentUser) :?>
