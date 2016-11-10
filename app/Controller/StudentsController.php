@@ -119,6 +119,74 @@ class StudentsController extends AppController{
         $this->set('yomi', $yomi);
     }
 
+    public function confirm($id = null) {
+        if (!$this->Student->exists($id)) {
+            throw new NotFoundExeption('生徒情報が見つかりません');
+        }
+        // 既存データ参照
+        $student = $this->Student->findById($id);
+        $this->set('student', $student);
+
+        // マスタデータ
+        $sex = ['男性', '女性', '不明'];
+        $this->set('sex', $sex);
+        $purpose = ['起業', '転職', 'フリーランス', 'スキルアップ', '副業', '趣味', 'その他'];
+        $this->set('purpose', $purpose);
+        $pc = ['Mac', 'Windows7', 'Windows8', 'Windows10', 'その他'];
+        $this->set('pc', $pc);
+        $week = ['日', '月', '火', '水', '木', '金', '土'];
+        $this->set('week', $week);
+        $status = ['入会前', '学習中', '卒業済', '削除予定'];
+        $this->set('status', $status);
+        $yomi = ['A', 'B', 'C'];
+        $this->set('yomi', $yomi);
+
+        // 編集画面からのpostデータ
+        $confirm = $this->request->data;
+        $this->set('confirm', $confirm);
+        // 日付フォーマット加工(array→string)
+        $birthdate =    $confirm['Student']['birthdate']['year'].'-'.
+                        $confirm['Student']['birthdate']['month'].'-'.
+                        $confirm['Student']['birthdate']['day'];
+        $this->set('birthdate', $birthdate);
+        $firstdate =    $confirm['Student']['first_meet_datetime']['year'].'-'.
+                        $confirm['Student']['first_meet_datetime']['month'].'-'.
+                        $confirm['Student']['first_meet_datetime']['day'].' '.
+                        $confirm['Student']['first_meet_datetime']['hour'].':'.
+                        $confirm['Student']['first_meet_datetime']['min'].':00';
+        $this->set('firstdate', $firstdate);
+        $seconddate =   $confirm['Student']['second_meet_datetime']['year'].'-'.
+                        $confirm['Student']['second_meet_datetime']['month'].'-'.
+                        $confirm['Student']['second_meet_datetime']['day'].' '.
+                        $confirm['Student']['second_meet_datetime']['hour'].':'.
+                        $confirm['Student']['second_meet_datetime']['min'].':00';
+        $this->set('seconddate', $seconddate);
+        $thirddate =    $confirm['Student']['third_meet_datetime']['year'].'-'.
+                        $confirm['Student']['third_meet_datetime']['month'].'-'.
+                        $confirm['Student']['third_meet_datetime']['day'].' '.
+                        $confirm['Student']['third_meet_datetime']['hour'].':'.
+                        $confirm['Student']['third_meet_datetime']['min'].':00';
+        $this->set('thirddate', $thirddate);
+        $contactdate =  $confirm['Student']['last_contact_datetime']['year'].'-'.
+                        $confirm['Student']['last_contact_datetime']['month'].'-'.
+                        $confirm['Student']['last_contact_datetime']['day'].' '.
+                        $confirm['Student']['last_contact_datetime']['hour'].':'.
+                        $confirm['Student']['last_contact_datetime']['min'].':00';
+        $this->set('contactdate', $contactdate);
+    }
+
+    public function save($id = null) {
+        if (!$this->Student->exists($id)) {
+            throw new NotFoundExeption('生徒情報が見つかりません');
+        }
+        if ($this->request->is(['post', 'put'])) {
+            if ($this->Student->save($this->request->data)) {
+                $this->Flash->success('更新しました');
+                return $this->redirect(['action' => 'view',$id]);
+            }
+        }
+    }
+
     public function entry(){
 
     }
