@@ -110,4 +110,3 @@ INSERT INTO `students` (`family_name`, `given_name`,
                 VALUES ("削除", "不明",
                         "08000003333", "sample@mail.jp", "2",
                         "3", "ABC-1111", "2016-07-10 19:00:00");
-

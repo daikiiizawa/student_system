@@ -2,6 +2,8 @@
 
 class StudentsController extends AppController{
 
+    public $uses = ['Student','Level', 'Region'];
+
     public $components = [
         'Search.Prg',
     ];
@@ -238,6 +240,13 @@ class StudentsController extends AppController{
     }
 
     public function entry(){
+        $programming_lv = $this->Level->find('list', ['fields' => ['detail']]);
+        $this->set('programming_lv', $programming_lv);
+        $region = $this->Region->find('list', ['fields' => ['region_name']]);
+        $this->set('region', $region);
+        if($this->request->is('post')){
+
+        }
 
     }
 
