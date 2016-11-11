@@ -26,7 +26,9 @@
 
         <tr>
             <td class="active text-right" style="width:40%;">性別</td>
-            <td><?= $sex[$student['Student']['sex_code']] ;?></td>
+            <?php if($student['Student']['sex_code'] != null) :?>
+                <td><?= $sex[$student['Student']['sex_code']] ;?></td>
+            <?php endif;?>
         </tr>
 
         <tr>
@@ -144,7 +146,11 @@
 
         <tr>
             <td class="active text-right" style="width:40%;">生徒ステータス</td>
-            <td><?= $status[$student['Student']['students_status_code']] ;?></td>
+            <td>
+                <?php if($student['Student']['students_status_code'] != null) :?>
+                    <?= $status[$student['Student']['students_status_code']] ;?>
+                <?php endif ;?>
+            </td>
         </tr>
 
         <tr>

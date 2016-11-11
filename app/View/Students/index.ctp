@@ -160,6 +160,8 @@
                 <td>
                     <?= $this->Html->link(h($student['Student']['family_name']) . ' '. h($student['Student']['given_name']), [
                     'action' => 'view', $student['Student']['id']
+                    ], [
+                    'target' => '_blank'
                     ]) ;?>
                  </td>
                 <td>
@@ -194,6 +196,8 @@
                 <td class="btn btn-default">
                     <?= $this->Html->link('詳細',[
                     'action' => 'view',$student['Student']['id']
+                    ], [
+                    'target' => '_blank'
                     ]) ;?>
                 </td>
             </tr>

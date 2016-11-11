@@ -3,10 +3,18 @@
 
 <table class="table">
 <h2>確認画面</h2>
+<p class="text-danger">※赤枠の箇所が更新されます</p>
+    <b>↑↑↑今は氏名のみ対応済→この書き方がダサい気がする</b>
+
     <tbody>
         <tr>
-            <td class="active text-right" style="width:40%;">氏名</td>
-            <td><?= h($confirm['Student']['family_name']) . ' '. h($confirm['Student']['given_name']) ;?></td>
+            <?php if ($confirm['Student']['family_name'].$confirm['Student']['given_name'] != $student['Student']['family_name'].$student['Student']['given_name']) :?>
+                <td class="active text-right" style="width:40%;">氏名</td>
+                <td class="bg-danger"><?= h($confirm['Student']['family_name']) . ' '. h($confirm['Student']['given_name']) ;?></td>
+            <?php else :?>
+                <td class="active text-right" style="width:40%;">氏名</td>
+                <td><?= h($confirm['Student']['family_name']).' '.h($confirm['Student']['given_name']) ;?></td>
+            <?php endif ;?>
         </tr>
 
         <tr>
@@ -26,7 +34,11 @@
 
         <tr>
             <td class="active text-right" style="width:40%;">性別</td>
-            <td><?= $sex[$confirm['Student']['sex_code']] ;?></td>
+            <td>
+                <?php if($confirm['Student']['sex_code'] != null):?>
+                    <?= $sex[$confirm['Student']['sex_code']] ;?>
+                <?php endif ;?>
+            </td>
         </tr>
 
         <tr>
@@ -144,7 +156,11 @@
 
         <tr>
             <td class="active text-right" style="width:40%;">生徒ステータス</td>
-            <td><?= $status[$confirm['Student']['students_status_code']] ;?></td>
+            <td>
+                <?php if($confirm['Student']['students_status_code'] != null) :?>
+                    <?= $status[$confirm['Student']['students_status_code']] ;?>
+                <?php endif ;?>
+            </td>
         </tr>
 
         <tr>
