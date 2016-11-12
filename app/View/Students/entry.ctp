@@ -55,6 +55,7 @@
                 'label' => false,
                 'class' => 'form-control',
                 'type' => 'select',
+                'options' => $region
             ]); ?>
         </div>
         <div class="form-group">
@@ -62,6 +63,7 @@
                 'label' => false,
                 'class' => 'form-control',
                 'type' => 'select',
+                'options' => $programming_lv
             ]); ?>
         </div>
         <div class="form-group">
