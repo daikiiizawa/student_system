@@ -9,7 +9,7 @@ class Student extends AppModel {
     );
 
     //programming_lv、都道府県との紐付け
-    public $hasOne = ['Level', 'Region'];
+    // public $hasOne = ['Level', 'Region'];
 
     public $validate = [
         'family_name' => [

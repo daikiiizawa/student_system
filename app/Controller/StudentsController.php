@@ -4,7 +4,7 @@ App::uses('CakeEmail', 'Network/Email');
 
 class StudentsController extends AppController{
 
-    public $uses = ['Student','Level', 'Region'];
+    public $uses = ['Student', 'Level', 'Region'];
 
     public $components = [
         'Search.Prg',
@@ -294,6 +294,16 @@ class StudentsController extends AppController{
 
 
                 //エントリーした生徒へのメール送信
+                $email = new CakeEmail('default');
+                $email->from(['info@elites.com' => 'ELITES']);
+                $email->to($student_email);
+                $email->template('entry_to_student');
+                $email->subject('ELITESにお問い合わせいただきありがとうございます');
+                $email->viewVars(compact([
+                    'family_name',
+                    'given_name',
+                ]));
+                $email->send();
 
 
 
