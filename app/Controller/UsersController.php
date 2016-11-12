@@ -92,8 +92,6 @@ class UsersController extends AppController{
                 $email->viewVars(compact('new_password'));
                 $email->send();
                 $this->Flash->success('登録されているアドレスにメールを送信しました');
-                var_dump($new_password);
-                var_dump($hashed_password);
             } else {
                 //セキュリティ保護のため、存在しないアドレスでもsuccessさせる
                 $this->Flash->success('登録されているアドレスにメールを送信しました');
