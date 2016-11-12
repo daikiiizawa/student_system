@@ -67,7 +67,7 @@
             ]); ?>
         </div>
         <div class="form-group">
-            <?= $this->Form->input('hoge', [
+            <?= $this->Form->input('comment', [
                 'label' => false,
                 'type' => 'textarea',
                 'class' => 'form-control',
@@ -75,9 +75,6 @@
                 'rows'=> 5
             ]); ?>
         </div>
-        <?= $this->Form->end([
-          'label' => '無料相談にエントリーする',
-          'class' => 'center-block btn btn-info btn-lg'
-        ]); ?>
+        <?= $this->Form->submit('無料相談にエントリーする', ['class' => 'center-block btn btn-info btn-lg']); ?>
     </form>
 </div>

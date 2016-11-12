@@ -1,8 +1,10 @@
 <?php
+App::uses('CakeEmail', 'Network/Email');
+
 
 class StudentsController extends AppController{
 
-    public $uses = ['Student','Level', 'Region'];
+    public $uses = ['Student', 'Level', 'Region'];
 
     public $components = [
         'Search.Prg',
@@ -245,9 +247,71 @@ class StudentsController extends AppController{
         $region = $this->Region->find('list', ['fields' => ['region_name']]);
         $this->set('region', $region);
         if($this->request->is('post')){
+            $this->Student->create();
+            if($this->Student->save($this->request->data)){
 
+                //ELITES事務局への通知メール送信
+                $family_name = $this->request->data['Student']['family_name'];
+                $given_name = $this->request->data['Student']['given_name'];
+                $family_name_kana = $this->request->data['Student']['family_name_kana'];
+                $given_name_kana = $this->request->data['Student']['given_name_kana'];
+                $student_email = $this->request->data['Student']['email'];
+                $phone_number = $this->request->data['Student']['phone_number'];
+
+                //都道府県の変数設定
+                $region_name = $this->Region->find('list', [
+                    'fields' => ['region_name'],
+                    'conditions' => ['id' => $this->request->data['Student']['region_code']
+                ]]);
+                $region_name = $region_name[$this->request->data['Student']['region_code']];
+
+                //プログラミングレベルの変数設定
+                $programming_lv = $this->Level->find('list', [
+                    'fields' => ['detail'],
+                    'conditions' => ['id' => $this->request->data['Student']['programming_lv']
+                ]]);
+                $programming_lv = $programming_lv[$this->request->data['Student']['programming_lv']];
+
+                $comment = $this->request->data['Student']['comment'];
+
+                $email = new CakeEmail('default');
+                $email->from(['info@elites.com' => 'ELITES']);
+                $email->to('monokuro_monocuro@yahoo.co.jp');
+                $email->template('entry_to_user');
+                $email->subject('ELITES新規エントリーのお知らせ');
+                $email->viewVars(compact([
+                    'family_name',
+                    'given_name',
+                    'family_name_kana',
+                    'given_name_kana',
+                    'student_email',
+                    'phone_number',
+                    'region_name',
+                    'programming_lv',
+                    'comment'
+                ]));
+                $email->send();
+
+
+                //エントリーした生徒へのメール送信
+                $email = new CakeEmail('default');
+                $email->from(['info@elites.com' => 'ELITES']);
+                $email->to($student_email);
+                $email->template('entry_to_student');
+                $email->subject('ELITESにお問い合わせいただきありがとうございます');
+                $email->viewVars(compact([
+                    'family_name',
+                    'given_name',
+                ]));
+                $email->send();
+
+
+
+                //thanksページへの遷移
+                $this->Flash->success('エントリーが完了しました');
+                return $this->redirect(['action' => 'thanks']);
+            }
         }
-
     }
 
     public function thanks(){
