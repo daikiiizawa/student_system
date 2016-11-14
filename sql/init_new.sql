@@ -23,12 +23,12 @@ CREATE TABLE `students` (
   `sex_code` tinyint(2),
   `birthdate` date,
   `postalcode` int(7),
-  `region_code` tinyint(2),
+  `region_id` int(11) NOT NULL,
   `address` varchar(255),
   `occupation` varchar(255),
   `large_purpose_code` tinyint(2),
   `detail_purpose` text,
-  `programming_lv` tinyint(2),
+  `programming_lv_code` tinyint(2),
   `studying_time` varchar(255),
   `come_to_office_time` varchar(255),
   `first_preffered_date` varchar(255),
@@ -50,13 +50,6 @@ CREATE TABLE `students` (
 ALTER TABLE `students` ADD PRIMARY KEY (`id`);
 ALTER TABLE `students` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
-CREATE TABLE `levels` (
-  `id` int(11) NOT NULL,
-  `detail` varchar(255)
-) ENGINE=InnoDB;
-ALTER TABLE `levels` ADD PRIMARY KEY (`id`);
-ALTER TABLE `levels` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 CREATE TABLE `regions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `region_code` char(2) NOT NULL,
@@ -67,27 +60,22 @@ CREATE TABLE `regions` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
--- プログラミングLV初期データ投入
-INSERT INTO `levels` (`detail`) VALUES ("初めてプログラミングに触れる");
-INSERT INTO `levels` (`detail`) VALUES ("プログラミングを少し学んだことがある");
-INSERT INTO `levels` (`detail`) VALUES ("プログラミングで仕事をしている・したことがある");
-
 -- 都道府県初期データ投入
 INSERT INTO `regions` (`id`, `region_code`, `region_name`, `block_name`) VALUES
-(1, '01', '北海道', '北海道'),
-(2, '02', '青森県', '東北'),
-(3, '03', '岩手県', '東北'),
-(4, '04', '宮城県', '東北'),
-(5, '05', '秋田県', '東北'),
-(6, '06', '山形県', '東北'),
-(7, '07', '福島県', '東北'),
-(8, '08', '茨城県', '関東'),
-(9, '09', '栃木県', '関東'),
-(10, '10', '群馬県', '関東'),
-(11, '11', '埼玉県', '関東'),
-(12, '12', '千葉県', '関東'),
-(13, '13', '東京都', '関東'),
-(14, '14', '神奈川県', '関東'),
+(1, '13', '東京都', '関東'),
+(2, '12', '千葉県', '関東'),
+(3, '14', '神奈川県', '関東'),
+(4, '11', '埼玉県', '関東'),
+(5, '01', '北海道', '北海道'),
+(6, '02', '青森県', '東北'),
+(7, '03', '岩手県', '東北'),
+(8, '04', '宮城県', '東北'),
+(9, '05', '秋田県', '東北'),
+(10, '06', '山形県', '東北'),
+(11, '07', '福島県', '東北'),
+(12, '08', '茨城県', '関東'),
+(13, '09', '栃木県', '関東'),
+(14, '10', '群馬県', '関東'),
 (15, '15', '新潟県', '中部'),
 (16, '16', '富山県', '中部'),
 (17, '17', '石川県', '中部'),
