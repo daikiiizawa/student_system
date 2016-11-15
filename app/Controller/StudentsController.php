@@ -183,9 +183,11 @@ class StudentsController extends AppController{
         $confirm = $this->request->data;
         $this->set('confirm', $confirm);
         // 日付フォーマット加工(array→string)
-        $birthdate =    $confirm['Student']['birthdate']['year'].'-'.
-                        $confirm['Student']['birthdate']['month'].'-'.
-                        $confirm['Student']['birthdate']['day'];
+        if ($confirm['Student']['birthdate']['year'] != '') {
+            $birthdate =    $confirm['Student']['birthdate']['year'].'-'.
+                            $confirm['Student']['birthdate']['month'].'-'.
+                            $confirm['Student']['birthdate']['day'];
+            } else {$birthdate = '';}
         $this->set('birthdate', $birthdate);
         if ($confirm['Student']['first_meet_datetime']['year'] != '') {
             $firstdate =    $confirm['Student']['first_meet_datetime']['year'].'-'.
