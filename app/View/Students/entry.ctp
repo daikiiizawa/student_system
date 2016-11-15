@@ -51,7 +51,7 @@
             ]); ?>
         </div>
         <div class="form-group">
-            <?= $this->Form->input('region_code', [
+            <?= $this->Form->input('region_id', [
                 'label' => false,
                 'class' => 'form-control',
                 'type' => 'select',
@@ -59,7 +59,7 @@
             ]); ?>
         </div>
         <div class="form-group">
-            <?= $this->Form->input('programming_lv', [
+            <?= $this->Form->input('programming_lv_code', [
                 'label' => false,
                 'class' => 'form-control',
                 'type' => 'select',
@@ -75,6 +75,7 @@
                 'rows'=> 5
             ]); ?>
         </div>
+        <?= $this->Form->hidden('students_status_code', ['value' => 0]); ?>
         <?= $this->Form->submit('無料相談にエントリーする', ['class' => 'center-block btn btn-info btn-lg']); ?>
     </form>
 </div>

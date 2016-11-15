@@ -9,11 +9,11 @@ class StudentsController extends AppController{
     public $components = [
         'Search.Prg',
     ];
+
     public $presetVars = true;
 
     public function beforeFilter(){
         parent::beforeFilter();
-
         $this->Auth->allow('add', 'entry', 'thanks');
     }
 
@@ -242,7 +242,7 @@ class StudentsController extends AppController{
     }
 
     public function entry(){
-        $programming_lv = $this->Level->find('list', ['fields' => ['detail']]);
+        $programming_lv = ['初めてプログラミングに触れる', 'プログラミングを少し学んだことがある', 'プログラミングで仕事をしている・したことがある'];
         $this->set('programming_lv', $programming_lv);
         $region = $this->Region->find('list', ['fields' => ['region_name']]);
         $this->set('region', $region);
@@ -261,16 +261,13 @@ class StudentsController extends AppController{
                 //都道府県の変数設定
                 $region_name = $this->Region->find('list', [
                     'fields' => ['region_name'],
-                    'conditions' => ['id' => $this->request->data['Student']['region_code']
+                    'conditions' => ['id' => $this->request->data['Student']['region_id']
                 ]]);
-                $region_name = $region_name[$this->request->data['Student']['region_code']];
+                $region_name = $region_name[$this->request->data['Student']['region_id']];
 
                 //プログラミングレベルの変数設定
-                $programming_lv = $this->Level->find('list', [
-                    'fields' => ['detail'],
-                    'conditions' => ['id' => $this->request->data['Student']['programming_lv']
-                ]]);
-                $programming_lv = $programming_lv[$this->request->data['Student']['programming_lv']];
+                //あとでメール送れる環境で確認すること！！
+                $programming_lv = $programming_lv[$this->request->data['Student']['programming_lv_code']];
 
                 $comment = $this->request->data['Student']['comment'];
 
