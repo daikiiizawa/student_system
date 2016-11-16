@@ -332,7 +332,6 @@
 <?= $this->Form->hidden('birthdate',['value' => $birthdate]); ?>
 <?= $this->Form->hidden('postalcode'); ?>
 <?= $this->Form->hidden('region_id'); ?>
-<?= $this->Form->hidden('address'); ?>
 <?= $this->Form->hidden('large_purpose_code'); ?>
 <?= $this->Form->hidden('detail_purpose'); ?>
 <?= $this->Form->hidden('studying_time'); ?>
@@ -350,6 +349,7 @@
 <?= $this->Form->hidden('yomi_code'); ?>
 <?= $this->Form->hidden('affiliate_id'); ?>
 <?= $this->Form->hidden('comment'); ?>
+<?= $this->Form->hidden('address', ['value' => $confirm['address']]); ?>
 
 <?= $this->Form->end([
     'label' => '更新',
@@ -374,7 +374,6 @@
 <?= $this->Form->hidden('birthdate',['value' => $birthdate]); ?>
 <?= $this->Form->hidden('postalcode'); ?>
 <?= $this->Form->hidden('region_id'); ?>
-<?= $this->Form->hidden('address'); ?>
 <?= $this->Form->hidden('large_purpose_code'); ?>
 <?= $this->Form->hidden('detail_purpose'); ?>
 <?= $this->Form->hidden('studying_time'); ?>
@@ -392,6 +391,7 @@
 <?= $this->Form->hidden('yomi_code'); ?>
 <?= $this->Form->hidden('affiliate_id'); ?>
 <?= $this->Form->hidden('comment'); ?>
+<?= $this->Form->hidden('address', ['value' => $confirm['address']]); ?>
 
 <?= $this->Form->end([
     'label' => '戻る',

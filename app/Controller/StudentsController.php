@@ -243,7 +243,11 @@ class StudentsController extends AppController{
                 $this->Flash->success('更新しました');
                 return $this->redirect(['action' => 'view',$id]);
             }
+        } else {
+            $this->Flash->error('失敗');
+            return $this->redirect(['action' => 'view',$id]);
         }
+
     }
 
     public function find() {

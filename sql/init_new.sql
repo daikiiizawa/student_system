@@ -170,8 +170,8 @@ INSERT INTO `students` (`family_name`, `given_name`, `family_name_kana`, `given_
                         "08月", "2016-07-27 19:00:00", "0", "0", "ABC-0004", "2016-07-16 19:00:00");
 
 INSERT INTO `students` (`family_name`, `given_name`,
-                        `phone_number`, `email`, `sex_code`,
+                        `phone_number`, `email`, `sex_code`, `region_id`,
                         `students_status_code`, `affiliate_id`, `created`)
                 VALUES ("削除", "不明",
-                        "08000003333", "sample@mail.jp", "2",
+                        "08000003333", "sample@mail.jp", "2", "1",
                         "3", "ABC-1111", "2016-07-10 19:00:00");
