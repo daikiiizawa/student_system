@@ -182,6 +182,7 @@ class StudentsController extends AppController{
         // 編集画面からのpostデータ
         $confirm = $this->request->data;
         $this->set('confirm', $confirm);
+
         // 日付フォーマット加工(array→string)
         if ($confirm['Student']['birthdate']['year'] != '') {
             $birthdate =    $confirm['Student']['birthdate']['year'].'-'.
@@ -220,6 +221,7 @@ class StudentsController extends AppController{
                             $confirm['Student']['last_contact_datetime']['hour'].':'.
                             $confirm['Student']['last_contact_datetime']['min'].':00';
         } else {$contactdate = '';}
+        $confirm['Student']['address'] = $confirm['address'];
         $this->set('contactdate', $contactdate);
 
         // 日付データをarrayからstringに戻す
