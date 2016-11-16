@@ -25,14 +25,14 @@
             <?= $this->Form->input('family_name_kana', [
                 'label' => false,
                 'class' => 'form-control',
-                'placeholder' => 'ふりがな(姓)',
+                'placeholder' => 'フリガナ(姓)　(全角カタカナで入力して下さい)',
             ]); ?>
         </div>
         <div class="form-group">
             <?= $this->Form->input('given_name_kana', [
                 'label' => false,
                 'class' => 'form-control',
-                'placeholder' => 'ふりがな(名)',
+                'placeholder' => 'フリガナ(名)　(全角カタカナで入力して下さい)',
             ]); ?>
         </div>
         <div class="form-group">
