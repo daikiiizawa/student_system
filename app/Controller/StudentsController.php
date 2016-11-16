@@ -4,7 +4,7 @@ App::uses('CakeEmail', 'Network/Email');
 
 class StudentsController extends AppController{
 
-    public $uses = ['Student', 'Level', 'Region'];
+    public $uses = ['Student', 'Region'];
 
     public $components = [
         'Search.Prg',
@@ -14,7 +14,7 @@ class StudentsController extends AppController{
 
     public function beforeFilter(){
         parent::beforeFilter();
-        $this->Auth->allow('add', 'entry', 'thanks');
+        $this->Auth->allow('find', 'entry', 'thanks');
     }
 
     public function index(){
@@ -244,6 +244,43 @@ class StudentsController extends AppController{
             }
         }
     }
+
+    public function find() {
+        $week = ['日', '月', '火', '水', '木', '金', '土'];
+        $this->set('week', $week);
+        $count_students = 0;
+        $this->paginate = [
+            'order' => ['created' => 'desc'],
+            'limit' => 100,
+        ];
+        if ($this->request->is('post')){
+            if ($this->request->data['Student']['search_sei'] != '' &&
+                $this->request->data['Student']['search_mei'] != '' &&
+                $this->request->data['Student']['search_phone'] != '') {
+                $search_sei = $this->request->data['Student']['search_sei'];
+                $search_mei = $this->request->data['Student']['search_mei'];
+                $search_phone = $this->request->data['Student']['search_phone'];
+                $conditions = [
+                    // 全項目必須の完全一致
+                    'Student.family_name LIKE' => $search_sei,
+                    'Student.given_name LIKE' => $search_mei,
+                    'Student.phone_number LIKE' => $search_phone,
+                    // 部分一致
+                    // 'Student.family_name LIKE' => "%{$search_sei}%",
+                    // 'Student.given_name LIKE' => "%{$search_mei}%",
+                    // 'Student.phone_number LIKE' => "%{$search_phone}%",
+                ];
+                $hit_students = $this->paginate('Student', $conditions);
+                // $this->Flash->success('検索しました');
+                $this->set('hit_students', $hit_students);
+                $count_students = count($hit_students);
+            } else {
+                $this->Flash->error('全項目入力して下さい');
+            }
+        }
+        $this->set('count_students', $count_students);
+    }
+
 
     public function entry(){
         $programming_lv = ['初めてプログラミングに触れる', 'プログラミングを少し学んだことがある', 'プログラミングで仕事をしている・したことがある'];
