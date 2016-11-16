@@ -126,6 +126,7 @@ class StudentsController extends AppController{
             '12月' => '12月'
             ];
         $this->set('month', $month);
+        $this->set('regions',$this->Region->find('list',['fields'=>['id','region_name']]));
 
         // 詳細ページからgetで来た場合のみdataに既存の生徒情報を参照する
         if (!$this->request->data) {
@@ -178,7 +179,7 @@ class StudentsController extends AppController{
         $this->set('status', $status);
         $yomi = ['A', 'B', 'C'];
         $this->set('yomi', $yomi);
-
+        $this->set('regions',$this->Region->find('list',['fields'=>['id','region_name']]));
         // 編集画面からのpostデータ
         $confirm = $this->request->data;
         $this->set('confirm', $confirm);

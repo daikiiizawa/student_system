@@ -101,12 +101,13 @@
 
 <!-- エントリーフォームが完成したらプルダウンに変更 -->
 <div class="form-group col-xs-12">
-<?= $this->Form->input('region_code', [
+<?= $this->Form->input('region_id', [
     'label' => ['text' => '都道府県', 'class' => 'col-xs-5 text-right'],
-    'type'  => 'text',
-    'placeholder'  => 'プルダウンに変更予定',
-    // 'type'  => 'select',
-    // 'empty' => '選択して下さい',
+    // 'type'  => 'text',
+    // 'placeholder'  => 'プルダウンに変更予定',
+    'type'  => 'select',
+    'options' => $regions,
+    'empty' => '選択して下さい',
     'class' => 'col-xs-3'
     ]); ?>
 </div>
