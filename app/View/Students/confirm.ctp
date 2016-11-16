@@ -80,12 +80,12 @@
 
         <tr>
             <td class="active text-right" style="width:40%;">都道府県</td>
-            <?php if ($confirm['Student']['region_code'] != $student['Student']['region_code']):?>
+            <?php if ($confirm['Student']['region_id'] != $student['Student']['region_id']):?>
                 <td class="bg-danger">
             <?php else:?>
                 <td>
             <?php endif ;?>
-            <?= $confirm['Student']['region_code'] ;?></td>
+            <?= $regions[$confirm['Student']['region_id']] ;?></td>
         </tr>
 
         <tr>
@@ -331,8 +331,7 @@
 <?= $this->Form->hidden('sex_code'); ?>
 <?= $this->Form->hidden('birthdate',['value' => $birthdate]); ?>
 <?= $this->Form->hidden('postalcode'); ?>
-<?= $this->Form->hidden('region_code'); ?>
-<?= $this->Form->hidden('address'); ?>
+<?= $this->Form->hidden('region_id'); ?>
 <?= $this->Form->hidden('large_purpose_code'); ?>
 <?= $this->Form->hidden('detail_purpose'); ?>
 <?= $this->Form->hidden('studying_time'); ?>
@@ -350,6 +349,7 @@
 <?= $this->Form->hidden('yomi_code'); ?>
 <?= $this->Form->hidden('affiliate_id'); ?>
 <?= $this->Form->hidden('comment'); ?>
+<?= $this->Form->hidden('address', ['value' => $confirm['address']]); ?>
 
 <?= $this->Form->end([
     'label' => '更新',
@@ -373,8 +373,7 @@
 <?= $this->Form->hidden('sex_code'); ?>
 <?= $this->Form->hidden('birthdate',['value' => $birthdate]); ?>
 <?= $this->Form->hidden('postalcode'); ?>
-<?= $this->Form->hidden('region_code'); ?>
-<?= $this->Form->hidden('address'); ?>
+<?= $this->Form->hidden('region_id'); ?>
 <?= $this->Form->hidden('large_purpose_code'); ?>
 <?= $this->Form->hidden('detail_purpose'); ?>
 <?= $this->Form->hidden('studying_time'); ?>
@@ -392,6 +391,7 @@
 <?= $this->Form->hidden('yomi_code'); ?>
 <?= $this->Form->hidden('affiliate_id'); ?>
 <?= $this->Form->hidden('comment'); ?>
+<?= $this->Form->hidden('address', ['value' => $confirm['address']]); ?>
 
 <?= $this->Form->end([
     'label' => '戻る',

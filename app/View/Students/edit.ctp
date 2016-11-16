@@ -87,28 +87,39 @@
     ]); ?>
 </div>
 
+<!-- 郵便番号入力後、ajaxzipでaddressに住所を自動表示 -->
+<script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
 <div class="form-group col-xs-12">
 <?= $this->Form->input('postalcode', [
     'label' => ['text' => '郵便番号', 'class' => 'col-xs-5 text-right'],
     'type'  => 'text',
     'placeholder' => '1234567',
+    'onKeyUp' => "AjaxZip3.zip2addr(this,'','pref01','address');",
     'class' => 'col-xs-7'
     ]); ?>
 </div>
 
+<!-- エントリーフォームが完成したらプルダウンに変更 -->
 <div class="form-group col-xs-12">
-<?= $this->Form->input('region_code', [
+<?= $this->Form->input('region_id', [
     'label' => ['text' => '都道府県', 'class' => 'col-xs-5 text-right'],
-    'type'  => 'text',
-    'placeholder' => '東京都',
-    'class' => 'col-xs-7'
+    // 'type'  => 'text',
+    // 'placeholder'  => 'プルダウンに変更予定',
+    'type'  => 'select',
+    'options' => $regions,
+    'empty' => '選択して下さい',
+    'class' => 'col-xs-3'
     ]); ?>
 </div>
+
+<!-- ajaxzip3の動作のため都道府県情報をhiddennで送信 -->
+<input type="hidden" name="pref01" size="20">
 
 <div class="form-group col-xs-12">
 <?= $this->Form->input('address', [
     'label' => ['text' => '住所', 'class' => 'col-xs-5 text-right'],
     'type'  => 'text',
+    'name' => 'address',
     'placeholder' => '千代田区1-2-3',
     'class' => 'col-xs-7'
     ]); ?>

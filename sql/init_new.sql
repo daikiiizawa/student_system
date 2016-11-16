@@ -110,11 +110,15 @@ INSERT INTO `regions` (`id`, `region_code`, `region_name`, `block_name`) VALUES
 (46, '46', '鹿児島県', '九州'),
 (47, '47', '沖縄県', '九州');
 
+-- 外部キー設定
+ALTER TABLE `students` ADD KEY `region_id` (`region_id`);
+ALTER TABLE `students`
+  ADD CONSTRAINT `students_ibfk_1` FOREIGN KEY (`region_id`) REFERENCES `regions` (`id`);
 
 -- 初期サンプルデータ
 INSERT INTO `students` (`family_name`, `given_name`, `family_name_kana`, `given_name_kana`,
-                        `phone_number`, `email`, `sex_code`, `birthdate`, `postalcode`, `region_code`, `address`,
-                        `occupation`, `large_purpose_code`, `detail_purpose`, `programming_lv`, `studying_time`, `come_to_office_time`,
+                        `phone_number`, `email`, `sex_code`, `birthdate`, `postalcode`, `region_id`, `address`,
+                        `occupation`, `large_purpose_code`, `detail_purpose`, `programming_lv_code`, `studying_time`, `come_to_office_time`,
                         `first_preffered_date`, `second_preffered_date`, `third_preffered_date`, `using_pc_code`,
                         `first_meet_datetime`, `second_meet_datetime`, `third_meet_datetime`,
                         `admission_month`, `last_contact_datetime`, `students_status_code`, `yomi_code`, `affiliate_id`, `created`)
@@ -126,26 +130,26 @@ INSERT INTO `students` (`family_name`, `given_name`, `family_name_kana`, `given_
                         "10月", "2016-07-27 19:00:00", "0", "0", "ABC-0003", "2016-07-21 19:00:00");
 
 INSERT INTO `students` (`family_name`, `given_name`, `family_name_kana`, `given_name_kana`,
-                        `phone_number`, `email`, `sex_code`, `birthdate`, `postalcode`, `region_code`, `address`,
-                        `occupation`, `large_purpose_code`, `detail_purpose`, `programming_lv`, `studying_time`, `come_to_office_time`,
+                        `phone_number`, `email`, `sex_code`, `birthdate`, `postalcode`, `region_id`, `address`,
+                        `occupation`, `large_purpose_code`, `detail_purpose`, `programming_lv_code`, `studying_time`, `come_to_office_time`,
                         `first_preffered_date`, `second_preffered_date`, `third_preffered_date`, `using_pc_code`,
                         `first_meet_datetime`, `second_meet_datetime`, `third_meet_datetime`,
                         `admission_month`, `last_contact_datetime`, `students_status_code`, `yomi_code`, `affiliate_id`, `created`)
                 VALUES ("山田", "太郎", "ヤマダ", "タロウ",
-                        "08000000000", "hoge@mail.jp", "0", "1990-06-06", "0000000",  "13", "千代田区0-1-2",
+                        "08000000000", "hoge@mail.jp", "0", "1990-06-06", "2220000",  "13", "千代田区0-1-2",
                         "営業", "1", "異業種のキャリアを積みたい", "1", "平日：19:00~23:00 休日：10:00~15:00", "平日夜",
                         "毎週木曜20時", "毎週月曜21時", "毎週木曜17時", "1",
                         "2016-07-30 20:00:00", "2016-08-04 20:00:00", "2016-08-09 19:00:00",
                         "09月", "2016-07-25 19:00:00", "0", "0", "ABC-0001", "2016-07-25 19:00:00");
 
 INSERT INTO `students` (`family_name`, `given_name`, `family_name_kana`, `given_name_kana`,
-                        `phone_number`, `email`, `sex_code`, `birthdate`, `postalcode`, `region_code`, `address`,
-                        `occupation`, `large_purpose_code`, `detail_purpose`, `programming_lv`, `studying_time`, `come_to_office_time`,
+                        `phone_number`, `email`, `sex_code`, `birthdate`, `postalcode`, `region_id`, `address`,
+                        `occupation`, `large_purpose_code`, `detail_purpose`, `programming_lv_code`, `studying_time`, `come_to_office_time`,
                         `first_preffered_date`, `second_preffered_date`, `third_preffered_date`, `using_pc_code`,
                         `first_meet_datetime`, `second_meet_datetime`, `third_meet_datetime`,
                         `admission_month`, `last_contact_datetime`, `students_status_code`, `yomi_code`, `affiliate_id`, `created`)
                 VALUES ("石田", "翔太", "イシダ", "ショウタ",
-                        "08000002222", "ishida@mail.jp", "0", "1990-02-02", "2220000",  "1", "札幌市1-2-3",
+                        "08000002222", "ishida@mail.jp", "0", "1990-02-02", "3330000",  "1", "札幌市1-2-3",
                         "事務職", "2", "プログラミング経験はあるので、スキルを固めたい", "1", "平日：19:30~21:00 休日：17:00~20:00", "毎日20時以降",
                         "毎週水曜18時", "毎週火曜20時", "毎週木曜18時", "0",
                         "2016-07-22 19:00:00", "2016-07-24 19:00:00", "2016-07-26 19:00:00",
@@ -153,21 +157,21 @@ INSERT INTO `students` (`family_name`, `given_name`, `family_name_kana`, `given_
 
 
 INSERT INTO `students` (`family_name`, `given_name`, `family_name_kana`, `given_name_kana`,
-                        `phone_number`, `email`, `sex_code`, `birthdate`, `postalcode`, `region_code`, `address`,
-                        `occupation`, `large_purpose_code`, `detail_purpose`, `programming_lv`, `studying_time`, `come_to_office_time`,
+                        `phone_number`, `email`, `sex_code`, `birthdate`, `postalcode`, `region_id`, `address`,
+                        `occupation`, `large_purpose_code`, `detail_purpose`, `programming_lv_code`, `studying_time`, `come_to_office_time`,
                         `first_preffered_date`, `second_preffered_date`, `third_preffered_date`, `using_pc_code`,
                         `first_meet_datetime`, `second_meet_datetime`, `third_meet_datetime`,
                         `admission_month`, `last_contact_datetime`, `students_status_code`, `yomi_code`, `affiliate_id`, `created`)
                 VALUES ("井上", "香織", "イノウエ", "カオリ",
-                        "08000003333", "inoue@mail.jp", "1", "1991-03-03", "3330000",  "10", "船橋市1-2-3",
+                        "08000003333", "inoue@mail.jp", "1", "1991-03-03", "5550000",  "10", "船橋市1-2-3",
                         "営業", "1", "新しい挑戦をしたい", "1", "平日：19:30~21:00 休日：17:00~20:00", "毎日20時以降",
                         "毎週水曜18時", "毎週火曜20時", "毎週木曜18時", "0",
                         "2016-07-20 19:00:00", "2016-07-24 19:00:00", "2016-07-26 19:00:00",
                         "08月", "2016-07-27 19:00:00", "0", "0", "ABC-0004", "2016-07-16 19:00:00");
 
 INSERT INTO `students` (`family_name`, `given_name`,
-                        `phone_number`, `email`, `sex_code`,
+                        `phone_number`, `email`, `sex_code`, `region_id`,
                         `students_status_code`, `affiliate_id`, `created`)
                 VALUES ("削除", "不明",
-                        "08000003333", "sample@mail.jp", "2",
+                        "08000003333", "sample@mail.jp", "2", "1",
                         "3", "ABC-1111", "2016-07-10 19:00:00");

@@ -43,7 +43,7 @@
 
         <tr>
             <td class="active text-right" style="width:40%;">都道府県</td>
-            <td><?= $student['Student']['region_code'] ;?></td>
+            <td><?= $student['Region']['region_name'] ;?></td>
         </tr>
 
         <tr>

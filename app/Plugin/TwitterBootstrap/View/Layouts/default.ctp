@@ -58,7 +58,7 @@
   						</li>
             <?php endif;?>
 						<li>
-              <?= $this->Html->link('生徒入力画面', ['controller' => 'students', 'action' => 'add']); ?>
+              <?= $this->Html->link('生徒検索', ['controller' => 'students', 'action' => 'find']); ?>
             </li>
 					</ul>
 				</div>
