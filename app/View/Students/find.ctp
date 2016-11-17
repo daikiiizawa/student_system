@@ -1,3 +1,9 @@
+<!-- ユーザー定義定数の読み出し -->
+<?php
+$week = Configure::read("week");
+?>
+
+
 <div class='container'>
 <div class="col-md-10 col-md-offset-1">
 

@@ -1,3 +1,14 @@
+<!-- ユーザー定義定数の読み出し -->
+<?php
+$week = Configure::read("week");
+$yomi = Configure::read("yomi");
+$status = Configure::read("status");
+$sex = Configure::read("sex");
+$purpose = Configure::read("purpose");
+$pc = Configure::read("pc");
+$month = Configure::read("month");
+?>
+
 <div class='container'>
 <div class="col-md-10 col-md-offset-1">
 
@@ -173,6 +184,16 @@
     ]); ?>
 </div>
 
+<div class="form-group col-xs-12">
+<?= $this->Form->input('admission_month', [
+    'label' => ['text' => '入学希望月', 'class' => 'col-xs-5 text-right'],
+    'type'  => 'select',
+    'options' => $month,
+    'empty' => '選択して下さい',
+    'class' => 'col-xs-3'
+    ]); ?>
+</div>
+
 <div class="form-group col-xs-12">&nbsp;</div>
 
 <div class="form-group col-xs-5 text-right">
@@ -257,23 +278,18 @@
     ]); ?>
 </div>
 
+<?php if($currentUser) :?>
+
 <div class="form-group col-xs-12">&nbsp;</div>
 
+<div class="form-group col-xs-5 text-right">
+    <b>▼管理情報</b>
+</div>
 <div class="form-group col-xs-12">
 <?= $this->Form->input('students_status_code', [
     'label' => ['text' => '生徒ステータス', 'class' => 'col-xs-5 text-right'],
     'type'  => 'select',
     'options' => $status,
-    'empty' => '選択して下さい',
-    'class' => 'col-xs-3'
-    ]); ?>
-</div>
-
-<div class="form-group col-xs-12">
-<?= $this->Form->input('admission_month', [
-    'label' => ['text' => '入学希望月', 'class' => 'col-xs-5 text-right'],
-    'type'  => 'select',
-    'options' => $month,
     'empty' => '選択して下さい',
     'class' => 'col-xs-3'
     ]); ?>
@@ -320,6 +336,7 @@
     'class' => 'col-xs-7'
     ]); ?>
 </div>
+<?php endif ?>
 
 <?= $this->Form->hidden('id'); ?>
 

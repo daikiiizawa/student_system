@@ -1,3 +1,14 @@
+<!-- ユーザー定義定数の読み出し -->
+<?php
+$week = Configure::read("week");
+$yomi = Configure::read("yomi");
+$status = Configure::read("status");
+$sex = Configure::read("sex");
+$purpose = Configure::read("purpose");
+$pc = Configure::read("pc");
+?>
+
+
 <div class='container'>
 <div class="col-md-8 col-md-offset-2">
 
@@ -155,6 +166,16 @@
         </tr>
 
         <tr>
+            <td class="active text-right" style="width:40%;">入学希望月</td>
+            <?php if ($confirm['Student']['admission_month'] != $student['Student']['admission_month']):?>
+                <td class="bg-danger">
+            <?php else:?>
+                <td>
+            <?php endif;?>
+            <?= $confirm['Student']['admission_month'] ;?></td>
+        </tr>
+
+        <tr>
             <td style="width:40%; padding-top:20px;" class="text-right"><strong>▼週次面談希望曜日・時間</strong></td>
             <td></td>
         </tr>
@@ -239,7 +260,11 @@
             </td>
         </tr>
 
-        <tr><td></td><td></td></tr>
+    <?php if(!empty($currentUser)) :?>
+        <tr>
+            <td style="width:40%; padding-top:20px;" class="text-right"><strong>▼管理情報</strong></td>
+            <td></td>
+        </tr>
 
         <tr>
             <td class="active text-right" style="width:40%;">生徒ステータス</td>
@@ -252,16 +277,6 @@
                     <?= $status[$confirm['Student']['students_status_code']] ;?>
                 <?php endif ;?>
             </td>
-        </tr>
-
-        <tr>
-            <td class="active text-right" style="width:40%;">入学希望月</td>
-            <?php if ($confirm['Student']['admission_month'] != $student['Student']['admission_month']):?>
-                <td class="bg-danger">
-            <?php else:?>
-                <td>
-            <?php endif;?>
-            <?= $confirm['Student']['admission_month'] ;?></td>
         </tr>
 
         <tr>
@@ -310,6 +325,7 @@
             <?php endif;?>
             <?= $confirm['Student']['comment'] ;?></td>
         </tr>
+    <?php endif ?>
     </tbody>
 </table>
 
@@ -332,24 +348,26 @@
 <?= $this->Form->hidden('birthdate',['value' => $birthdate]); ?>
 <?= $this->Form->hidden('postalcode'); ?>
 <?= $this->Form->hidden('region_id'); ?>
+<?= $this->Form->hidden('address', ['value' => $confirm['address']]); ?>
 <?= $this->Form->hidden('large_purpose_code'); ?>
 <?= $this->Form->hidden('detail_purpose'); ?>
 <?= $this->Form->hidden('studying_time'); ?>
 <?= $this->Form->hidden('come_to_office_time'); ?>
 <?= $this->Form->hidden('using_pc_code'); ?>
+<?= $this->Form->hidden('admission_month'); ?>
 <?= $this->Form->hidden('first_preffered_date'); ?>
 <?= $this->Form->hidden('second_preffered_date'); ?>
 <?= $this->Form->hidden('third_preffered_date'); ?>
 <?= $this->Form->hidden('first_meet_datetime',['value' => $firstdate]); ?>
 <?= $this->Form->hidden('second_meet_datetime',['value' => $seconddate]); ?>
 <?= $this->Form->hidden('third_meet_datetime',['value' => $thirddate]); ?>
+<?php if($currentUser) :?>
 <?= $this->Form->hidden('students_status_code'); ?>
-<?= $this->Form->hidden('admission_month'); ?>
 <?= $this->Form->hidden('last_contact_datetime',['value' => $contactdate]); ?>
 <?= $this->Form->hidden('yomi_code'); ?>
 <?= $this->Form->hidden('affiliate_id'); ?>
 <?= $this->Form->hidden('comment'); ?>
-<?= $this->Form->hidden('address', ['value' => $confirm['address']]); ?>
+<?php endif;?>
 
 <?= $this->Form->end([
     'label' => '更新',
@@ -374,24 +392,26 @@
 <?= $this->Form->hidden('birthdate',['value' => $birthdate]); ?>
 <?= $this->Form->hidden('postalcode'); ?>
 <?= $this->Form->hidden('region_id'); ?>
+<?= $this->Form->hidden('address', ['value' => $confirm['address']]); ?>
 <?= $this->Form->hidden('large_purpose_code'); ?>
 <?= $this->Form->hidden('detail_purpose'); ?>
 <?= $this->Form->hidden('studying_time'); ?>
 <?= $this->Form->hidden('come_to_office_time'); ?>
 <?= $this->Form->hidden('using_pc_code'); ?>
+<?= $this->Form->hidden('admission_month'); ?>
 <?= $this->Form->hidden('first_preffered_date'); ?>
 <?= $this->Form->hidden('second_preffered_date'); ?>
 <?= $this->Form->hidden('third_preffered_date'); ?>
 <?= $this->Form->hidden('first_meet_datetime',['value' => $firstdate]); ?>
 <?= $this->Form->hidden('second_meet_datetime',['value' => $seconddate]); ?>
 <?= $this->Form->hidden('third_meet_datetime',['value' => $thirddate]); ?>
+<?php if($currentUser) :?>
 <?= $this->Form->hidden('students_status_code'); ?>
-<?= $this->Form->hidden('admission_month'); ?>
 <?= $this->Form->hidden('last_contact_datetime',['value' => $contactdate]); ?>
 <?= $this->Form->hidden('yomi_code'); ?>
 <?= $this->Form->hidden('affiliate_id'); ?>
 <?= $this->Form->hidden('comment'); ?>
-<?= $this->Form->hidden('address', ['value' => $confirm['address']]); ?>
+<?php endif;?>
 
 <?= $this->Form->end([
     'label' => '戻る',

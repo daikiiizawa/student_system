@@ -1,3 +1,13 @@
+<!-- ユーザー定義定数の読み出し -->
+<?php
+$week = Configure::read("week");
+$yomi = Configure::read("yomi");
+$status = Configure::read("status");
+$sex = Configure::read("sex");
+$purpose = Configure::read("purpose");
+$pc = Configure::read("pc");
+?>
+
 <div class='container'>
 <div class="col-md-8 col-md-offset-2">
 
@@ -85,6 +95,12 @@
         </tr>
 
         <tr>
+            <td class="active text-right" style="width:40%;">入学希望月</td>
+            <td><?= $student['Student']['admission_month'] ;?></td>
+        </tr>
+
+
+        <tr>
             <td style="width:40%; padding-top:20px;" class="text-right"><strong>▼週次面談希望曜日・時間</strong></td>
             <td></td>
         </tr>
@@ -142,7 +158,11 @@
             </td>
         </tr>
 
-        <tr><td></td><td></td></tr>
+    <?php if($currentUser) :?>
+        <tr>
+            <td style="width:40%; padding-top:20px;" class="text-right"><strong>▼管理情報</strong></td>
+            <td></td>
+        </tr>
 
         <tr>
             <td class="active text-right" style="width:40%;">生徒ステータス</td>
@@ -151,11 +171,6 @@
                     <?= $status[$student['Student']['students_status_code']] ;?>
                 <?php endif ;?>
             </td>
-        </tr>
-
-        <tr>
-            <td class="active text-right" style="width:40%;">入学希望月</td>
-            <td><?= $student['Student']['admission_month'] ;?></td>
         </tr>
 
         <tr>
@@ -186,6 +201,8 @@
             <td class="active text-right" style="width:40%;">備考</td>
             <td><?= $student['Student']['comment'] ;?></td>
         </tr>
+    <?php endif ;?>
+
     </tbody>
 </table>
 
