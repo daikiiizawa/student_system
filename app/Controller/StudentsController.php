@@ -4,7 +4,7 @@ App::uses('CakeEmail', 'Network/Email');
 
 class StudentsController extends AppController{
 
-    public $uses = ['Student', 'Region'];
+    public $uses = ['Student', 'Region', 'User'];
 
     public $components = [
         'Search.Prg',
@@ -82,6 +82,8 @@ class StudentsController extends AppController{
         $confirm = $this->request->data;
         $this->set('confirm', $confirm);
 
+        $confirm['Student']['address'] = $confirm['address'];
+
         // 日付フォーマット加工(array→string)
         if ($confirm['Student']['birthdate']['year'] != '') {
             $birthdate =    $confirm['Student']['birthdate']['year'].'-'.
@@ -113,22 +115,26 @@ class StudentsController extends AppController{
                             $confirm['Student']['third_meet_datetime']['min'].':00';
         } else {$thirddate = '';}
         $this->set('thirddate', $thirddate);
-        if ($confirm['Student']['last_contact_datetime']['year'] != '') {
-            $contactdate =  $confirm['Student']['last_contact_datetime']['year'].'-'.
-                            $confirm['Student']['last_contact_datetime']['month'].'-'.
-                            $confirm['Student']['last_contact_datetime']['day'].' '.
-                            $confirm['Student']['last_contact_datetime']['hour'].':'.
-                            $confirm['Student']['last_contact_datetime']['min'].':00';
-        } else {$contactdate = '';}
-        $confirm['Student']['address'] = $confirm['address'];
-        $this->set('contactdate', $contactdate);
+
+        // 管理情報のため、管理者ログイン時のみ処理を行う
+        if($this->Auth->user()){
+            if ($confirm['Student']['last_contact_datetime']['year'] != '') {
+                $contactdate =  $confirm['Student']['last_contact_datetime']['year'].'-'.
+                                $confirm['Student']['last_contact_datetime']['month'].'-'.
+                                $confirm['Student']['last_contact_datetime']['day'].' '.
+                                $confirm['Student']['last_contact_datetime']['hour'].':'.
+                                $confirm['Student']['last_contact_datetime']['min'].':00';
+            } else {$contactdate = '';}
+            $this->set('contactdate', $contactdate);
+            $confirm['Student']['last_contact_datetime'] = $contactdate;
+        }
 
         // 日付データをarrayからstringに戻してconfirm内に入れる
         $confirm['Student']['birthdate'] = $birthdate;
         $confirm['Student']['first_meet_datetime'] = $firstdate;
         $confirm['Student']['second_meet_datetime'] = $seconddate;
         $confirm['Student']['third_meet_datetime'] = $thirddate;
-        $confirm['Student']['last_contact_datetime'] = $contactdate;
+
         $this->set('confirm', $confirm);
     }
 

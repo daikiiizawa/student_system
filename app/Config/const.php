@@ -16,11 +16,11 @@ $config['hoge'] = array(
 );
 
 $config['week'] = ['日', '月', '火', '水', '木', '金', '土'];
-$config['yomi'] = ['A', 'B', 'C'];
-$config['status'] = ['入会前', '学習中', '卒業済', '削除予定'];
 $config['sex'] = ['男性', '女性', '不明'];
 $config['purpose'] = ['起業', '転職', 'フリーランス', 'スキルアップ', '副業', '趣味', 'その他'];
 $config['pc'] = ['Mac', 'Windows7', 'Windows8', 'Windows10', 'その他'];
+$config['status'] = ['入会前', '学習中', '卒業済', '削除予定'];
+$config['yomi'] = ['A', 'B', 'C'];
 $config['month'] = [
     '01月' => '01月',
     '02月' => '02月',

@@ -95,6 +95,12 @@ $pc = Configure::read("pc");
         </tr>
 
         <tr>
+            <td class="active text-right" style="width:40%;">入学希望月</td>
+            <td><?= $student['Student']['admission_month'] ;?></td>
+        </tr>
+
+
+        <tr>
             <td style="width:40%; padding-top:20px;" class="text-right"><strong>▼週次面談希望曜日・時間</strong></td>
             <td></td>
         </tr>
@@ -152,7 +158,11 @@ $pc = Configure::read("pc");
             </td>
         </tr>
 
-        <tr><td></td><td></td></tr>
+    <?php if($currentUser) :?>
+        <tr>
+            <td style="width:40%; padding-top:20px;" class="text-right"><strong>▼管理情報</strong></td>
+            <td></td>
+        </tr>
 
         <tr>
             <td class="active text-right" style="width:40%;">生徒ステータス</td>
@@ -161,11 +171,6 @@ $pc = Configure::read("pc");
                     <?= $status[$student['Student']['students_status_code']] ;?>
                 <?php endif ;?>
             </td>
-        </tr>
-
-        <tr>
-            <td class="active text-right" style="width:40%;">入学希望月</td>
-            <td><?= $student['Student']['admission_month'] ;?></td>
         </tr>
 
         <tr>
@@ -196,6 +201,8 @@ $pc = Configure::read("pc");
             <td class="active text-right" style="width:40%;">備考</td>
             <td><?= $student['Student']['comment'] ;?></td>
         </tr>
+    <?php endif ;?>
+
     </tbody>
 </table>
 
