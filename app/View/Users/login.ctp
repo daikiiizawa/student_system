@@ -14,9 +14,9 @@
   </form>
 
   <hr>
-  
+
   <p>
-    <?= $this->Html->link('生徒入力画面へ', ['controller' => 'students', 'action' => 'add']); ?>
+    <?= $this->Html->link('生徒検索へ', ['controller' => 'students', 'action' => 'find']); ?>
   </p>
   <p>
     <?= $this->Html->link('パスワードを忘れた方はこちら', ['controller' => 'users', 'action' => 'password_reset']); ?>

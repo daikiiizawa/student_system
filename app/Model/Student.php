@@ -30,13 +30,21 @@ class Student extends AppModel {
         'family_name_kana' => [
             'required' => [
                 'rule' => 'notBlank',
-                'message' => 'ふりがな(姓)を入力してください'
+                'message' => 'フリガナ(姓)を入力してください'
+            ],
+            'katakana' => [
+                'rule' => ['katakana_only'],
+                'message' => '全角カタカナで入力して下さい'
             ],
         ],
         'given_name_kana' => [
             'required' => [
                 'rule' => 'notBlank',
-                'message' => 'ふりがな(名)を入力してください'
+                'message' => 'フリガナ(名)を入力してください'
+            ],
+            'katakana' => [
+                'rule' => ['katakana_only'],
+                'message' => '全角カタカナで入力して下さい'
             ],
         ],
         'email' => [
@@ -59,8 +67,13 @@ class Student extends AppModel {
                   'message' => 'ハイフン無しで入力して下さい'
               ],
         ],
-
     ];
+
+    public function katakana_only($wordvalue){
+        $value = array_shift($wordvalue);
+        
+        return preg_match("/^[ァ-ヶー゛゜]*$/u", $value);
+    }
 
 
 }
