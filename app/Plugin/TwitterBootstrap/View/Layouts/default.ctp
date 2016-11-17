@@ -10,10 +10,7 @@
 	</title>
 
     <!-- Bootstrap -->
-	<?php echo $this->Html->css('bootstrap.min'); ?>
-	<?php echo $this->Html->css('bootstrap-responsive.min'); ?>
-  <?php echo $this->Html->css('bootstrap-custom'); ?>
-
+    <?php echo $this->Html->css('bootstrap.min'); ?>
 
 
 	<style>
@@ -47,18 +44,21 @@
 					<ul class="nav navbar-nav navbar-right">
             <?php if($currentUser) :?>
               <li>
-                <?= $this->Html->link('設定変更', ['controller' => 'users', 'action' => 'edit']); ?>
+                  <?= $this->Html->link('設定変更', ['controller' => 'users', 'action' => 'edit']); ?>
               </li>
               <li>
-                <?= $this->Html->link('ログアウト', ['controller' => 'users', 'action' => 'logout']); ?>
+                  <?= $this->Html->link('ログアウト', ['controller' => 'users', 'action' => 'logout']); ?>
               </li>
             <?php else :?>
-  						<li>
-  							<?= $this->Html->link('ユーザ登録', ['controller' => 'users', 'action' => 'signup']); ?>
-  						</li>
+              <li>
+                  <?= $this->Html->link('ログイン', ['controller' => 'users', 'action' => 'login']); ?>
+              </li>
+              <li>
+                  <?= $this->Html->link('ユーザ登録', ['controller' => 'users', 'action' => 'signup']); ?>
+              </li>
             <?php endif;?>
-						<li>
-              <?= $this->Html->link('生徒検索', ['controller' => 'students', 'action' => 'find']); ?>
+            <li>
+                <?= $this->Html->link('生徒検索', ['controller' => 'students', 'action' => 'find']); ?>
             </li>
 					</ul>
 				</div>
