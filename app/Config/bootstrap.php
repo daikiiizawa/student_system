@@ -75,6 +75,13 @@ CakePlugin::load(['DebugKit', 'TwitterBootstrap', 'Search']);
  * Configure::write('I18n.preferApp', true);
  */
 
+
+// グローバル定数の定義
+// 飯沢追記/20161117
+Configure::load("const");
+
+
+
 /**
  * You can attach event listeners to the request lifecycle as Dispatcher Filter. By default CakePHP bundles two filters:
  *

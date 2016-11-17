@@ -14,34 +14,25 @@ class StudentsController extends AppController{
 
     public function beforeFilter(){
         parent::beforeFilter();
-        $this->Auth->allow('find', 'entry', 'thanks', 'view', 'edit', 'confirm');
+        $this->Auth->allow('find', 'entry', 'thanks', 'view', 'edit', 'confirm', 'save');
     }
 
     public function index(){
         $all_students_count = count($this->Student->find('all'));
-        $week = ['日', '月', '火', '水', '木', '金', '土'];
-        $yomi = ['A', 'B', 'C'];
-        $status = ['入会前', '学習中', '卒業済', '削除予定'];
         $this->set('all_students_count', $all_students_count);
-        $this->set('week', $week);
-        $this->set('yomi', $yomi);
-        $this->set('status', $status);
 
+        // 生徒ステータスの絞込処理
         $this->Prg->commonProcess();
-
         if ($this->request->data) {
             $conditions = $this->Student->parseCriteria($this->passedArgs);
         } elseif (empty($this->request->data['Student'])) {
             $conditions = ['Student.students_status_code' => '0'];
         }
-
         $this->paginate = [
             'conditions' => $conditions,
             'order' => ['created' => 'desc'],
             'limit' => 20,
         ];
-        $params = $this->request->params;
-        $this->set('params', $params);
 
         // sortを昇順降順切り替えとなるようdirectionを場合分け
         if (empty($this->request->params['named']['direction'])) {
@@ -53,85 +44,20 @@ class StudentsController extends AppController{
         }
         $this->set('direction', $direction);
         $this->set('students', $this->paginate('Student'));
-        $this->set('conditions', $conditions);
-    }
-
-    public function add(){
-        $sex = ['男性', '女性', '不明'];
-        $this->set('sex', $sex);
-        $purpose = ['起業', '転職', 'フリーランス', 'スキルアップ', '副業', '趣味', 'その他'];
-        $this->set('purpose', $purpose);
-        $pc = ['Mac', 'Windows7', 'Windows8', 'Windows10', 'その他'];
-        $this->set('pc', $pc);
-        $week = ['日', '月', '火', '水', '木', '金', '土'];
-        $this->set('week', $week);
-        $status = ['入会前', '学習中', '卒業済', '削除予定'];
-        $this->set('status', $status);
-        $yomi = ['A', 'B', 'C'];
-        $this->set('yomi', $yomi);
-        $month = [
-            '01月' => '01月',
-            '02月' => '02月',
-            '03月' => '03月',
-            '04月' => '04月',
-            '05月' => '05月',
-            '06月' => '06月',
-            '07月' => '07月',
-            '08月' => '08月',
-            '09月' => '09月',
-            '10月' => '10月',
-            '11月' => '11月',
-            '12月' => '12月'
-            ];
-        $this->set('month', $month);
-        if ($this->request->is('post')) {
-            $this->Student->create();
-
-            if ($this->Student->save($this->request->data)) {
-                $this->Flash->success('登録完了しました');
-                return $this->redirect(['action' => 'index']);
-            }
-        }
     }
 
     public function edit ($id = null) {
         if (!$this->Student->exists($id)) {
             throw new NotFoundException('生徒情報が見つかりません');
         }
-
-        $sex = ['男性', '女性', '不明'];
-        $this->set('sex', $sex);
-        $purpose = ['起業', '転職', 'フリーランス', 'スキルアップ', '副業', '趣味', 'その他'];
-        $this->set('purpose', $purpose);
-        $pc = ['Mac', 'Windows7', 'Windows8', 'Windows10', 'その他'];
-        $this->set('pc', $pc);
-        $week = ['日', '月', '火', '水', '木', '金', '土'];
-        $this->set('week', $week);
-        $status = ['入会前', '学習中', '卒業済', '削除予定'];
-        $this->set('status', $status);
-        $yomi = ['A', 'B', 'C'];
-        $this->set('yomi', $yomi);
-        $month = [
-            '01月' => '01月',
-            '02月' => '02月',
-            '03月' => '03月',
-            '04月' => '04月',
-            '05月' => '05月',
-            '06月' => '06月',
-            '07月' => '07月',
-            '08月' => '08月',
-            '09月' => '09月',
-            '10月' => '10月',
-            '11月' => '11月',
-            '12月' => '12月'
-            ];
-        $this->set('month', $month);
         $this->set('regions',$this->Region->find('list',['fields'=>['id','region_name']]));
 
         // 詳細ページからgetで来た場合のみdataに既存の生徒情報を参照する
         if (!$this->request->data) {
             $this->request->data = $this->Student->findById($id);
         }
+
+        // 編集画面から戻るボタンで詳細ページに戻るのを簡潔にまとめるためidを定義
         $id = $this->request->data['Student']['id'];
         $this->set('id', $id);
     }
@@ -142,20 +68,6 @@ class StudentsController extends AppController{
         }
         $student = $this->Student->findById($id);
         $this->set('student', $student);
-
-        // 指定項目の入力情報
-        $sex = ['男性', '女性', '不明'];
-        $this->set('sex', $sex);
-        $purpose = ['起業', '転職', 'フリーランス', 'スキルアップ', '副業', '趣味', 'その他'];
-        $this->set('purpose', $purpose);
-        $pc = ['Mac', 'Windows7', 'Windows8', 'Windows10', 'その他'];
-        $this->set('pc', $pc);
-        $week = ['日', '月', '火', '水', '木', '金', '土'];
-        $this->set('week', $week);
-        $status = ['入会前', '学習中', '卒業済', '削除予定'];
-        $this->set('status', $status);
-        $yomi = ['A', 'B', 'C'];
-        $this->set('yomi', $yomi);
     }
 
     public function confirm($id = null) {
@@ -165,20 +77,6 @@ class StudentsController extends AppController{
         // 既存データ参照
         $student = $this->Student->findById($id);
         $this->set('student', $student);
-
-        // マスタデータ
-        $sex = ['男性', '女性', '不明'];
-        $this->set('sex', $sex);
-        $purpose = ['起業', '転職', 'フリーランス', 'スキルアップ', '副業', '趣味', 'その他'];
-        $this->set('purpose', $purpose);
-        $pc = ['Mac', 'Windows7', 'Windows8', 'Windows10', 'その他'];
-        $this->set('pc', $pc);
-        $week = ['日', '月', '火', '水', '木', '金', '土'];
-        $this->set('week', $week);
-        $status = ['入会前', '学習中', '卒業済', '削除予定'];
-        $this->set('status', $status);
-        $yomi = ['A', 'B', 'C'];
-        $this->set('yomi', $yomi);
         $this->set('regions',$this->Region->find('list',['fields'=>['id','region_name']]));
         // 編集画面からのpostデータ
         $confirm = $this->request->data;
@@ -225,7 +123,7 @@ class StudentsController extends AppController{
         $confirm['Student']['address'] = $confirm['address'];
         $this->set('contactdate', $contactdate);
 
-        // 日付データをarrayからstringに戻す
+        // 日付データをarrayからstringに戻してconfirm内に入れる
         $confirm['Student']['birthdate'] = $birthdate;
         $confirm['Student']['first_meet_datetime'] = $firstdate;
         $confirm['Student']['second_meet_datetime'] = $seconddate;
@@ -242,17 +140,17 @@ class StudentsController extends AppController{
             if ($this->Student->save($this->request->data)) {
                 $this->Flash->success('更新しました');
                 return $this->redirect(['action' => 'view',$id]);
+            } else {
+            $this->Flash->error('必須項目の編集に誤りがあるため保存できませんでした。');
+            return $this->redirect(['action' => 'view',$id]);
             }
         } else {
             $this->Flash->error('失敗');
             return $this->redirect(['action' => 'view',$id]);
         }
-
     }
 
     public function find() {
-        $week = ['日', '月', '火', '水', '木', '金', '土'];
-        $this->set('week', $week);
         $count_students = 0;
         $this->paginate = [
             'order' => ['created' => 'desc'],
@@ -276,7 +174,6 @@ class StudentsController extends AppController{
                     // 'Student.phone_number LIKE' => "%{$search_phone}%",
                 ];
                 $hit_students = $this->paginate('Student', $conditions);
-                // $this->Flash->success('検索しました');
                 $this->set('hit_students', $hit_students);
                 $count_students = count($hit_students);
             } else {
@@ -285,7 +182,6 @@ class StudentsController extends AppController{
         }
         $this->set('count_students', $count_students);
     }
-
 
     public function entry(){
         $programming_lv = ['初めてプログラミングに触れる', 'プログラミングを少し学んだことがある', 'プログラミングで仕事をしている・したことがある'];

@@ -1,3 +1,10 @@
+<!-- ユーザー定義定数の読み出し -->
+<?php
+$week = Configure::read("week");
+$yomi = Configure::read("yomi");
+$status = Configure::read("status");
+?>
+
 <div class='container'>
 
 <div class="col-md-2">
