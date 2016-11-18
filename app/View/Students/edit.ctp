@@ -278,8 +278,6 @@ $month = Configure::read("month");
     ]); ?>
 </div>
 
-<?php if($currentUser) :?>
-
 <div class="form-group col-xs-12">&nbsp;</div>
 
 <div class="form-group col-xs-5 text-right">
@@ -321,14 +319,6 @@ $month = Configure::read("month");
 </div>
 
 <div class="form-group col-xs-12">
-<?= $this->Form->input('affiliate_id', [
-    'label' => ['text' => 'ID', 'class' => 'col-xs-5 text-right'],
-    'type'  => 'text',
-    'class' => 'col-xs-7'
-    ]); ?>
-</div>
-
-<div class="form-group col-xs-12">
 <?= $this->Form->input('comment', [
     'label' => ['text' => '備考', 'class' => 'col-xs-5 text-right'],
     'type'  => 'text',
@@ -336,7 +326,6 @@ $month = Configure::read("month");
     'class' => 'col-xs-7'
     ]); ?>
 </div>
-<?php endif ?>
 
 <?= $this->Form->hidden('id'); ?>
 

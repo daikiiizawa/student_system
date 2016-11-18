@@ -44,6 +44,9 @@
 					<ul class="nav navbar-nav navbar-right">
             <?php if($currentUser) :?>
               <li>
+                <?= $this->Html->link('生徒検索', ['controller' => 'students', 'action' => 'find']); ?>
+              </li>
+              <li>
                   <?= $this->Html->link('設定変更', ['controller' => 'users', 'action' => 'edit']); ?>
               </li>
               <li>
@@ -51,15 +54,12 @@
               </li>
             <?php else :?>
               <li>
-                  <?= $this->Html->link('ログイン', ['controller' => 'users', 'action' => 'login']); ?>
-              </li>
-              <li>
                   <?= $this->Html->link('ユーザ登録', ['controller' => 'users', 'action' => 'signup']); ?>
               </li>
+              <li>
+                  <?= $this->Html->link('ログイン', ['controller' => 'users', 'action' => 'login']); ?>
+              </li>
             <?php endif;?>
-            <li>
-                <?= $this->Html->link('生徒検索', ['controller' => 'students', 'action' => 'find']); ?>
-            </li>
 					</ul>
 				</div>
 			</div>

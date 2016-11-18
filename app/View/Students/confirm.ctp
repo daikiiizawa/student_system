@@ -260,7 +260,6 @@ $pc = Configure::read("pc");
             </td>
         </tr>
 
-    <?php if(!empty($currentUser)) :?>
         <tr>
             <td style="width:40%; padding-top:20px;" class="text-right"><strong>▼管理情報</strong></td>
             <td></td>
@@ -307,25 +306,14 @@ $pc = Configure::read("pc");
         </tr>
 
         <tr>
-            <td class="active text-right" style="width:40%;">ID</td>
-            <?php if ($confirm['Student']['affiliate_id'] != $student['Student']['affiliate_id']):?>
-                <td class="bg-danger">
-            <?php else:?>
-                <td>
-            <?php endif;?>
-            <?= $confirm['Student']['affiliate_id'] ;?></td>
-        </tr>
-
-        <tr>
             <td class="active text-right" style="width:40%;">備考</td>
             <?php if ($confirm['Student']['comment'] != $student['Student']['comment']):?>
                 <td class="bg-danger">
             <?php else:?>
                 <td>
             <?php endif;?>
-            <?= $confirm['Student']['comment'] ;?></td>
+            <span style="white-space:pre-wrap"><?= $confirm['Student']['comment'] ;?></span></td>
         </tr>
-    <?php endif ?>
     </tbody>
 </table>
 
@@ -361,13 +349,10 @@ $pc = Configure::read("pc");
 <?= $this->Form->hidden('first_meet_datetime',['value' => $firstdate]); ?>
 <?= $this->Form->hidden('second_meet_datetime',['value' => $seconddate]); ?>
 <?= $this->Form->hidden('third_meet_datetime',['value' => $thirddate]); ?>
-<?php if($currentUser) :?>
 <?= $this->Form->hidden('students_status_code'); ?>
 <?= $this->Form->hidden('last_contact_datetime',['value' => $contactdate]); ?>
 <?= $this->Form->hidden('yomi_code'); ?>
-<?= $this->Form->hidden('affiliate_id'); ?>
 <?= $this->Form->hidden('comment'); ?>
-<?php endif;?>
 
 <?= $this->Form->end([
     'label' => '更新',
@@ -405,13 +390,10 @@ $pc = Configure::read("pc");
 <?= $this->Form->hidden('first_meet_datetime',['value' => $firstdate]); ?>
 <?= $this->Form->hidden('second_meet_datetime',['value' => $seconddate]); ?>
 <?= $this->Form->hidden('third_meet_datetime',['value' => $thirddate]); ?>
-<?php if($currentUser) :?>
 <?= $this->Form->hidden('students_status_code'); ?>
 <?= $this->Form->hidden('last_contact_datetime',['value' => $contactdate]); ?>
 <?= $this->Form->hidden('yomi_code'); ?>
-<?= $this->Form->hidden('affiliate_id'); ?>
 <?= $this->Form->hidden('comment'); ?>
-<?php endif;?>
 
 <?= $this->Form->end([
     'label' => '戻る',

@@ -158,7 +158,6 @@ $pc = Configure::read("pc");
             </td>
         </tr>
 
-    <?php if($currentUser) :?>
         <tr>
             <td style="width:40%; padding-top:20px;" class="text-right"><strong>▼管理情報</strong></td>
             <td></td>
@@ -193,15 +192,9 @@ $pc = Configure::read("pc");
         </tr>
 
         <tr>
-            <td class="active text-right" style="width:40%;">ID</td>
-            <td><?= $student['Student']['affiliate_id'] ;?></td>
-        </tr>
-
-        <tr>
             <td class="active text-right" style="width:40%;">備考</td>
-            <td><?= $student['Student']['comment'] ;?></td>
+            <td style="white-space:pre-wrap"><?= $student['Student']['comment'] ;?></td>
         </tr>
-    <?php endif ;?>
 
     </tbody>
 </table>

@@ -14,7 +14,7 @@ class StudentsController extends AppController{
 
     public function beforeFilter(){
         parent::beforeFilter();
-        $this->Auth->allow('find', 'entry', 'thanks', 'view', 'edit', 'confirm', 'save');
+        $this->Auth->allow('entry', 'thanks');
     }
 
     public function index(){
