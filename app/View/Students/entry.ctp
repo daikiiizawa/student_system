@@ -6,34 +6,38 @@
     <div style="margin-top:30px;", class="form-horizontal">
         <?= $this->Form->create('Student'); ?>
         <div class="form-group">
-            <?= $this->Form->input('family_name', [
-                'label' => false,
-                'type'  => 'name',
-                'class' => 'form-control',
-                'placeholder' => '姓',
-            ]); ?>
+            <div class="form-inline">
+                <?= $this->Form->input('family_name', [
+                    'label' => false,
+                    'type'  => 'name',
+                    'class' => 'form-control col-xs-3',
+                    'style' => 'width: 49%;',
+                    'placeholder' => '姓',
+                ]); ?>
+                <?= $this->Form->input('given_name', [
+                    'label' => false,
+                    'type'  => 'name',
+                    'class' => 'form-control',
+                    'style' => 'width: 50%; margin-left: 1%',
+                    'placeholder' => '名',
+                ]); ?>
+            </div>
         </div>
         <div class="form-group">
-            <?= $this->Form->input('given_name', [
-                'label' => false,
-                'type'  => 'name',
-                'class' => 'form-control',
-                'placeholder' => '名',
-            ]); ?>
-        </div>
-        <div class="form-group">
-            <?= $this->Form->input('family_name_kana', [
-                'label' => false,
-                'class' => 'form-control',
-                'placeholder' => 'フリガナ(姓)　(全角カタカナで入力して下さい)',
-            ]); ?>
-        </div>
-        <div class="form-group">
-            <?= $this->Form->input('given_name_kana', [
-                'label' => false,
-                'class' => 'form-control',
-                'placeholder' => 'フリガナ(名)　(全角カタカナで入力して下さい)',
-            ]); ?>
+            <div class="form-inline">
+                <?= $this->Form->input('family_name_kana', [
+                    'label' => false,
+                    'class' => 'form-control col-xs-3',
+                    'style' => 'width: 49%;',
+                    'placeholder' => 'フリガナ(姓)　(全角カタカナで入力して下さい)',
+                ]); ?>
+                <?= $this->Form->input('given_name_kana', [
+                    'label' => false,
+                    'class' => 'form-control',
+                    'style' => 'width: 50%; margin-left: 1%',
+                    'placeholder' => 'フリガナ(名)　(全角カタカナで入力して下さい)',
+                ]); ?>
+            </div>
         </div>
         <div class="form-group">
             <?= $this->Form->input('email', [
@@ -79,3 +83,37 @@
         <?= $this->Form->submit('無料相談にエントリーする', ['class' => 'center-block btn btn-info btn-lg']); ?>
     </form>
 </div>
+
+
+
+<!-- <form action="" class="form-horizontal">
+  <div class="form-group">
+    <label for="name" class="control-label col-md-3">氏名</label>
+    <div class="col-sm-8">
+      <input type="text" placeholder="氏名" id="name" class="form-control">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="kana" class="control-label col-md-3">フリガナ</label>
+    <div class="col-sm-8">
+      <input type="text" placeholder="フリガナ" id="kana" class="form-control">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="birth" class="control-label col-md-3">生年月日</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" placeholder="年" style="width: 70px;display: inline-block;"><span style="margin: 0 5px;">年</span>
+      <input type="text" class="form-control" placeholder="月" style="width: 50px;display: inline-block;"><span style="margin: 0 5px;">月</span>
+      <input type="text" class="form-control" placeholder="日" style="width: 50px;display: inline-block;"><span style="margin: 0 5px;">日</span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="adr" class="control-label col-md-3">住所</label>
+    <div class="col-sm-8">
+      <input type="text" placeholder="住所" id="adr" class="form-control">
+    </div>
+  </div>
+</form> -->
