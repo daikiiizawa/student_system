@@ -18,7 +18,7 @@ class UsersController extends AppController{
         if($this->Auth->login()){
             $this->Flash->success('ログインしました');
             $this->User->id = $this->Auth->user('id');
-            $this->redirect(['controller' => 'students', 'action' => 'index']);
+            $this->redirect(['controller' => 'students', 'action' => 'index', 'students_status_code' => '0']);
           }
           $this->Flash->error('メールアドレスかパスワードが違います');
         }

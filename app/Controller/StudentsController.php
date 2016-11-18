@@ -4,7 +4,7 @@ App::uses('CakeEmail', 'Network/Email');
 
 class StudentsController extends AppController{
 
-    public $uses = ['Student', 'Region', 'User'];
+    public $uses = ['Student', 'Region'];
 
     public $components = [
         'Search.Prg',
@@ -20,13 +20,22 @@ class StudentsController extends AppController{
     public function index(){
         $all_students_count = count($this->Student->find('all'));
         $this->set('all_students_count', $all_students_count);
+        $conditions = array();
 
         // 生徒ステータスの絞込処理
         $this->Prg->commonProcess();
-        if ($this->request->data) {
-            $conditions = $this->Student->parseCriteria($this->passedArgs);
-        } elseif (empty($this->request->data['Student'])) {
+
+        if (empty($this->request->data['Student'])){
             $conditions = ['Student.students_status_code' => '0'];
+        } else {
+            // 生徒ステータスを'全表示'にした場合
+            if ($this->request->data['Student']['students_status_code'] == '4') {
+                $conditions = null;
+
+            // 生徒ステータスをpostした場合
+            } elseif ($this->request->data) {
+                $conditions = $this->Student->parseCriteria($this->passedArgs);
+            }
         }
         $this->paginate = [
             'conditions' => $conditions,
