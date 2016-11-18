@@ -26,7 +26,7 @@ $status = Configure::read("status");
                     <?= $this->Form->input('students_status_code', [
                         'label' => false,
                         'type' => 'select',
-                        'options' => ['0'=>'入会前','1'=>'学習中','2'=>'卒業済', '3'=>'削除予定'],
+                        'options' => $status,
                         'style' => 'width:130px;'
                     ]);?>
                 <td>&nbsp;</td>
