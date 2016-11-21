@@ -71,6 +71,10 @@ class AppController extends Controller {
        'action' => 'login'
      ],
      'authError' => 'ログインしてください',   // ログインが必要なページにアクセスした時のメッセージ
+      // CSRF、マスアサインメント対策として Security コンポーネントを使用する
+      // CSRF対策：フォームにトークンが追加されるようになる
+      // マスアサインメント対策：フォーム改ざんチェックが行われる
+      'Security',
    ]
 
   ];

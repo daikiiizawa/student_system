@@ -1,8 +1,6 @@
 <!-- ユーザー定義定数の読み出し -->
 <?php
 $week = Configure::read("week");
-$yomi = Configure::read("yomi");
-$status = Configure::read("status");
 $sex = Configure::read("sex");
 $purpose = Configure::read("purpose");
 $pc = Configure::read("pc");
@@ -20,77 +18,77 @@ $pc = Configure::read("pc");
 
 <tr>
     <td class="active text-right" style="width:40%;">電話番号</td>
-    <td><?= $student['Student']['phone_number'] ;?></td>
+    <td><?= h($student['Student']['phone_number']) ;?></td>
 </tr>
 
 <tr>
     <td class="active text-right" style="width:40%;">メールアドレス</td>
-    <td><?= $student['Student']['email'] ;?></td>
+    <td><?= h($student['Student']['email']) ;?></td>
 </tr>
 
 <tr>
     <td class="active text-right" style="width:40%;">性別</td>
     <?php if($student['Student']['sex_code'] != null) :?>
-        <td><?= $sex[$student['Student']['sex_code']] ;?></td>
+        <td><?= $sex[h($student['Student']['sex_code'])] ;?></td>
     <?php endif;?>
 </tr>
 
 <tr>
     <td class="active text-right" style="width:40%;">生年月日</td>
-    <td><?= h($this->Time->format($student['Student']['birthdate'],'%Y/%m/%d')) ;?></td>
+    <td><?= $this->Time->format(h($student['Student']['birthdate']),'%Y/%m/%d') ;?></td>
 </tr>
 
 <tr>
     <td class="active text-right" style="width:40%;">郵便番号</td>
-    <td><?= $student['Student']['postalcode'] ;?></td>
+    <td><?= h($student['Student']['postalcode']) ;?></td>
 </tr>
 
 <tr>
     <td class="active text-right" style="width:40%;">都道府県</td>
-    <td><?= $student['Region']['region_name'] ;?></td>
+    <td><?= h($student['Region']['region_name']) ;?></td>
 </tr>
 
 <tr>
     <td class="active text-right" style="width:40%;">住所</td>
-    <td><?= $student['Student']['address'] ;?></td>
+    <td><?= h($student['Student']['address']) ;?></td>
 </tr>
 
 <tr>
     <td class="active text-right" style="width:40%;">受講の目的(項目から指定)</td>
     <td>
         <?php if($student['Student']['large_purpose_code'] != null) :?>
-            <?= $purpose[$student['Student']['large_purpose_code']] ;?>
+            <?= $purpose[h($student['Student']['large_purpose_code'])] ;?>
         <?php endif ;?>
     </td>
 </tr>
 
 <tr>
     <td class="active text-right" style="width:40%;">受講の目的(フリー入力)</td>
-    <td><?= $student['Student']['detail_purpose'] ;?></td>
+    <td style="white-space:pre-wrap"><?= h($student['Student']['detail_purpose']) ;?></td>
 </tr>
 
 <tr>
     <td class="active text-right" style="width:40%;">学習時間帯</td>
-    <td><?= $student['Student']['studying_time'] ;?></td>
+    <td><?= h($student['Student']['studying_time']) ;?></td>
 </tr>
 
 <tr>
     <td class="active text-right" style="width:40%;">オフィスに来られる曜日や時間帯</td>
-    <td><?= $student['Student']['come_to_office_time'] ;?></td>
+    <td><?= h($student['Student']['come_to_office_time']) ;?></td>
 </tr>
 
 <tr>
     <td class="active text-right" style="width:40%;">使用PC</td>
     <td>
         <?php if($student['Student']['using_pc_code'] != null) :?>
-            <?= $pc[$student['Student']['using_pc_code']] ;?>
+            <?= $pc[h($student['Student']['using_pc_code'])] ;?>
         <?php endif ;?>
     </td>
 </tr>
 
 <tr>
     <td class="active text-right" style="width:40%;">入学希望月</td>
-    <td><?= $student['Student']['admission_month'] ;?></td>
+    <td><?= h($student['Student']['admission_month']) ;?></td>
 </tr>
 
 
@@ -101,17 +99,17 @@ $pc = Configure::read("pc");
 
 <tr>
     <td class="active text-right" style="width:40%;">第一希望</td>
-    <td><?= $student['Student']['first_preffered_date'] ;?></td>
+    <td><?= h($student['Student']['first_preffered_date']) ;?></td>
 </tr>
 
 <tr>
     <td class="active text-right" style="width:40%;">第二希望</td>
-    <td><?= $student['Student']['second_preffered_date'] ;?></td>
+    <td><?= h($student['Student']['second_preffered_date']) ;?></td>
 </tr>
 
 <tr>
     <td class="active text-right" style="width:40%;">第三希望</td>
-    <td><?= $student['Student']['third_preffered_date'] ;?></td>
+    <td><?= h($student['Student']['third_preffered_date']) ;?></td>
 </tr>
 
 <tr>
@@ -123,9 +121,9 @@ $pc = Configure::read("pc");
     <td class="active text-right" style="width:40%;">第一希望</td>
     <td>
         <?php if($student['Student']['first_meet_datetime']) :?>
-            <?= h($this->Time->format($student['Student']['first_meet_datetime'],'%m/%d'). '(' .
-            $week[$this->Time->format($student['Student']['first_meet_datetime'],'%w')].') / '.
-            $this->Time->format($student['Student']['first_meet_datetime'],'%H:00')) ;?>
+            <?= $this->Time->format(h($student['Student']['first_meet_datetime']),'%m/%d'. '(' .
+            $week[$this->Time->format(h($student['Student']['first_meet_datetime']),'%w')].') / '.
+            $this->Time->format(h($student['Student']['first_meet_datetime']),'%H:00')) ;?>
         <?php endif ;?>
     </td>
 </tr>
@@ -134,9 +132,9 @@ $pc = Configure::read("pc");
     <td class="active text-right" style="width:40%;">第二希望</td>
     <td>
         <?php if($student['Student']['second_meet_datetime']) :?>
-            <?= h($this->Time->format($student['Student']['second_meet_datetime'],'%m/%d'). '(' .
-            $week[$this->Time->format($student['Student']['second_meet_datetime'],'%w')].') / '.
-            $this->Time->format($student['Student']['second_meet_datetime'],'%H:00')) ;?>
+            <?= $this->Time->format(h($student['Student']['second_meet_datetime']),'%m/%d'. '(' .
+            $week[$this->Time->format(h($student['Student']['second_meet_datetime']),'%w')].') / '.
+            $this->Time->format(h($student['Student']['second_meet_datetime']),'%H:00')) ;?>
         <?php endif ;?>
     </td>
 </tr>
@@ -145,9 +143,9 @@ $pc = Configure::read("pc");
     <td class="active text-right" style="width:40%;">第三希望</td>
     <td>
         <?php if($student['Student']['third_meet_datetime']) :?>
-            <?= h($this->Time->format($student['Student']['third_meet_datetime'],'%m/%d'). '(' .
-            $week[$this->Time->format($student['Student']['third_meet_datetime'],'%w')].') / '.
-            $this->Time->format($student['Student']['third_meet_datetime'],'%H:00')) ;?>
+            <?= $this->Time->format(h($student['Student']['third_meet_datetime']),'%m/%d'. '(' .
+            $week[$this->Time->format(h($student['Student']['third_meet_datetime']),'%w')].') / '.
+            $this->Time->format(h($student['Student']['third_meet_datetime']),'%H:00')) ;?>
         <?php endif ;?>
     </td>
 </tr>

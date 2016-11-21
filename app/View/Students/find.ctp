@@ -75,7 +75,7 @@ $week = Configure::read("week");
     <?php foreach ($hit_students as $hit_student) :?>
         <tr>
             <td>
-                <?= h($this->Time->format($hit_student['Student']['created'],'%m/%d') . '(' .
+                <?= $this->Time->format($hit_student['Student']['created'],'%m/%d' . '(' .
                 $week[$this->Time->format($hit_student['Student']['created'],'%w')] . ')') ;?>
             </td>
             <td>

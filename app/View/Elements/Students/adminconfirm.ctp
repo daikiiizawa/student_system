@@ -3,9 +3,6 @@
 $week = Configure::read("week");
 $yomi = Configure::read("yomi");
 $status = Configure::read("status");
-$sex = Configure::read("sex");
-$purpose = Configure::read("purpose");
-$pc = Configure::read("pc");
 ?>
 
 <tr>
@@ -21,7 +18,7 @@ $pc = Configure::read("pc");
         <td>
     <?php endif;?>
         <?php if($confirm['Student']['students_status_code'] != null) :?>
-            <?= $status[$confirm['Student']['students_status_code']] ;?>
+            <?= $status[h($confirm['Student']['students_status_code'])] ;?>
         <?php endif ;?>
     </td>
 </tr>
@@ -34,9 +31,9 @@ $pc = Configure::read("pc");
         <td>
     <?php endif;?>
         <?php if($confirm['Student']['last_contact_datetime']) :?>
-            <?= h($this->Time->format($contactdate,'%m/%d'). '(' .
-            $week[$this->Time->format($contactdate,'%w')].') / '.
-            $this->Time->format($contactdate,'%H:00')) ;?>
+            <?= $this->Time->format(h($contactdate),'%m/%d'. '(' .
+            $week[$this->Time->format(h($contactdate),'%w')].') / '.
+            $this->Time->format(h($contactdate),'%H:00')) ;?>
         <?php endif ;?>
     </td>
 </tr>
@@ -49,7 +46,7 @@ $pc = Configure::read("pc");
         <td>
     <?php endif;?>
         <?php if($confirm['Student']['yomi_code'] != null) :?>
-            <?= $yomi[$confirm['Student']['yomi_code']] ;?></td>
+            <?= $yomi[h($confirm['Student']['yomi_code'])] ;?></td>
         <?php endif ;?>
 </tr>
 
@@ -60,5 +57,5 @@ $pc = Configure::read("pc");
     <?php else:?>
         <td>
     <?php endif;?>
-    <span style="white-space:pre-wrap"><?= $confirm['Student']['comment'] ;?></span></td>
+    <span style="white-space:pre-wrap"><?= h($confirm['Student']['comment']) ;?></span></td>
 </tr>

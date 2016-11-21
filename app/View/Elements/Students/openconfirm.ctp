@@ -1,8 +1,6 @@
 <!-- ユーザー定義定数の読み出し -->
 <?php
 $week = Configure::read("week");
-$yomi = Configure::read("yomi");
-$status = Configure::read("status");
 $sex = Configure::read("sex");
 $purpose = Configure::read("purpose");
 $pc = Configure::read("pc");
@@ -35,7 +33,7 @@ $pc = Configure::read("pc");
     <?php else:?>
         <td>
     <?php endif;?>
-    <?= $confirm['Student']['phone_number'] ;?></td>
+    <?= h($confirm['Student']['phone_number']) ;?></td>
 </tr>
 
 <tr>
@@ -45,7 +43,7 @@ $pc = Configure::read("pc");
     <?php else :?>
         <td>
     <?php endif;?>
-    <?= $confirm['Student']['email'] ;?></td>
+    <?= h($confirm['Student']['email']) ;?></td>
 </tr>
 
 <tr>
@@ -56,7 +54,7 @@ $pc = Configure::read("pc");
         <td>
     <?php endif ;?>
     <?php if($confirm['Student']['sex_code'] != null):?>
-        <?= $sex[$confirm['Student']['sex_code']] ;?>
+        <?= $sex[h($confirm['Student']['sex_code'])] ;?>
     <?php endif ;?>
     </td>
 </tr>
@@ -68,7 +66,7 @@ $pc = Configure::read("pc");
     <?php else :?>
         <td>
     <?php endif ;?>
-    <?= h($this->Time->format($birthdate,'%Y/%m/%d')) ;?></td>
+    <?= $this->Time->format(h($birthdate),'%Y/%m/%d') ;?></td>
 </tr>
 
 <tr>
@@ -78,7 +76,7 @@ $pc = Configure::read("pc");
     <?php else:?>
         <td>
     <?php endif ;?>
-    <?= $confirm['Student']['postalcode'] ;?></td>
+    <?= h($confirm['Student']['postalcode']) ;?></td>
 </tr>
 
 <tr>
@@ -88,7 +86,7 @@ $pc = Configure::read("pc");
     <?php else:?>
         <td>
     <?php endif ;?>
-    <?= $regions[$confirm['Student']['region_id']] ;?></td>
+    <?= $regions[h($confirm['Student']['region_id'])] ;?></td>
 </tr>
 
 <tr>
@@ -98,7 +96,7 @@ $pc = Configure::read("pc");
     <?php else :?>
         <td>
     <?php endif ;?>
-    <?= $confirm['Student']['address'] ;?></td>
+    <?= h($confirm['Student']['address']) ;?></td>
 </tr>
 
 <tr>
@@ -109,7 +107,7 @@ $pc = Configure::read("pc");
         <td>
     <?php endif ;?>
     <?php if($confirm['Student']['large_purpose_code'] != null) :?>
-        <?= $purpose[$confirm['Student']['large_purpose_code']] ;?>
+        <?= $purpose[h($confirm['Student']['large_purpose_code'])] ;?>
     <?php endif ;?>
     </td>
 </tr>
@@ -121,7 +119,7 @@ $pc = Configure::read("pc");
     <?php else:?>
         <td>
     <?php endif ?>
-    <?= $confirm['Student']['detail_purpose'] ;?></td>
+    <span style="white-space:pre-wrap"><?= h($confirm['Student']['detail_purpose']) ;?></span></td>
 </tr>
 
 <tr>
@@ -131,7 +129,7 @@ $pc = Configure::read("pc");
     <?php else :?>
         <td>
     <?php endif;?>
-    <?= $confirm['Student']['studying_time'] ;?></td>
+    <?= h($confirm['Student']['studying_time']) ;?></td>
 </tr>
 
 <tr>
@@ -141,7 +139,7 @@ $pc = Configure::read("pc");
     <?php else:?>
         <td>
     <?php endif;?>
-    <?= $confirm['Student']['come_to_office_time'] ;?></td>
+    <?= h($confirm['Student']['come_to_office_time']) ;?></td>
 </tr>
 
 <tr>
@@ -152,7 +150,7 @@ $pc = Configure::read("pc");
         <td>
     <?php endif;?>
     <?php if($confirm['Student']['using_pc_code'] != null) :?>
-        <?= $pc[$confirm['Student']['using_pc_code']] ;?>
+        <?= $pc[h($confirm['Student']['using_pc_code'])] ;?>
     <?php endif ;?>
     </td>
 </tr>
@@ -164,7 +162,7 @@ $pc = Configure::read("pc");
     <?php else:?>
         <td>
     <?php endif;?>
-    <?= $confirm['Student']['admission_month'] ;?></td>
+    <?= h($confirm['Student']['admission_month']) ;?></td>
 </tr>
 
 <tr>
@@ -179,7 +177,7 @@ $pc = Configure::read("pc");
     <?php else:?>
         <td>
     <?php endif;?>
-    <?= $confirm['Student']['first_preffered_date'] ;?></td>
+    <?= h($confirm['Student']['first_preffered_date']) ;?></td>
 </tr>
 
 <tr>
@@ -189,7 +187,7 @@ $pc = Configure::read("pc");
     <?php else:?>
         <td>
     <?php endif;?>
-    <?= $confirm['Student']['second_preffered_date'] ;?></td>
+    <?= h($confirm['Student']['second_preffered_date']) ;?></td>
 </tr>
 
 <tr>
@@ -199,7 +197,7 @@ $pc = Configure::read("pc");
     <?php else:?>
         <td>
     <?php endif;?>
-    <?= $confirm['Student']['third_preffered_date'] ;?></td>
+    <?= h($confirm['Student']['third_preffered_date']) ;?></td>
 </tr>
 
 <tr>
@@ -215,9 +213,9 @@ $pc = Configure::read("pc");
         <td>
     <?php endif;?>
         <?php if($confirm['Student']['first_meet_datetime']) :?>
-            <?= h($this->Time->format($firstdate,'%m/%d'). '(' .
-            $week[$this->Time->format($firstdate,'%w')].') / '.
-            $this->Time->format($firstdate,'%H:00')) ;?>
+            <?= $this->Time->format(h($firstdate),'%m/%d'. '(' .
+            $week[$this->Time->format(h($firstdate),'%w')].') / '.
+            $this->Time->format(h($firstdate),'%H:00')) ;?>
         <?php endif ;?>
     </td>
 </tr>
@@ -230,9 +228,9 @@ $pc = Configure::read("pc");
         <td>
     <?php endif;?>
         <?php if($confirm['Student']['second_meet_datetime']) :?>
-            <?= h($this->Time->format($seconddate,'%m/%d'). '(' .
-            $week[$this->Time->format($seconddate,'%w')].') / '.
-            $this->Time->format($seconddate,'%H:00')) ;?>
+            <?= $this->Time->format(h($seconddate),'%m/%d'. '(' .
+            $week[$this->Time->format(h($seconddate),'%w')].') / '.
+            $this->Time->format(h($seconddate),'%H:00')) ;?>
         <?php endif ;?>
     </td>
 </tr>
@@ -245,9 +243,9 @@ $pc = Configure::read("pc");
         <td>
     <?php endif;?>
         <?php if($confirm['Student']['third_meet_datetime']) :?>
-            <?= h($this->Time->format($thirddate,'%m/%d'). '(' .
-            $week[$this->Time->format($thirddate,'%w')].') / '.
-            $this->Time->format($thirddate,'%H:00')) ;?>
+            <?= $this->Time->format(h($thirddate),'%m/%d'. '(' .
+            $week[$this->Time->format(h($thirddate),'%w')].') / '.
+            $this->Time->format(h($thirddate),'%H:00')) ;?>
         <?php endif ;?>
     </td>
 </tr>

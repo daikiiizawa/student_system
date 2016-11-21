@@ -1,8 +1,6 @@
 <!-- ユーザー定義定数の読み出し -->
 <?php
 $week = Configure::read("week");
-$yomi = Configure::read("yomi");
-$status = Configure::read("status");
 $sex = Configure::read("sex");
 $purpose = Configure::read("purpose");
 $pc = Configure::read("pc");

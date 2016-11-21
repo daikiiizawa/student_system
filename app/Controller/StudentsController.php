@@ -60,7 +60,6 @@ class StudentsController extends AppController{
         if (!$this->Student->exists($id)) {
             throw new NotFoundException('生徒情報が見つかりません');
         }
-        $this->set('regions',$this->Region->find('list',['fields'=>['id','region_name']]));
 
         // 詳細ページからgetで来た場合のみdataに既存の生徒情報を参照する
         if (!$this->request->data) {
@@ -76,7 +75,6 @@ class StudentsController extends AppController{
         if (!$this->Student->exists($id)) {
             throw new NotFoundException('生徒情報が見つかりません');
         }
-        $this->set('regions',$this->Region->find('list',['fields'=>['id','region_name']]));
 
         // 詳細ページからgetで来た場合のみdataに既存の生徒情報を参照する
         if (!$this->request->data) {
@@ -296,8 +294,6 @@ class StudentsController extends AppController{
     }
 
     public function entry(){
-        $region = $this->Region->find('list', ['fields' => ['region_name']]);
-        $this->set('region', $region);
         if($this->request->is('post')){
             $this->Student->create();
             if($this->Student->save($this->request->data)){

@@ -161,7 +161,7 @@ $status = Configure::read("status");
         <?php foreach ($students as $student) :?>
             <tr>
                 <td>
-                    <?= h($this->Time->format($student['Student']['created'],'%m/%d') . '(' .
+                    <?= $this->Time->format($student['Student']['created'],'%m/%d' . '(' .
                     $week[$this->Time->format($student['Student']['created'],'%w')] . ')') ;?>
                 </td>
                 <td>
@@ -173,29 +173,29 @@ $status = Configure::read("status");
                  </td>
                 <td>
                     <?php if($student['Student']['first_meet_datetime']) :?>
-                        <?= h($this->Time->format($student['Student']['first_meet_datetime'],'%m/%d'). '(' .
-                        $week[$this->Time->format($student['Student']['first_meet_datetime'],'%w')].') / '.
-                        $this->Time->format($student['Student']['first_meet_datetime'],'%H:00')) ;?>
+                        <?= $this->Time->format(h($student['Student']['first_meet_datetime']),'%m/%d'. '(' .
+                        $week[$this->Time->format(h($student['Student']['first_meet_datetime']),'%w')].') / '.
+                        $this->Time->format(h($student['Student']['first_meet_datetime']),'%H:00')) ;?>
                     <?php endif ;?>
                 </td>
                 <td><?= h($student['Student']['admission_month']) ;?></td>
 
                 <td>
                     <?php if($student['Student']['yomi_code'] != null) :?>
-                        <?= $yomi[$student['Student']['yomi_code']] ;?>
+                        <?= $yomi[h($student['Student']['yomi_code'])] ;?>
                     <?php endif ;?>
                 </td>
 
                 <td>
                     <?php if($student['Student']['students_status_code'] != null) :?>
-                        <?= $status[$student['Student']['students_status_code']] ;?>
+                        <?= $status[h($student['Student']['students_status_code'])] ;?>
                     <?php endif ;?>
                 </td>
 
                 <td>
                     <?php if($student['Student']['last_contact_datetime']) :?>
-                        <?= h($this->Time->format($student['Student']['last_contact_datetime'],'%m/%d'). '(' .
-                        $week[$this->Time->format($student['Student']['last_contact_datetime'],'%w')].')') ;?>
+                        <?= $this->Time->format(h($student['Student']['last_contact_datetime']),'%m/%d'. '(' .
+                        $week[$this->Time->format(h($student['Student']['last_contact_datetime']),'%w')].')') ;?>
                     <?php endif ;?>
                 </td>
                 <td><?= h($student['Student']['affiliate_id']) ;?></td>

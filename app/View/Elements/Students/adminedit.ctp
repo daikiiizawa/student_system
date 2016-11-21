@@ -3,10 +3,6 @@
 $week = Configure::read("week");
 $yomi = Configure::read("yomi");
 $status_edit = Configure::read("status_edit");
-$sex = Configure::read("sex");
-$purpose = Configure::read("purpose");
-$pc = Configure::read("pc");
-$month = Configure::read("month");
 ?>
 
 <div class="form-group col-xs-12">&nbsp;</div>
