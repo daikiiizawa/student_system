@@ -296,8 +296,6 @@ class StudentsController extends AppController{
     }
 
     public function entry(){
-        $programming_lv = ['初めてプログラミングに触れる', 'プログラミングを少し学んだことがある', 'プログラミングで仕事をしている・したことがある'];
-        $this->set('programming_lv', $programming_lv);
         $region = $this->Region->find('list', ['fields' => ['region_name']]);
         $this->set('region', $region);
         if($this->request->is('post')){

@@ -7,6 +7,7 @@ $sex = Configure::read("sex");
 $purpose = Configure::read("purpose");
 $pc = Configure::read("pc");
 $month = Configure::read("month");
+$region_name = Configure::read("region_name");
 ?>
 
 <div class="form-group col-xs-12">
@@ -98,10 +99,8 @@ $month = Configure::read("month");
 <div class="form-group col-xs-12">
 <?= $this->Form->input('region_id', [
     'label' => ['text' => '都道府県', 'class' => 'col-xs-5 text-right'],
-    // 'type'  => 'text',
-    // 'placeholder'  => 'プルダウンに変更予定',
     'type'  => 'select',
-    'options' => $regions,
+    'options' => $region_name,
     'empty' => '選択して下さい',
     'class' => 'col-xs-3'
     ]); ?>
