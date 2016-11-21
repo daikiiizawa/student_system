@@ -60,11 +60,12 @@ $week = Configure::read("week");
     <?php endif ;?>
 </p>
 
-<table class="table table-striped" style="width:40%">
+<table class="table table-striped" style="width:50%">
     <!-- ヘッダー -->
     <thead class="text-info">
         <th>登録日</th>
         <th>氏名</th>
+        <th></th>
         <th></th>
     </thead>
 
@@ -74,7 +75,7 @@ $week = Configure::read("week");
     <?php foreach ($hit_students as $hit_student) :?>
         <tr>
             <td>
-                <?= h($this->Time->format($hit_student['Student']['created'],'%m/%d') . '(' .
+                <?= $this->Time->format($hit_student['Student']['created'],'%m/%d' . '(' .
                 $week[$this->Time->format($hit_student['Student']['created'],'%w')] . ')') ;?>
             </td>
             <td>
@@ -85,11 +86,19 @@ $week = Configure::read("week");
                 ]) ;?>
              </td>
 
-            <td class="btn btn-default">
+            <td>
                 <?= $this->Html->link('詳細',[
                 'action' => 'view',$hit_student['Student']['id'],
                 ], [
-                'target' => '_blank'
+                'target' => '_blank',
+                'class' => 'btn btn-default btn-xs'
+                ]) ;?>
+
+                <?= $this->Html->link('生徒用詳細',[
+                'action' => 'subview',$hit_student['Student']['id'],
+                ], [
+                'target' => '_blank',
+                'class' => 'btn btn-primary btn-xs'
                 ]) ;?>
             </td>
         </tr>

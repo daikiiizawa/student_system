@@ -6,7 +6,6 @@
 <p class="text-danger">※赤枠の箇所が更新されます</p>
     <tbody>
         <?= $this->element('Students/openconfirm'); ?>
-        <?= $this->element('Students/adminconfirm'); ?>
     </tbody>
 </table>
 
@@ -14,7 +13,7 @@
 <div class="btn-toolbar">
 <div class="col-xs-5"></div>
 <?= $this->Form->create('Student', [
-    'url' => ["action" => "save"],
+    'url' => ["action" => "subsave"],
     "type" => "post"
     ]);?>
 
@@ -42,10 +41,6 @@
 <?= $this->Form->hidden('first_meet_datetime',['value' => $firstdate]); ?>
 <?= $this->Form->hidden('second_meet_datetime',['value' => $seconddate]); ?>
 <?= $this->Form->hidden('third_meet_datetime',['value' => $thirddate]); ?>
-<?= $this->Form->hidden('students_status_code'); ?>
-<?= $this->Form->hidden('last_contact_datetime',['value' => $contactdate]); ?>
-<?= $this->Form->hidden('yomi_code'); ?>
-<?= $this->Form->hidden('comment'); ?>
 
 <?= $this->Form->end([
     'label' => '更新',
@@ -55,7 +50,7 @@
 
 
 <?= $this->Form->create('Student', [
-    'url' => ["action" => "edit"],
+    'url' => ["action" => "subedit"],
     "type" => "post"
     ]);?>
 
@@ -83,10 +78,7 @@
 <?= $this->Form->hidden('first_meet_datetime',['value' => $firstdate]); ?>
 <?= $this->Form->hidden('second_meet_datetime',['value' => $seconddate]); ?>
 <?= $this->Form->hidden('third_meet_datetime',['value' => $thirddate]); ?>
-<?= $this->Form->hidden('students_status_code'); ?>
-<?= $this->Form->hidden('last_contact_datetime',['value' => $contactdate]); ?>
-<?= $this->Form->hidden('yomi_code'); ?>
-<?= $this->Form->hidden('comment'); ?>
+
 
 <?= $this->Form->end([
     'label' => '戻る',

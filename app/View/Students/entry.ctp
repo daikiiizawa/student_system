@@ -1,3 +1,9 @@
+<!-- ユーザー定義定数の読み出し -->
+<?php
+$region_name = Configure::read("region_name");
+$programming_lv = Configure::read("programming_lv");
+?>
+
 <div style="margin-bottom:50px;", class="container">
     <h2>さあ、次はあなたの番です。</h2>
     <div style="margin-top:30px;">あなたのために整えられた最高の学習環境で学び、そしてあなたの人生を変えるチャンスが今あります。</div>
@@ -59,7 +65,7 @@
                 'label' => false,
                 'class' => 'form-control',
                 'type' => 'select',
-                'options' => $region
+                'options' => $region_name
             ]); ?>
         </div>
         <div class="form-group">
