@@ -200,11 +200,19 @@ $status = Configure::read("status");
                 </td>
                 <td><?= h($student['Student']['affiliate_id']) ;?></td>
 
-                <td class="btn btn-default">
+                <td>
                     <?= $this->Html->link('詳細',[
                     'action' => 'view',$student['Student']['id']
                     ], [
-                    'target' => '_blank'
+                    'target' => '_blank',
+                     'class' => 'btn btn-default btn-xs'
+                    ]) ;?>
+
+                    <?= $this->Html->link('生徒用詳細',[
+                    'action' => 'subview',$student['Student']['id']
+                    ], [
+                    'target' => '_blank',
+                     'class' => 'btn btn-primary btn-xs'
                     ]) ;?>
                 </td>
             </tr>

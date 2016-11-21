@@ -8,14 +8,13 @@
 <div class="form-group">
 
 <?= $this->Form->create('Student', [
-    'url' => ['action' => 'confirm'],
+    'url' => ['action' => 'subconfirm'],
     'type'  => 'post',
     'novalidate' => true,
     'class' => 'form-horizontal'
     ]); ?>
 
 <?= $this->element('Students/openedit'); ?>
-<?= $this->element('Students/adminedit'); ?>
 
 </div>
 </div>
@@ -30,7 +29,7 @@
 
 
 <?= $this->Html->link(
-    '戻る', ['action' => 'view', $id], [
+    '戻る', ['action' => 'subview', $id], [
     'class' => 'btn-group btn btn-default',
     'style' => 'margin: 0px 0px 20px 0px;'
     ]) ;?>

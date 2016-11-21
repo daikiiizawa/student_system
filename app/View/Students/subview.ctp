@@ -5,19 +5,18 @@
 <h2>詳細画面</h2>
     <tbody>
         <?= $this->element('Students/openview'); ?>
-        <?= $this->element('Students/adminview'); ?>
     </tbody>
 </table>
 
 <div class="col-xs-5"></div>
 <?= $this->Html->link(
-    '編集', ['action' => 'edit', $student['Student']['id']], [
+    '編集', ['action' => 'subedit', $student['Student']['id']], [
     'class' => 'btn btn-primary',
     'style' => 'margin: 10px 0px 30px 0px;'
     ]) ;?>&nbsp;
 
 <?= $this->Html->link(
-    '戻る', ['action' => 'index', 'students_status_code' => '0'], [
+    '戻る', ['action' => 'find', 'students_status_code' => '0'], [
     'class' => 'btn btn-default',
     'style' => 'margin: 10px 0px 30px 0px;'
     ]) ;?>

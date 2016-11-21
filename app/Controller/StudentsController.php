@@ -55,6 +55,7 @@ class StudentsController extends AppController{
         $this->set('students', $this->paginate('Student'));
     }
 
+
     public function edit ($id = null) {
         if (!$this->Student->exists($id)) {
             throw new NotFoundException('生徒情報が見つかりません');
@@ -71,6 +72,23 @@ class StudentsController extends AppController{
         $this->set('id', $id);
     }
 
+    public function subedit ($id = null) {
+        if (!$this->Student->exists($id)) {
+            throw new NotFoundException('生徒情報が見つかりません');
+        }
+        $this->set('regions',$this->Region->find('list',['fields'=>['id','region_name']]));
+
+        // 詳細ページからgetで来た場合のみdataに既存の生徒情報を参照する
+        if (!$this->request->data) {
+            $this->request->data = $this->Student->findById($id);
+        }
+
+        // 編集画面から戻るボタンで詳細ページに戻るのを簡潔にまとめるためidを定義
+        $id = $this->request->data['Student']['id'];
+        $this->set('id', $id);
+    }
+
+
     public function view($id = null){
         if (!$this->Student->exists($id)) {
             throw new NotFoundException('生徒情報がみつかりません');
@@ -78,6 +96,15 @@ class StudentsController extends AppController{
         $student = $this->Student->findById($id);
         $this->set('student', $student);
     }
+
+    public function subview($id = null){
+        if (!$this->Student->exists($id)) {
+            throw new NotFoundException('生徒情報がみつかりません');
+        }
+        $student = $this->Student->findById($id);
+        $this->set('student', $student);
+    }
+
 
     public function confirm($id = null) {
         if (!$this->Student->exists($id)) {
@@ -124,19 +151,70 @@ class StudentsController extends AppController{
                             $confirm['Student']['third_meet_datetime']['min'].':00';
         } else {$thirddate = '';}
         $this->set('thirddate', $thirddate);
+        if ($confirm['Student']['last_contact_datetime']['year'] != '') {
+            $contactdate =  $confirm['Student']['last_contact_datetime']['year'].'-'.
+                            $confirm['Student']['last_contact_datetime']['month'].'-'.
+                            $confirm['Student']['last_contact_datetime']['day'].' '.
+                            $confirm['Student']['last_contact_datetime']['hour'].':'.
+                            $confirm['Student']['last_contact_datetime']['min'].':00';
+        } else {$contactdate = '';}
+        $this->set('contactdate', $contactdate);
 
-        // 管理情報のため、管理者ログイン時のみ処理を行う
-        if($this->Auth->user()){
-            if ($confirm['Student']['last_contact_datetime']['year'] != '') {
-                $contactdate =  $confirm['Student']['last_contact_datetime']['year'].'-'.
-                                $confirm['Student']['last_contact_datetime']['month'].'-'.
-                                $confirm['Student']['last_contact_datetime']['day'].' '.
-                                $confirm['Student']['last_contact_datetime']['hour'].':'.
-                                $confirm['Student']['last_contact_datetime']['min'].':00';
-            } else {$contactdate = '';}
-            $this->set('contactdate', $contactdate);
-            $confirm['Student']['last_contact_datetime'] = $contactdate;
+        // 日付データをarrayからstringに戻してconfirm内に入れる
+        $confirm['Student']['birthdate'] = $birthdate;
+        $confirm['Student']['first_meet_datetime'] = $firstdate;
+        $confirm['Student']['second_meet_datetime'] = $seconddate;
+        $confirm['Student']['third_meet_datetime'] = $thirddate;
+        $confirm['Student']['last_contact_datetime'] = $contactdate;
+
+        $this->set('confirm', $confirm);
+    }
+
+    public function subconfirm($id = null) {
+        if (!$this->Student->exists($id)) {
+            throw new NotFoundExeption('生徒情報が見つかりません');
         }
+        // 既存データ参照
+        $student = $this->Student->findById($id);
+        $this->set('student', $student);
+        $this->set('regions',$this->Region->find('list',['fields'=>['id','region_name']]));
+        // 編集画面からのpostデータ
+        $confirm = $this->request->data;
+        $this->set('confirm', $confirm);
+
+        $confirm['Student']['address'] = $confirm['address'];
+
+        // 日付フォーマット加工(array→string)
+        if ($confirm['Student']['birthdate']['year'] != '') {
+            $birthdate =    $confirm['Student']['birthdate']['year'].'-'.
+                            $confirm['Student']['birthdate']['month'].'-'.
+                            $confirm['Student']['birthdate']['day'];
+            } else {$birthdate = '';}
+        $this->set('birthdate', $birthdate);
+        if ($confirm['Student']['first_meet_datetime']['year'] != '') {
+            $firstdate =    $confirm['Student']['first_meet_datetime']['year'].'-'.
+                            $confirm['Student']['first_meet_datetime']['month'].'-'.
+                            $confirm['Student']['first_meet_datetime']['day'].' '.
+                            $confirm['Student']['first_meet_datetime']['hour'].':'.
+                            $confirm['Student']['first_meet_datetime']['min'].':00';
+            } else {$firstdate = '';}
+        $this->set('firstdate', $firstdate);
+        if ($confirm['Student']['second_meet_datetime']['year'] != '') {
+            $seconddate =   $confirm['Student']['second_meet_datetime']['year'].'-'.
+                            $confirm['Student']['second_meet_datetime']['month'].'-'.
+                            $confirm['Student']['second_meet_datetime']['day'].' '.
+                            $confirm['Student']['second_meet_datetime']['hour'].':'.
+                            $confirm['Student']['second_meet_datetime']['min'].':00';
+            } else {$seconddate = '';}
+        $this->set('seconddate', $seconddate);
+        if ($confirm['Student']['third_meet_datetime']['year'] != '') {
+            $thirddate =    $confirm['Student']['third_meet_datetime']['year'].'-'.
+                            $confirm['Student']['third_meet_datetime']['month'].'-'.
+                            $confirm['Student']['third_meet_datetime']['day'].' '.
+                            $confirm['Student']['third_meet_datetime']['hour'].':'.
+                            $confirm['Student']['third_meet_datetime']['min'].':00';
+        } else {$thirddate = '';}
+        $this->set('thirddate', $thirddate);
 
         // 日付データをarrayからstringに戻してconfirm内に入れる
         $confirm['Student']['birthdate'] = $birthdate;
@@ -146,6 +224,7 @@ class StudentsController extends AppController{
 
         $this->set('confirm', $confirm);
     }
+
 
     public function save($id = null) {
         if (!$this->Student->exists($id)) {
@@ -162,6 +241,24 @@ class StudentsController extends AppController{
         } else {
             $this->Flash->error('失敗');
             return $this->redirect(['action' => 'view',$id]);
+        }
+    }
+
+    public function subsave($id = null) {
+        if (!$this->Student->exists($id)) {
+            throw new NotFoundExeption('生徒情報が見つかりません');
+        }
+        if ($this->request->is(['post', 'put'])) {
+            if ($this->Student->save($this->request->data)) {
+                $this->Flash->success('更新しました');
+                return $this->redirect(['action' => 'subview',$id]);
+            } else {
+            $this->Flash->error('必須項目の編集に誤りがあるため保存できませんでした。');
+            return $this->redirect(['action' => 'subview',$id]);
+            }
+        } else {
+            $this->Flash->error('失敗');
+            return $this->redirect(['action' => 'subview',$id]);
         }
     }
 
