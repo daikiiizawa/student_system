@@ -175,7 +175,7 @@ $status = Configure::read("status");
                     <?php if($student['Student']['first_meet_datetime']) :?>
                         <?= $this->Time->format(h($student['Student']['first_meet_datetime']),'%m/%d'. '(' .
                         $week[$this->Time->format(h($student['Student']['first_meet_datetime']),'%w')].') / '.
-                        $this->Time->format(h($student['Student']['first_meet_datetime']),'%H:00')) ;?>
+                        $this->Time->format(h($student['Student']['first_meet_datetime']),'%H:%M')) ;?>
                     <?php endif ;?>
                 </td>
                 <td><?= h($student['Student']['admission_month']) ;?></td>

@@ -33,7 +33,7 @@ $status = Configure::read("status");
         <?php if($confirm['Student']['last_contact_datetime']) :?>
             <?= $this->Time->format(h($contactdate),'%m/%d'. '(' .
             $week[$this->Time->format(h($contactdate),'%w')].') / '.
-            $this->Time->format(h($contactdate),'%H:00')) ;?>
+            $this->Time->format(h($contactdate),'%H:%M')) ;?>
         <?php endif ;?>
     </td>
 </tr>

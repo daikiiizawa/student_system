@@ -215,7 +215,7 @@ $pc = Configure::read("pc");
         <?php if($confirm['Student']['first_meet_datetime']) :?>
             <?= $this->Time->format(h($firstdate),'%m/%d'. '(' .
             $week[$this->Time->format(h($firstdate),'%w')].') / '.
-            $this->Time->format(h($firstdate),'%H:00')) ;?>
+            $this->Time->format(h($firstdate),'%H:%M')) ;?>
         <?php endif ;?>
     </td>
 </tr>
@@ -230,7 +230,7 @@ $pc = Configure::read("pc");
         <?php if($confirm['Student']['second_meet_datetime']) :?>
             <?= $this->Time->format(h($seconddate),'%m/%d'. '(' .
             $week[$this->Time->format(h($seconddate),'%w')].') / '.
-            $this->Time->format(h($seconddate),'%H:00')) ;?>
+            $this->Time->format(h($seconddate),'%H:%M')) ;?>
         <?php endif ;?>
     </td>
 </tr>
@@ -245,7 +245,7 @@ $pc = Configure::read("pc");
         <?php if($confirm['Student']['third_meet_datetime']) :?>
             <?= $this->Time->format(h($thirddate),'%m/%d'. '(' .
             $week[$this->Time->format(h($thirddate),'%w')].') / '.
-            $this->Time->format(h($thirddate),'%H:00')) ;?>
+            $this->Time->format(h($thirddate),'%H:%M')) ;?>
         <?php endif ;?>
     </td>
 </tr>

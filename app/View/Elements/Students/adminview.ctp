@@ -25,7 +25,7 @@ $status = Configure::read("status");
         <?php if($student['Student']['last_contact_datetime']) :?>
             <?= $this->Time->format(h($student['Student']['last_contact_datetime']),'%m/%d'. '(' .
             $week[$this->Time->format(h($student['Student']['last_contact_datetime']),'%w')].') / '.
-            $this->Time->format(h($student['Student']['last_contact_datetime']),'%H:00')) ;?>
+            $this->Time->format(h($student['Student']['last_contact_datetime']),'%H:%M')) ;?>
         <?php endif ;?>
     </td>
 </tr>

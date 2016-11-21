@@ -123,7 +123,7 @@ $pc = Configure::read("pc");
         <?php if($student['Student']['first_meet_datetime']) :?>
             <?= $this->Time->format(h($student['Student']['first_meet_datetime']),'%m/%d'. '(' .
             $week[$this->Time->format(h($student['Student']['first_meet_datetime']),'%w')].') / '.
-            $this->Time->format(h($student['Student']['first_meet_datetime']),'%H:00')) ;?>
+            $this->Time->format(h($student['Student']['first_meet_datetime']),'%H:%M')) ;?>
         <?php endif ;?>
     </td>
 </tr>
@@ -134,7 +134,7 @@ $pc = Configure::read("pc");
         <?php if($student['Student']['second_meet_datetime']) :?>
             <?= $this->Time->format(h($student['Student']['second_meet_datetime']),'%m/%d'. '(' .
             $week[$this->Time->format(h($student['Student']['second_meet_datetime']),'%w')].') / '.
-            $this->Time->format(h($student['Student']['second_meet_datetime']),'%H:00')) ;?>
+            $this->Time->format(h($student['Student']['second_meet_datetime']),'%H:%M')) ;?>
         <?php endif ;?>
     </td>
 </tr>
@@ -145,7 +145,7 @@ $pc = Configure::read("pc");
         <?php if($student['Student']['third_meet_datetime']) :?>
             <?= $this->Time->format(h($student['Student']['third_meet_datetime']),'%m/%d'. '(' .
             $week[$this->Time->format(h($student['Student']['third_meet_datetime']),'%w')].') / '.
-            $this->Time->format(h($student['Student']['third_meet_datetime']),'%H:00')) ;?>
+            $this->Time->format(h($student['Student']['third_meet_datetime']),'%H:%M')) ;?>
         <?php endif ;?>
     </td>
 </tr>
