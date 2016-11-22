@@ -16,7 +16,7 @@
     ]) ;?>&nbsp;
 
 <?= $this->Html->link(
-    '戻る', ['action' => 'find', 'students_status_code' => '0'], [
+    '戻る', ['action' => 'index', 'students_status_code' => '0'], [
     'class' => 'btn btn-default',
     'style' => 'margin: 10px 0px 30px 0px;'
     ]) ;?>
