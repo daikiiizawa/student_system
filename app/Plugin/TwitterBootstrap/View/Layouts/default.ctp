@@ -11,6 +11,7 @@
 
     <!-- Bootstrap -->
     <?php echo $this->Html->css('bootstrap.min'); ?>
+    <?php echo $this->Html->css('bootstrap-custom'); ?>
 
 
 	<style>
