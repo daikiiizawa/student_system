@@ -18,6 +18,7 @@ class StudentsController extends AppController{
     }
 
     public function index(){
+        $this->set('title_for_layout', '一覧画面');
         $all_students_count = count($this->Student->find('all'));
         $this->set('all_students_count', $all_students_count);
         $conditions = array();
@@ -57,6 +58,7 @@ class StudentsController extends AppController{
 
 
     public function edit ($id = null) {
+        $this->set('title_for_layout', '編集画面');
         if (!$this->Student->exists($id)) {
             throw new NotFoundException('生徒情報が見つかりません');
         }
@@ -72,6 +74,7 @@ class StudentsController extends AppController{
     }
 
     public function subedit ($id = null) {
+        $this->set('title_for_layout', '編集画面');
         if (!$this->Student->exists($id)) {
             throw new NotFoundException('生徒情報が見つかりません');
         }
@@ -88,6 +91,7 @@ class StudentsController extends AppController{
 
 
     public function view($id = null){
+        $this->set('title_for_layout', '詳細画面');
         if (!$this->Student->exists($id)) {
             throw new NotFoundException('生徒情報がみつかりません');
         }
@@ -96,6 +100,7 @@ class StudentsController extends AppController{
     }
 
     public function subview($id = null){
+        $this->set('title_for_layout', '詳細画面');
         if (!$this->Student->exists($id)) {
             throw new NotFoundException('生徒情報がみつかりません');
         }
@@ -105,6 +110,7 @@ class StudentsController extends AppController{
 
 
     public function confirm($id = null) {
+        $this->set('title_for_layout', '確認画面');
         if (!$this->Student->exists($id)) {
             throw new NotFoundExeption('生徒情報が見つかりません');
         }
@@ -169,6 +175,7 @@ class StudentsController extends AppController{
     }
 
     public function subconfirm($id = null) {
+        $this->set('title_for_layout', '確認画面');
         if (!$this->Student->exists($id)) {
             throw new NotFoundExeption('生徒情報が見つかりません');
         }
@@ -261,6 +268,7 @@ class StudentsController extends AppController{
     }
 
     public function find() {
+        $this->set('title_for_layout', '検索画面');
         $count_students = 0;
         $this->paginate = [
             'order' => ['created' => 'desc'],
@@ -286,6 +294,10 @@ class StudentsController extends AppController{
                 $hit_students = $this->paginate('Student', $conditions);
                 $this->set('hit_students', $hit_students);
                 $count_students = count($hit_students);
+                if ($count_students == 0){
+                    $this->Flash->error('検索条件にヒットする対象者がいません。');
+                }
+
             } else {
                 $this->Flash->error('全項目入力して下さい');
             }
@@ -294,6 +306,7 @@ class StudentsController extends AppController{
     }
 
     public function entry(){
+        $this->set('title_for_layout', 'エントリーフォーム');
         if($this->request->is('post')){
             $this->Student->create();
             if($this->Student->save($this->request->data)){
