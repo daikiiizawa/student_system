@@ -80,7 +80,7 @@ $week = Configure::read("week");
             </td>
             <td>
                 <?= $this->Html->link(h($hit_student['Student']['family_name']) . ' '. h($hit_student['Student']['given_name']), [
-                'action' => 'view', $hit_student['Student']['id']
+                'action' => 'subview',$hit_student['Student']['id'],
                 ], [
                 'target' => '_blank'
                 ]) ;?>
@@ -88,17 +88,10 @@ $week = Configure::read("week");
 
             <td>
                 <?= $this->Html->link('詳細',[
-                'action' => 'view',$hit_student['Student']['id'],
-                ], [
-                'target' => '_blank',
-                'class' => 'btn btn-default btn-xs'
-                ]) ;?>
-
-                <?= $this->Html->link('生徒用詳細',[
                 'action' => 'subview',$hit_student['Student']['id'],
                 ], [
                 'target' => '_blank',
-                'class' => 'btn btn-primary btn-xs'
+                'class' => 'btn btn-default btn-xs'
                 ]) ;?>
             </td>
         </tr>

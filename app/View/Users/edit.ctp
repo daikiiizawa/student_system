@@ -16,6 +16,6 @@
       <?= $this->Form->submit('保存する', ['class' => 'btn btn-primary']); ?>
   </form>
   <div style="margin-top:10px;">
-    <?= $this->Html->link('戻る', ['students' => 'index', 'action' => 'index'], ['class' => 'btn btn-default']); ?>
+    <?= $this->Html->link('戻る', ['controller' => 'students', 'action' => 'index'], ['class' => 'btn btn-default']); ?>
   </div>
 </div>

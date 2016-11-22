@@ -108,7 +108,6 @@ class StudentsController extends AppController{
         $this->set('student', $student);
     }
 
-
     public function confirm($id = null) {
         $this->set('title_for_layout', '確認画面');
         if (!$this->Student->exists($id)) {
@@ -172,6 +171,25 @@ class StudentsController extends AppController{
         $confirm['Student']['last_contact_datetime'] = $contactdate;
 
         $this->set('confirm', $confirm);
+
+        // $date_error_count = '0';
+        // list($Y_birth, $m_birth, $d_birth) = explode('-', $birthdate);
+        // if (checkdate($m_birth, $d_birth, $Y_birth) === false) {
+        //     $this->Flash->error('誕生日に存在しない日付が入力されました。');
+        //     $date_error_count ++;
+        // }
+        // error_log($firstdate);
+        // debug($birthdate);
+        // list($Y_first, $m_first, $d_first) = explode('-', $firstdate);
+        // if (checkdate($m_first, $d_first, $Y_first) === false) {
+        //     $this->Flash->error('第一希望に存在しない日付が入力されました。');
+        //     $date_error_count ++;
+        // }
+
+        // if ($date_error_count !== 0) {
+        //     return $this->redirect(['action' => 'edit',$id]);
+        // }
+
     }
 
     public function subconfirm($id = null) {
@@ -295,7 +313,7 @@ class StudentsController extends AppController{
                 $this->set('hit_students', $hit_students);
                 $count_students = count($hit_students);
                 if ($count_students == 0){
-                    $this->Flash->error('検索条件にヒットする対象者がいません。');
+                    $this->Flash->error('検索条件に一致する対象者がいません。');
                 }
 
             } else {
