@@ -208,12 +208,6 @@ $status = Configure::read("status");
                      'class' => 'btn btn-default btn-xs'
                     ]) ;?>
 
-                    <?= $this->Html->link('生徒用詳細',[
-                    'action' => 'subview',$student['Student']['id']
-                    ], [
-                    'target' => '_blank',
-                     'class' => 'btn btn-primary btn-xs'
-                    ]) ;?>
                 </td>
             </tr>
         <?php endforeach; ?>
