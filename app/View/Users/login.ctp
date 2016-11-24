@@ -16,7 +16,7 @@
   <hr>
 
   <p>
-    <?= $this->Html->link('パスワードを忘れた方はこちら', ['controller' => 'users', 'action' => 'password_reset']); ?>
+    <?= $this->Html->link('パスワードを忘れた方/アカウントロックされたはこちら', ['controller' => 'users', 'action' => 'password_reset']); ?>
   </p>
 
 </div>
