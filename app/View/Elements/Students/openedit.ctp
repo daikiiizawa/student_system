@@ -133,7 +133,8 @@ $region_name = Configure::read("region_name");
     'type'  => 'text',
     'rows' => '2',
     'placeholder' => '自由記述',
-    'class' => 'col-xs-7'
+    'class' => 'col-xs-7',
+    // 'style' => 'width:50px'
     ]); ?>
 </div>
 
