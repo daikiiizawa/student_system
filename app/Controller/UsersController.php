@@ -11,18 +11,35 @@ class UsersController extends AppController{
 
     public function login(){
         if($this->Auth->user()){
-        return $this->redirect($this->Auth->redirectUrl());
-        }
+            return $this->redirect($this->Auth->redirectUrl());
+            }
 
-    if($this->request->is('post')){
-        if($this->Auth->login()){
-            $this->Flash->success('ログインしました');
-            $this->User->id = $this->Auth->user('id');
-            $this->redirect(['controller' => 'students', 'action' => 'index', 'students_status_code' => '0']);
-          }
-          $this->Flash->error('メールアドレスかパスワードが違います');
+        if($this->request->is('post')){
+            $request_user = $this->User->find('first', [
+                'fields' => ['id', 'try_login'], '
+                conditions' => ['email' => $this->request->data['User']['email']]
+            ]);
+            if($request_user['User']['try_login'] >= 5){
+                $this->Flash->error('試行回数が5回以上です。アカウントをロックしました。');
+                $this->redirect($this->referer());
+            }
+            if($this->Auth->login()){
+                $request_user['User']['try_login'] = 0;
+                $this->User->save($request_user);
+                $this->Flash->success('ログインしました');
+                $this->User->id = $this->Auth->user('id');
+                $this->redirect(['controller' => 'students', 'action' => 'index', 'students_status_code' => '0']);
+            }
+            if(!empty($request_user)){
+                $request_user['User']['try_login'] += 1;
+                $this->User->save($request_user);
+                if($request_user['User']['try_login'] >=5){
+                  $this->Flash->error('試行回数が5回以上です。アカウントをロックしました。');
+                  $this->redirect($this->referer());
+                }
+            }
+            $this->Flash->error('メールアドレスかパスワードが間違っています');
         }
-
     }
 
     public function signup(){
@@ -68,22 +85,22 @@ class UsersController extends AppController{
 
     public function password_reset(){
         if($this->request->data){
-            $user_email = $this->User->find('first',
-                ['fields' => 'email', 'conditions' => ['email' => $this->request->data['User']['email']]]
+            $request_user = $this->User->find('first',
+                ['fields' => ['id', 'email', 'try_login'], 'conditions' => ['email' => $this->request->data['User']['email']]]
             );
 
-            if($user_email){
+            if($request_user){
                 //パスワードリセットの処理
                 $new_password = $this->User->random();
                 $passwordHasher = new BlowfishPasswordHasher();
                 $hashed_password = $passwordHasher->hash($new_password);
-                $userId = $this->User->find('first',
-                    ['fields' => 'id', 'conditions' => ['email' => $this->request->data['User']['email']]]
+                $this->User->updateAll(
+                    ['User.password' => "'".$hashed_password. "'", 'User.try_login' => 0],
+                    ['User.id' => $request_user['User']['id']]
                 );
-                $this->User->updateAll(['User.password' => "'".$hashed_password. "'"], ['User.id' => $userId['User']['id']]);
 
                 //メール送信の処理
-                $user_email = $user_email['User']['email'];
+                $user_email = $request_user['User']['email'];
                 $email = new CakeEmail('default');
                 $email->from(['info@elites.com' => 'ELITES']);
                 $email->to($user_email);
