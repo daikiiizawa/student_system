@@ -45,7 +45,7 @@ $week = Configure::read("week");
         ]); ?>
     </div>
     <div class="btn-group">
-        <?= $this->Html->link('リセット',
+        <?= $this->Html->link('条件リセット',
             ['action' => 'find'], [
             'class' => 'btn btn-default'
             ]); ?>
@@ -53,8 +53,7 @@ $week = Configure::read("week");
     </div>
 </table>
 
-<p>
-    検索結果
+<p>検索結果
     <?php if ($count_students) :?>
         <?= '( ' . $count_students . '件 )';?>
     <?php endif ;?>
@@ -80,7 +79,7 @@ $week = Configure::read("week");
             </td>
             <td>
                 <?= $this->Html->link(h($hit_student['Student']['family_name']) . ' '. h($hit_student['Student']['given_name']), [
-                'action' => 'subview',$hit_student['Student']['id'],
+                'action' => 'view',$hit_student['Student']['id'],
                 ], [
                 'target' => '_blank'
                 ]) ;?>
@@ -88,7 +87,7 @@ $week = Configure::read("week");
 
             <td>
                 <?= $this->Html->link('詳細',[
-                'action' => 'subview',$hit_student['Student']['id'],
+                'action' => 'view',$hit_student['Student']['id'],
                 ], [
                 'target' => '_blank',
                 'class' => 'btn btn-default btn-xs'

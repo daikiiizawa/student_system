@@ -38,9 +38,6 @@
 <?= $this->Form->hidden('first_preffered_date'); ?>
 <?= $this->Form->hidden('second_preffered_date'); ?>
 <?= $this->Form->hidden('third_preffered_date'); ?>
-<?= $this->Form->hidden('first_meet_datetime',['value' => $firstdate]); ?>
-<?= $this->Form->hidden('second_meet_datetime',['value' => $seconddate]); ?>
-<?= $this->Form->hidden('third_meet_datetime',['value' => $thirddate]); ?>
 
 <?= $this->Form->end([
     'label' => '更新',
@@ -75,10 +72,6 @@
 <?= $this->Form->hidden('first_preffered_date'); ?>
 <?= $this->Form->hidden('second_preffered_date'); ?>
 <?= $this->Form->hidden('third_preffered_date'); ?>
-<?= $this->Form->hidden('first_meet_datetime',['value' => $firstdate]); ?>
-<?= $this->Form->hidden('second_meet_datetime',['value' => $seconddate]); ?>
-<?= $this->Form->hidden('third_meet_datetime',['value' => $thirddate]); ?>
-
 
 <?= $this->Form->end([
     'label' => '戻る',

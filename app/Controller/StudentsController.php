@@ -54,6 +54,13 @@ class StudentsController extends AppController{
         }
         $this->set('direction', $direction);
         $this->set('students', $this->paginate('Student'));
+
+        // 絞込ステータス表示用
+        $students_status_code = '0';
+        if (!empty($this->request->data['Student'])) {
+            $students_status_code = $this->request->data['Student']['students_status_code'];
+        }
+        $this->set('students_status_code', $students_status_code);
     }
 
 
@@ -74,7 +81,7 @@ class StudentsController extends AppController{
     }
 
     public function subedit ($id = null) {
-        $this->set('title_for_layout', '編集画面');
+        $this->set('title_for_layout', '入力フォーム');
         if (!$this->Student->exists($id)) {
             throw new NotFoundException('生徒情報が見つかりません');
         }
@@ -214,36 +221,8 @@ class StudentsController extends AppController{
                             $confirm['Student']['birthdate']['day'];
             } else {$birthdate = '';}
         $this->set('birthdate', $birthdate);
-        if ($confirm['Student']['first_meet_datetime']['year'] != '') {
-            $firstdate =    $confirm['Student']['first_meet_datetime']['year'].'-'.
-                            $confirm['Student']['first_meet_datetime']['month'].'-'.
-                            $confirm['Student']['first_meet_datetime']['day'].' '.
-                            $confirm['Student']['first_meet_datetime']['hour'].':'.
-                            $confirm['Student']['first_meet_datetime']['min'].':00';
-            } else {$firstdate = '';}
-        $this->set('firstdate', $firstdate);
-        if ($confirm['Student']['second_meet_datetime']['year'] != '') {
-            $seconddate =   $confirm['Student']['second_meet_datetime']['year'].'-'.
-                            $confirm['Student']['second_meet_datetime']['month'].'-'.
-                            $confirm['Student']['second_meet_datetime']['day'].' '.
-                            $confirm['Student']['second_meet_datetime']['hour'].':'.
-                            $confirm['Student']['second_meet_datetime']['min'].':00';
-            } else {$seconddate = '';}
-        $this->set('seconddate', $seconddate);
-        if ($confirm['Student']['third_meet_datetime']['year'] != '') {
-            $thirddate =    $confirm['Student']['third_meet_datetime']['year'].'-'.
-                            $confirm['Student']['third_meet_datetime']['month'].'-'.
-                            $confirm['Student']['third_meet_datetime']['day'].' '.
-                            $confirm['Student']['third_meet_datetime']['hour'].':'.
-                            $confirm['Student']['third_meet_datetime']['min'].':00';
-        } else {$thirddate = '';}
-        $this->set('thirddate', $thirddate);
-
         // 日付データをarrayからstringに戻してconfirm内に入れる
         $confirm['Student']['birthdate'] = $birthdate;
-        $confirm['Student']['first_meet_datetime'] = $firstdate;
-        $confirm['Student']['second_meet_datetime'] = $seconddate;
-        $confirm['Student']['third_meet_datetime'] = $thirddate;
 
         $this->set('confirm', $confirm);
     }
@@ -293,21 +272,21 @@ class StudentsController extends AppController{
             'limit' => 100,
         ];
         if ($this->request->is('post')){
-            if ($this->request->data['Student']['search_sei'] != '' &&
-                $this->request->data['Student']['search_mei'] != '' &&
+            if ($this->request->data['Student']['search_sei'] != '' ||
+                $this->request->data['Student']['search_mei'] != '' ||
                 $this->request->data['Student']['search_phone'] != '') {
                 $search_sei = $this->request->data['Student']['search_sei'];
                 $search_mei = $this->request->data['Student']['search_mei'];
                 $search_phone = $this->request->data['Student']['search_phone'];
                 $conditions = [
-                    // 全項目必須の完全一致
-                    'Student.family_name LIKE' => $search_sei,
-                    'Student.given_name LIKE' => $search_mei,
-                    'Student.phone_number LIKE' => $search_phone,
                     // 部分一致
-                    // 'Student.family_name LIKE' => "%{$search_sei}%",
-                    // 'Student.given_name LIKE' => "%{$search_mei}%",
-                    // 'Student.phone_number LIKE' => "%{$search_phone}%",
+                    'Student.family_name LIKE' => "%{$search_sei}%",
+                    'Student.given_name LIKE' => "%{$search_mei}%",
+                    'Student.phone_number LIKE' => "%{$search_phone}%",
+                    // 全項目必須の完全一致
+                    // 'Student.family_name LIKE' => $search_sei,
+                    // 'Student.given_name LIKE' => $search_mei,
+                    // 'Student.phone_number LIKE' => $search_phone,
                 ];
                 $hit_students = $this->paginate('Student', $conditions);
                 $this->set('hit_students', $hit_students);
@@ -317,7 +296,7 @@ class StudentsController extends AppController{
                 }
 
             } else {
-                $this->Flash->error('全項目入力して下さい');
+                $this->Flash->error('検索条件を入力して下さい。');
             }
         }
         $this->set('count_students', $count_students);
