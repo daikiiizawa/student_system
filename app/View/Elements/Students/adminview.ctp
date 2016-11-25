@@ -6,6 +6,44 @@ $status = Configure::read("status");
 ?>
 
 <tr>
+    <td style="width:40%; padding-top:20px;" class="text-right"><strong>▼面談希望日</strong></td>
+    <td></td>
+</tr>
+
+<tr>
+    <td class="active text-right" style="width:40%;">第一希望</td>
+    <td>
+        <?php if($student['Student']['first_meet_datetime']) :?>
+            <?= $this->Time->format(h($student['Student']['first_meet_datetime']),'%m/%d'. '(' .
+            $week[$this->Time->format(h($student['Student']['first_meet_datetime']),'%w')].') / '.
+            $this->Time->format(h($student['Student']['first_meet_datetime']),'%H:%M')) ;?>
+        <?php endif ;?>
+    </td>
+</tr>
+
+<tr>
+    <td class="active text-right" style="width:40%;">第二希望</td>
+    <td>
+        <?php if($student['Student']['second_meet_datetime']) :?>
+            <?= $this->Time->format(h($student['Student']['second_meet_datetime']),'%m/%d'. '(' .
+            $week[$this->Time->format(h($student['Student']['second_meet_datetime']),'%w')].') / '.
+            $this->Time->format(h($student['Student']['second_meet_datetime']),'%H:%M')) ;?>
+        <?php endif ;?>
+    </td>
+</tr>
+
+<tr>
+    <td class="active text-right" style="width:40%;">第三希望</td>
+    <td>
+        <?php if($student['Student']['third_meet_datetime']) :?>
+            <?= $this->Time->format(h($student['Student']['third_meet_datetime']),'%m/%d'. '(' .
+            $week[$this->Time->format(h($student['Student']['third_meet_datetime']),'%w')].') / '.
+            $this->Time->format(h($student['Student']['third_meet_datetime']),'%H:%M')) ;?>
+        <?php endif ;?>
+    </td>
+</tr>
+
+<tr>
     <td style="width:40%; padding-top:20px;" class="text-right"><strong>▼管理情報</strong></td>
     <td></td>
 </tr>

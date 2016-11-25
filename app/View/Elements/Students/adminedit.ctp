@@ -8,6 +8,58 @@ $status_edit = Configure::read("status_edit");
 <div class="form-group col-xs-12">&nbsp;</div>
 
 <div class="form-group col-xs-5 text-right">
+    <b>▼面談希望日</b>
+</div>
+
+<div class="form-group col-xs-12">
+<?= $this->Form->input('first_meet_datetime', [
+    'label' => ['text' => '第一希望', 'class' => 'col-xs-5 text-right'],
+    'type'  => 'datetime',
+    'dateFormat' => 'YMD',
+    'timeFormat' => '24',
+    'monthNames' => false,
+    'separator' => array('年', '月', '日／'),
+    'empty' => '-',
+    'maxYear' => date('Y') + 1,
+    'minYear' => date('Y') - 3,
+    'interval' => 15
+    ]); ?>
+</div>
+
+<div class="form-group col-xs-12">
+<?= $this->Form->input('second_meet_datetime', [
+    'label' => ['text' => '第二希望', 'class' => 'col-xs-5 text-right'],
+    'type'  => 'datetime',
+    'dateFormat' => 'YMD',
+    'timeFormat' => '24',
+    'monthNames' => false,
+    'separator' => array('年', '月', '日／'),
+    'empty' => '-',
+    'maxYear' => date('Y') + 1,
+    'minYear' => date('Y') - 3,
+    'interval' => 15
+    ]); ?>
+</div>
+
+<div class="form-group col-xs-12">
+<?= $this->Form->input('third_meet_datetime', [
+    'label' => ['text' => '第三希望', 'class' => 'col-xs-5 text-right'],
+    'type'  => 'datetime',
+    'dateFormat' => 'YMD',
+    'timeFormat' => '24',
+    'monthNames' => false,
+    'separator' => array('年', '月', '日／'),
+    'empty' => '-',
+    'maxYear' => date('Y') + 1,
+    'minYear' => date('Y') - 3,
+    'interval' => 15
+    ]); ?>
+</div>
+
+
+<div class="form-group col-xs-12">&nbsp;</div>
+
+<div class="form-group col-xs-5 text-right">
     <b>▼管理情報</b>
 </div>
 <div class="form-group col-xs-12">

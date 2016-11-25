@@ -65,7 +65,8 @@ $programming_lv = Configure::read("programming_lv");
                 'label' => false,
                 'class' => 'form-control',
                 'type' => 'select',
-                'options' => $region_name
+                'options' => $region_name,
+                'default' => '13'
             ]); ?>
         </div>
         <div class="form-group">

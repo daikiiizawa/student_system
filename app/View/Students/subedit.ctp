@@ -2,7 +2,7 @@
 <div class="col-md-10 col-md-offset-1">
 
 <table class="table">
-<h2>編集画面</h2>
+<h2>お客様情報入力フォーム</h2>
 
 <div class="well form-inline">
 <div class="form-group">
@@ -22,7 +22,7 @@
 <div class="btn-toolbar">
 <div class="col-xs-5"></div>
 <?= $this->Form->end([
-    'label' => '確認画面',
+    'label' => '完了',
     'class' => 'btn-group btn btn-primary',
     'style' => 'margin: 0px 10px 20px 0px;'
     ]); ?>&#010;

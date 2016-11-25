@@ -31,25 +31,19 @@ $status = Configure::read("status");
                     ]);?>
                 <td>&nbsp;</td>
                 <td>
-                    <div class="btn-group">
-                        <?= $this->Form->end([
-                            'label' => '絞込',
-                            'class' => 'btn btn-primary btn-xs'
-                            ]); ?>
-                    </div>
-                    <div class="btn-group">
-                        <?= $this->Html->link('リセット', [
-                            'action' => 'index',
-                            'students_status_code' => '0'
-                            ],
-                            ['class' => 'btn btn-default btn-xs']
-                        ); ?>
-                    </div>
+                    <?= $this->Form->end([
+                        'label' => '絞込',
+                        'class' => 'btn btn-primary btn-xs'
+                        ]); ?>
                 </td>
             </tr>
         </div>
     </table>
-    <span>対象<?= $this->Paginator->counter(['format' => ('{:count}')]);?>件／全件数<?= $all_students_count;?>件</span>
+    <span>
+        <?= $status[$students_status_code].
+            $this->Paginator->counter(['format' => ('{:count}')]).'件／全件数'.
+            $all_students_count;?>件
+    </span>
 </div>
 <br/>
 <div class="col-md-12">
