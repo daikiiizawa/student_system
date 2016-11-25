@@ -17,8 +17,8 @@ class UsersController extends AppController{
 
         if($this->request->is('post')){
             $request_user = $this->User->find('first', [
-                'fields' => ['id', 'try_login'], '
-                conditions' => ['email' => $this->request->data['User']['email']]
+                'fields' => ['id', 'try_login'],
+                'conditions' => ['email' => $this->request->data['User']['email']]
             ]);
             if($request_user['User']['try_login'] >= 5){
                 $this->Flash->error('試行回数が5回以上です。アカウントをロックしました。');
@@ -35,8 +35,8 @@ class UsersController extends AppController{
                 $request_user['User']['try_login'] += 1;
                 $this->User->save($request_user);
                 if($request_user['User']['try_login'] >=5){
-                  $this->Flash->error('試行回数が5回以上です。アカウントをロックしました。');
-                  $this->redirect($this->referer());
+                    $this->Flash->error('試行回数が5回以上です。アカウントをロックしました。');
+                    $this->redirect($this->referer());
                 }
             }
             $this->Flash->error('メールアドレスかパスワードが間違っています');
@@ -106,7 +106,7 @@ class UsersController extends AppController{
                 //メール送信の処理
                 $user_email = $request_user['User']['email'];
                 $email = new CakeEmail('default');
-                $email->from(['info@elites.com' => 'ELITES']);
+                $email->from(['info@elites.com' => 'ELITES 生徒管理システム']);
                 $email->to($user_email);
                 $email->template('reset_password');
                 $email->subject('生徒管理システム パスワードのリセット');
