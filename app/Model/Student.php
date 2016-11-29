@@ -34,7 +34,7 @@ class Student extends AppModel {
             ],
             'katakana' => [
                 'rule' => ['katakana_only'],
-                'message' => '全角カタカナで入力して下さい'
+                'message' => 'フリガナ(姓)は全角カタカナで入力して下さい'
             ],
         ],
         'given_name_kana' => [
@@ -44,7 +44,7 @@ class Student extends AppModel {
             ],
             'katakana' => [
                 'rule' => ['katakana_only'],
-                'message' => '全角カタカナで入力して下さい'
+                'message' => 'フリガナ(名)は全角カタカナで入力して下さい'
             ],
         ],
         'email' => [
@@ -54,7 +54,7 @@ class Student extends AppModel {
               ],
               'validEmail' => [
                   'rule' => 'email',
-                  'message' => '正しいメールアドレスを入力してください'
+                  'message' => 'メールアドレスを正しく入力して下さい'
               ],
         ],
         'phone_number' => [
@@ -64,14 +64,14 @@ class Student extends AppModel {
               ],
               'numeric' => [
                   'rule' => 'numeric',
-                  'message' => 'ハイフン無しで入力して下さい'
+                  'message' => '電話番号はハイフン無しで入力して下さい'
               ],
         ],
     ];
 
     public function katakana_only($wordvalue){
         $value = array_shift($wordvalue);
-        
+
         return preg_match("/^[ァ-ヶー゛゜]*$/u", $value);
     }
 

@@ -78,6 +78,17 @@ class StudentsController extends AppController{
         // 編集画面から戻るボタンで詳細ページに戻るのを簡潔にまとめるためidを定義
         $id = $this->request->data['Student']['id'];
         $this->set('id', $id);
+
+        // バリデーションメッセージの入れ子を宣言
+        $errors = array();
+        $this->set('errors',$errors);
+        $alert_color = [
+            'family_name' => '', 'given_name' => '',
+            'family_name_kana' => '', 'given_name_kana' => '',
+            'email' => '',
+            'phone_number' => ''
+            ];
+        $this->set('alert_color',$alert_color);
     }
 
     public function subedit ($id = null) {
@@ -94,6 +105,17 @@ class StudentsController extends AppController{
         // 編集画面から戻るボタンで詳細ページに戻るのを簡潔にまとめるためidを定義
         $id = $this->request->data['Student']['id'];
         $this->set('id', $id);
+
+        // バリデーションメッセージの入れ子を宣言
+        $errors = array();
+        $this->set('errors',$errors);
+        $alert_color = [
+            'family_name' => '', 'given_name' => '',
+            'family_name_kana' => '', 'given_name_kana' => '',
+            'email' => '',
+            'phone_number' => ''
+            ];
+        $this->set('alert_color',$alert_color);
     }
 
 
@@ -179,6 +201,37 @@ class StudentsController extends AppController{
 
         $this->set('confirm', $confirm);
 
+        // 確認画面に入る前にバリデーション処理
+        if ($this->request->is('post')) {
+            // モデルにpostされたデータをセット
+            $this->Student->set($this->request->data);
+
+            if ($this->Student->validates()) {
+                // バリデートが成功した場合
+                $this->Flash->success('送信されたデータは正常です');
+
+            } else {
+                // 失敗した場合
+                $this->Flash->error('バリデーションにかかりました');
+                $errors = $this->validateErrors($this->Student);
+
+                $alert_color = [
+                    'family_name' => '', 'given_name' => '',
+                    'family_name_kana' => '', 'given_name_kana' => '',
+                    'email' => '',
+                    'phone_number' => ''
+                    ];
+                foreach ($errors as $key => $error) {
+                    $alert_color[$key] = '#FADBDA';
+                }
+                $this->set('alert_color', $alert_color);
+
+                $this->set('id',$id);
+                $this->set('errors',$errors);
+                $this->render('edit');
+            }
+        }
+
         // $date_error_count = '0';
         // list($Y_birth, $m_birth, $d_birth) = explode('-', $birthdate);
         // if (checkdate($m_birth, $d_birth, $Y_birth) === false) {
@@ -225,6 +278,36 @@ class StudentsController extends AppController{
         $confirm['Student']['birthdate'] = $birthdate;
 
         $this->set('confirm', $confirm);
+
+
+        // 確認画面に入る前にバリデーション処理
+        if ($this->request->is('post')) {
+            // モデルにpostされたデータをセット
+            $this->Student->set($this->request->data);
+
+            if ($this->Student->validates()) {
+                // バリデートが成功した場合
+                $this->Flash->success('送信されたデータは正常です');
+            } else {
+                // 失敗した場合
+                $this->Flash->error('バリデーションにかかりました');
+                $errors = $this->validateErrors($this->Student);
+
+                $alert_color = [
+                    'family_name' => '', 'given_name' => '',
+                    'family_name_kana' => '', 'given_name_kana' => '',
+                    'email' => '',
+                    'phone_number' => ''
+                    ];
+                foreach ($errors as $key => $error) {
+                    $alert_color[$key] = '#FADBDA';
+                }
+                $this->set('alert_color', $alert_color);
+                $this->set('id',$id);
+                $this->set('errors',$errors);
+                $this->render('subedit');
+            }
+        }
     }
 
 

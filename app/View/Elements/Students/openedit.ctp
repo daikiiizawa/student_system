@@ -15,7 +15,8 @@ $region_name = Configure::read("region_name");
     'type'  => 'name',
     'placeholder' => '姓',
     'class' => 'form-control col-xs-3',
-    'style' => 'width:25%'
+    'style' => 'width:25%; background-color:'.$alert_color['family_name'],
+    'error' => false
     ]); ?>
 
 <?= $this->Form->input('given_name', [
@@ -23,7 +24,8 @@ $region_name = Configure::read("region_name");
     'type'  => 'name',
     'placeholder' => '名',
     'class' => 'form-control col-xs-3',
-    'style' => 'width:25%'
+    'style' => 'width:25%; background-color:'.$alert_color['given_name'],
+    'error' => false
     ]); ?>
 </div>
 </div>
@@ -35,7 +37,8 @@ $region_name = Configure::read("region_name");
     'type'  => 'name',
     'placeholder' => 'セイ',
     'class' => 'form-control col-xs-3',
-    'style' => 'width:25%'
+    'style' => 'width:25%; background-color:'.$alert_color['family_name_kana'],
+    'error' => false
     ]); ?>
 
 <?= $this->Form->input('given_name_kana', [
@@ -43,7 +46,8 @@ $region_name = Configure::read("region_name");
     'type'  => 'name',
     'placeholder' => 'メイ',
     'class' => 'form-control col-xs-3',
-    'style' => 'width:25%'
+    'style' => 'width:25%; background-color:'.$alert_color['given_name_kana'],
+    'error' => false
     ]); ?>
 </div>
 </div>
@@ -55,7 +59,8 @@ $region_name = Configure::read("region_name");
     'type'  => 'text',
     'placeholder' => '08012345678',
     'class' => 'form-control col-xs-7',
-    'style' => 'width:50%'
+    'style' => 'width:50%; background-color:'.$alert_color['phone_number'],
+    'error' => false
     ]); ?>
 </div>
 </div>
@@ -67,7 +72,8 @@ $region_name = Configure::read("region_name");
     'type'  => 'text',
     'placeholder' => 'sample@mail.com',
     'class' => 'form-control col-xs-7',
-    'style' => 'width:50%'
+    'style' => 'width:50%; background-color:'.$alert_color['email'],
+    'error' => false
     ]); ?>
 </div>
 </div>
