@@ -4,6 +4,11 @@
     <table class="table">
         <h2>編集画面</h2>
 
+        <!-- バリデーションメッセージ -->
+        <?php foreach($errors as $key => $error):?>
+            <div style="color:#ff0000"><?= $error[0];?></div>
+        <?php endforeach ;?></br>
+
             <?= $this->Form->create('Student', [
                 'url' => ['action' => 'confirm'],
                 'type'  => 'post',

@@ -6,6 +6,11 @@
             <u>お客様情報入力フォーム</u>
         </h2>
 
+        <!-- バリデーションメッセージ -->
+        <?php foreach($errors as $key => $error):?>
+            <div class="text-center" style="color:#ff0000"><?= $error[0];?></div>
+        <?php endforeach ;?></br>
+
             <?= $this->Form->create('Student', [
                 'url' => ['action' => 'subconfirm'],
                 'type'  => 'post',
