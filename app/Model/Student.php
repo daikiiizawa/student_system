@@ -18,19 +18,19 @@ class Student extends AppModel {
         'family_name' => [
             'required' => [
                 'rule' => 'notBlank',
-                'message' => '姓を入力してください'
+                'message' => '姓を入力して下さい'
             ],
         ],
         'given_name' => [
             'required' => [
                 'rule' => 'notBlank',
-                'message' => '名を入力してください'
+                'message' => '名を入力して下さい'
             ],
         ],
         'family_name_kana' => [
             'required' => [
                 'rule' => 'notBlank',
-                'message' => 'フリガナ(姓)を入力してください'
+                'message' => 'フリガナ(姓)を入力して下さい'
             ],
             'katakana' => [
                 'rule' => ['katakana_only'],
@@ -40,7 +40,7 @@ class Student extends AppModel {
         'given_name_kana' => [
             'required' => [
                 'rule' => 'notBlank',
-                'message' => 'フリガナ(名)を入力してください'
+                'message' => 'フリガナ(名)を入力して下さい'
             ],
             'katakana' => [
                 'rule' => ['katakana_only'],
@@ -53,8 +53,8 @@ class Student extends AppModel {
                 'message' => 'メールアドレスを入力してください'
               ],
               'validEmail' => [
-                  'rule' => 'email',
-                  'message' => 'メールアドレスを正しく入力して下さい'
+                'rule' => 'email',
+                'message' => 'メールアドレスを正しく入力して下さい'
               ],
         ],
         'phone_number' => [
@@ -63,8 +63,14 @@ class Student extends AppModel {
                 'message' => '電話番号を入力してください'
               ],
               'numeric' => [
-                  'rule' => 'numeric',
-                  'message' => '電話番号はハイフン無しで入力して下さい'
+                'rule' => 'numeric',
+                'message' => '電話番号はハイフン無しで入力して下さい'
+              ],
+        ],
+        'birthdate' => [
+            'required' => [
+                'rule' => ['date', 'ymd'],
+                'message' => '誕生日を正しく入力して下さい'
               ],
         ],
     ];

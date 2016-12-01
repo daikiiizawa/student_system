@@ -7,6 +7,9 @@
         <!-- バリデーションメッセージ -->
         <?php foreach($errors as $key => $error):?>
             <div style="color:#ff0000"><?= $error[0];?></div>
+        <?php endforeach ;?>
+        <?php foreach($datetime_errors as $key => $datetime_error):?>
+            <div style="color:#ff0000"><?= $datetime_error[0];?></div>
         <?php endforeach ;?></br>
 
             <?= $this->Form->create('Student', [

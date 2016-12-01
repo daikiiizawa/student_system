@@ -79,16 +79,26 @@ class StudentsController extends AppController{
         $id = $this->request->data['Student']['id'];
         $this->set('id', $id);
 
-        // バリデーションメッセージの入れ子を宣言
+        // バリデーションのエラーメッセージ、エラー塗りつぶし箇所の変数宣言
         $errors = array();
+        $datetime_errors = array();
         $this->set('errors',$errors);
+        $this->set('datetime_errors',$datetime_errors);
         $alert_color = [
             'family_name' => '', 'given_name' => '',
             'family_name_kana' => '', 'given_name_kana' => '',
             'email' => '',
-            'phone_number' => ''
+            'phone_number' => '',
+            'birthdate' => '',
             ];
         $this->set('alert_color',$alert_color);
+        $datetime_alert_color = [
+            'first_meet_datetime' => '',
+            'second_meet_datetime' => '',
+            'third_meet_datetime' => '',
+            'last_contact_datetime' => '',
+            ];
+        $this->set('datetime_alert_color',$datetime_alert_color);
     }
 
     public function subedit ($id = null) {
@@ -106,29 +116,21 @@ class StudentsController extends AppController{
         $id = $this->request->data['Student']['id'];
         $this->set('id', $id);
 
-        // バリデーションメッセージの入れ子を宣言
+        // バリデーションのエラーメッセージ、エラー塗りつぶし箇所の変数宣言
         $errors = array();
         $this->set('errors',$errors);
         $alert_color = [
             'family_name' => '', 'given_name' => '',
             'family_name_kana' => '', 'given_name_kana' => '',
             'email' => '',
-            'phone_number' => ''
+            'phone_number' => '',
+            'birthdate' => '',
             ];
         $this->set('alert_color',$alert_color);
     }
 
 
     public function view($id = null){
-        $this->set('title_for_layout', '詳細画面');
-        if (!$this->Student->exists($id)) {
-            throw new NotFoundException('生徒情報がみつかりません');
-        }
-        $student = $this->Student->findById($id);
-        $this->set('student', $student);
-    }
-
-    public function subview($id = null){
         $this->set('title_for_layout', '詳細画面');
         if (!$this->Student->exists($id)) {
             throw new NotFoundException('生徒情報がみつかりません');
@@ -149,8 +151,30 @@ class StudentsController extends AppController{
         // 編集画面からのpostデータ
         $confirm = $this->request->data;
         $this->set('confirm', $confirm);
-
         $confirm['Student']['address'] = $confirm['address'];
+
+        // エラーメッセージ、エラーメッセージ出力時の塗りつぶしの変数宣言
+        $errors = array();
+        $this->set('errors',$errors);
+        $datetime_errors = array();
+        $this->set('datetime_errors',$datetime_errors);
+        $alert_color = [
+            'family_name' => '', 'given_name' => '',
+            'family_name_kana' => '', 'given_name_kana' => '',
+            'email' => '',
+            'phone_number' => '',
+            'birthdate' => '',
+            'first_meet_datetime' => ''
+            ];
+        $this->set('alert_color', $alert_color);
+        $datetime_alert_color = [
+            'first_meet_datetime' => '',
+            'second_meet_datetime' => '',
+            'third_meet_datetime' => '',
+            'last_contact_datetime' => ''
+            ];
+        $this->set('datetime_alert_color',$datetime_alert_color);
+        $this->set('id',$id);
 
         // 日付フォーマット加工(array→string)
         if ($confirm['Student']['birthdate']['year'] != '') {
@@ -159,46 +183,263 @@ class StudentsController extends AppController{
                             $confirm['Student']['birthdate']['day'];
             } else {$birthdate = '';}
         $this->set('birthdate', $birthdate);
-        if ($confirm['Student']['first_meet_datetime']['year'] != '') {
+        $confirm['Student']['birthdate'] = $birthdate;
+
+
+        // 第一希望のバリデーション処理
+        if ($confirm['Student']['first_meet_datetime']['year'] == ''&&
+            $confirm['Student']['first_meet_datetime']['month'] == ''&&
+            $confirm['Student']['first_meet_datetime']['day'] == ''&&
+            $confirm['Student']['first_meet_datetime']['hour'] == ''&&
+            $confirm['Student']['first_meet_datetime']['min'] == ''
+            ) {
+            $firstdate = '';
+        } elseif(
+            $confirm['Student']['first_meet_datetime']['year'] == ''||
+            $confirm['Student']['first_meet_datetime']['month'] == ''||
+            $confirm['Student']['first_meet_datetime']['day'] == ''||
+            $confirm['Student']['first_meet_datetime']['hour'] == ''||
+            $confirm['Student']['first_meet_datetime']['min'] == ''
+            ) {
+            $datetime_errors['first_meet_datetime'][0] = '第一希望の全ての項目を入力して下さい';
+            // 時間未入力時のエラー回避処理
+            if ($confirm['Student']['first_meet_datetime']['hour'] == ''){
+                $this->request->data['Student']['first_meet_datetime']['min'] = '';
+                $datetime_errors['first_meet_datetime'][0] = '第一希望の全ての項目を入力して下さい';
+            } elseif (
+                $confirm['Student']['first_meet_datetime']['hour'] != ''&&
+                $confirm['Student']['first_meet_datetime']['min'] != ''&&
+                $confirm['Student']['first_meet_datetime']['year'] == ''||
+                $confirm['Student']['first_meet_datetime']['month'] == ''||
+                $confirm['Student']['first_meet_datetime']['day'] == ''
+                ){
+                $this->request->data['Student']['first_meet_datetime']['hour'] = '';
+                $this->request->data['Student']['first_meet_datetime']['min'] = '';
+                $datetime_errors['first_meet_datetime'][0] = '第一希望の全ての項目を入力して下さい';
+            }
+            $firstdate = '';
+            $this->set('datetime_errors',$datetime_errors);
+            $datetime_alert_color['first_meet_datetime'] = '#FADBDA';
+            $this->set('datetime_alert_color', $datetime_alert_color);
+            $this->render('edit');
+        } else {
             $firstdate =    $confirm['Student']['first_meet_datetime']['year'].'-'.
                             $confirm['Student']['first_meet_datetime']['month'].'-'.
                             $confirm['Student']['first_meet_datetime']['day'].' '.
                             $confirm['Student']['first_meet_datetime']['hour'].':'.
                             $confirm['Student']['first_meet_datetime']['min'].':00';
-            } else {$firstdate = '';}
+
+            // 日付の妥当性確認
+            $firstday =     $confirm['Student']['first_meet_datetime']['year'].'-'.
+                            $confirm['Student']['first_meet_datetime']['month'].'-'.
+                            $confirm['Student']['first_meet_datetime']['day'];
+            list($Y, $m, $d) = explode('-', $firstday);
+            if (checkdate($m, $d, $Y) === false) {
+                $datetime_errors['first_meet_datetime'][0] =
+                    '第一希望に正しい日付を入力して下さい ('.
+                    $confirm['Student']['first_meet_datetime']['month'].'月'.
+                    $confirm['Student']['first_meet_datetime']['day'].'日と入力されました)';
+                $this->set('datetime_errors',$datetime_errors);
+                $datetime_alert_color['first_meet_datetime'] = '#FADBDA';
+                $this->set('datetime_alert_color', $datetime_alert_color);
+                $this->render('edit');
+            }
+        }
+        $confirm['Student']['first_meet_datetime'] = $firstdate;
         $this->set('firstdate', $firstdate);
-        if ($confirm['Student']['second_meet_datetime']['year'] != '') {
-            $seconddate =   $confirm['Student']['second_meet_datetime']['year'].'-'.
+
+
+        // 第二希望のバリデーション処理
+        if ($confirm['Student']['second_meet_datetime']['year'] == ''&&
+            $confirm['Student']['second_meet_datetime']['month'] == ''&&
+            $confirm['Student']['second_meet_datetime']['day'] == ''&&
+            $confirm['Student']['second_meet_datetime']['hour'] == ''&&
+            $confirm['Student']['second_meet_datetime']['min'] == ''
+            ) {
+            $seconddate = '';
+        } elseif(
+            $confirm['Student']['second_meet_datetime']['year'] == ''||
+            $confirm['Student']['second_meet_datetime']['month'] == ''||
+            $confirm['Student']['second_meet_datetime']['day'] == ''||
+            $confirm['Student']['second_meet_datetime']['hour'] == ''||
+            $confirm['Student']['second_meet_datetime']['min'] == ''
+            ) {
+            $datetime_errors['second_meet_datetime'][0] = '第二希望の全ての項目を入力して下さい';
+            // 時間未入力時のエラー回避処理
+            if ($confirm['Student']['second_meet_datetime']['hour'] == ''){
+                $this->request->data['Student']['second_meet_datetime']['min'] = '';
+                $datetime_errors['second_meet_datetime'][0] = '第二希望の全ての項目を入力して下さい';
+            } elseif (
+                $confirm['Student']['second_meet_datetime']['hour'] != ''&&
+                $confirm['Student']['second_meet_datetime']['min'] != ''&&
+                $confirm['Student']['second_meet_datetime']['year'] == ''||
+                $confirm['Student']['second_meet_datetime']['month'] == ''||
+                $confirm['Student']['second_meet_datetime']['day'] == ''
+                ){
+                $this->request->data['Student']['second_meet_datetime']['hour'] = '';
+                $this->request->data['Student']['second_meet_datetime']['min'] = '';
+                $datetime_errors['second_meet_datetime'][0] = '第二希望の全ての項目を入力して下さい';
+            }
+            $seconddate = '';
+            $this->set('datetime_errors',$datetime_errors);
+            $datetime_alert_color['second_meet_datetime'] = '#FADBDA';
+            $this->set('datetime_alert_color', $datetime_alert_color);
+            $this->render('edit');
+        } else {
+            $seconddate =    $confirm['Student']['second_meet_datetime']['year'].'-'.
                             $confirm['Student']['second_meet_datetime']['month'].'-'.
                             $confirm['Student']['second_meet_datetime']['day'].' '.
                             $confirm['Student']['second_meet_datetime']['hour'].':'.
                             $confirm['Student']['second_meet_datetime']['min'].':00';
-            } else {$seconddate = '';}
+
+            // 日付の妥当性確認
+            $secondday =     $confirm['Student']['second_meet_datetime']['year'].'-'.
+                            $confirm['Student']['second_meet_datetime']['month'].'-'.
+                            $confirm['Student']['second_meet_datetime']['day'];
+            list($Y, $m, $d) = explode('-', $secondday);
+            if (checkdate($m, $d, $Y) === false) {
+                $datetime_errors['second_meet_datetime'][0] =
+                    '第二希望に正しい日付を入力して下さい ('.
+                    $confirm['Student']['second_meet_datetime']['month'].'月'.
+                    $confirm['Student']['second_meet_datetime']['day'].'日と入力されました)';
+                $this->set('datetime_errors',$datetime_errors);
+                $datetime_alert_color['second_meet_datetime'] = '#FADBDA';
+                $this->set('datetime_alert_color', $datetime_alert_color);
+                $this->render('edit');
+            }
+        }
+        $confirm['Student']['second_meet_datetime'] = $seconddate;
         $this->set('seconddate', $seconddate);
-        if ($confirm['Student']['third_meet_datetime']['year'] != '') {
+
+
+        // 第三希望のバリデーション処理
+        if ($confirm['Student']['third_meet_datetime']['year'] == ''&&
+            $confirm['Student']['third_meet_datetime']['month'] == ''&&
+            $confirm['Student']['third_meet_datetime']['day'] == ''&&
+            $confirm['Student']['third_meet_datetime']['hour'] == ''&&
+            $confirm['Student']['third_meet_datetime']['min'] == ''
+            ) {
+            $thirddate = '';
+        } elseif(
+            $confirm['Student']['third_meet_datetime']['year'] == ''||
+            $confirm['Student']['third_meet_datetime']['month'] == ''||
+            $confirm['Student']['third_meet_datetime']['day'] == ''||
+            $confirm['Student']['third_meet_datetime']['hour'] == ''||
+            $confirm['Student']['third_meet_datetime']['min'] == ''
+            ) {
+            $datetime_errors['third_meet_datetime'][0] = '第三希望の全ての項目を入力して下さい';
+            // 時間未入力時のエラー回避処理
+            if ($confirm['Student']['third_meet_datetime']['hour'] == ''){
+                $this->request->data['Student']['third_meet_datetime']['min'] = '';
+                $datetime_errors['third_meet_datetime'][0] = '第三希望の全ての項目を入力して下さい';
+            } elseif (
+                $confirm['Student']['third_meet_datetime']['hour'] != ''&&
+                $confirm['Student']['third_meet_datetime']['min'] != ''&&
+                $confirm['Student']['third_meet_datetime']['year'] == ''||
+                $confirm['Student']['third_meet_datetime']['month'] == ''||
+                $confirm['Student']['third_meet_datetime']['day'] == ''
+                ){
+                $this->request->data['Student']['third_meet_datetime']['hour'] = '';
+                $this->request->data['Student']['third_meet_datetime']['min'] = '';
+                $datetime_errors['third_meet_datetime'][0] = '第三希望の全ての項目を入力して下さい';
+            }
+            $thirddate = '';
+            $this->set('datetime_errors',$datetime_errors);
+            $datetime_alert_color['third_meet_datetime'] = '#FADBDA';
+            $this->set('datetime_alert_color', $datetime_alert_color);
+            $this->render('edit');
+        } else {
             $thirddate =    $confirm['Student']['third_meet_datetime']['year'].'-'.
                             $confirm['Student']['third_meet_datetime']['month'].'-'.
                             $confirm['Student']['third_meet_datetime']['day'].' '.
                             $confirm['Student']['third_meet_datetime']['hour'].':'.
                             $confirm['Student']['third_meet_datetime']['min'].':00';
-        } else {$thirddate = '';}
+
+            // 日付の妥当性確認
+            $thirdday =     $confirm['Student']['third_meet_datetime']['year'].'-'.
+                            $confirm['Student']['third_meet_datetime']['month'].'-'.
+                            $confirm['Student']['third_meet_datetime']['day'];
+            list($Y, $m, $d) = explode('-', $thirdday);
+            if (checkdate($m, $d, $Y) === false) {
+                $datetime_errors['third_meet_datetime'][0] =
+                    '第三希望に正しい日付を入力して下さい ('.
+                    $confirm['Student']['third_meet_datetime']['month'].'月'.
+                    $confirm['Student']['third_meet_datetime']['day'].'日と入力されました)';
+                $this->set('datetime_errors',$datetime_errors);
+                $datetime_alert_color['third_meet_datetime'] = '#FADBDA';
+                $this->set('datetime_alert_color', $datetime_alert_color);
+                $this->render('edit');
+            }
+        }
+        $confirm['Student']['third_meet_datetime'] = $thirddate;
         $this->set('thirddate', $thirddate);
-        if ($confirm['Student']['last_contact_datetime']['year'] != '') {
-            $contactdate =  $confirm['Student']['last_contact_datetime']['year'].'-'.
+
+
+
+        // 最終連絡日のバリデーション処理
+        if ($confirm['Student']['last_contact_datetime']['year'] == ''&&
+            $confirm['Student']['last_contact_datetime']['month'] == ''&&
+            $confirm['Student']['last_contact_datetime']['day'] == ''&&
+            $confirm['Student']['last_contact_datetime']['hour'] == ''&&
+            $confirm['Student']['last_contact_datetime']['min'] == ''
+            ) {
+            $contactdate = '';
+        } elseif(
+            $confirm['Student']['last_contact_datetime']['year'] == ''||
+            $confirm['Student']['last_contact_datetime']['month'] == ''||
+            $confirm['Student']['last_contact_datetime']['day'] == ''||
+            $confirm['Student']['last_contact_datetime']['hour'] == ''||
+            $confirm['Student']['last_contact_datetime']['min'] == ''
+            ) {
+            $datetime_errors['last_contact_datetime'][0] = '最終連絡日の全ての項目を入力して下さい';
+            // 時間未入力時のエラー回避処理
+            if ($confirm['Student']['last_contact_datetime']['hour'] == ''){
+                $this->request->data['Student']['last_contact_datetime']['min'] = '';
+                $datetime_errors['last_contact_datetime'][0] = '最終連絡日の全ての項目を入力して下さい';
+            } elseif (
+                $confirm['Student']['last_contact_datetime']['hour'] != ''&&
+                $confirm['Student']['last_contact_datetime']['min'] != ''&&
+                $confirm['Student']['last_contact_datetime']['year'] == ''||
+                $confirm['Student']['last_contact_datetime']['month'] == ''||
+                $confirm['Student']['last_contact_datetime']['day'] == ''
+                ){
+                $this->request->data['Student']['last_contact_datetime']['hour'] = '';
+                $this->request->data['Student']['last_contact_datetime']['min'] = '';
+                $datetime_errors['last_contact_datetime'][0] = '最終連絡日の全ての項目を入力して下さい';
+            }
+            $contactdate = '';
+            $this->set('datetime_errors',$datetime_errors);
+            $datetime_alert_color['last_contact_datetime'] = '#FADBDA';
+            $this->set('datetime_alert_color', $datetime_alert_color);
+            $this->render('edit');
+        } else {
+            $contactdate =    $confirm['Student']['last_contact_datetime']['year'].'-'.
                             $confirm['Student']['last_contact_datetime']['month'].'-'.
                             $confirm['Student']['last_contact_datetime']['day'].' '.
                             $confirm['Student']['last_contact_datetime']['hour'].':'.
                             $confirm['Student']['last_contact_datetime']['min'].':00';
-        } else {$contactdate = '';}
+
+            // 日付の妥当性確認
+            $thirdday =     $confirm['Student']['last_contact_datetime']['year'].'-'.
+                            $confirm['Student']['last_contact_datetime']['month'].'-'.
+                            $confirm['Student']['last_contact_datetime']['day'];
+            list($Y, $m, $d) = explode('-', $thirdday);
+            if (checkdate($m, $d, $Y) === false) {
+                $datetime_errors['last_contact_datetime'][0] =
+                    '最終連絡日に正しい日付を入力して下さい ('.
+                    $confirm['Student']['last_contact_datetime']['month'].'月'.
+                    $confirm['Student']['last_contact_datetime']['day'].'日と入力されました)';
+                $this->set('datetime_errors',$datetime_errors);
+                $datetime_alert_color['last_contact_datetime'] = '#FADBDA';
+                $this->set('datetime_alert_color', $datetime_alert_color);
+                $this->render('edit');
+            }
+        }
+        $confirm['Student']['last_contact_datetime'] = $contactdate;
         $this->set('contactdate', $contactdate);
 
-        // 日付データをarrayからstringに戻してconfirm内に入れる
-        $confirm['Student']['birthdate'] = $birthdate;
-        $confirm['Student']['first_meet_datetime'] = $firstdate;
-        $confirm['Student']['second_meet_datetime'] = $seconddate;
-        $confirm['Student']['third_meet_datetime'] = $thirddate;
-        $confirm['Student']['last_contact_datetime'] = $contactdate;
 
+        // 日付データをarrayからstringに戻してconfirm内に入れる
         $this->set('confirm', $confirm);
 
         // 確認画面に入る前にバリデーション処理
@@ -206,20 +447,22 @@ class StudentsController extends AppController{
             // モデルにpostされたデータをセット
             $this->Student->set($this->request->data);
 
+            // if ($this->Student->validates()) {
             if ($this->Student->validates()) {
                 // バリデートが成功した場合
-                $this->Flash->success('送信されたデータは正常です');
 
             } else {
                 // 失敗した場合
-                $this->Flash->error('バリデーションにかかりました');
+                // $this->Flash->error('バリデーションにかかりました');
                 $errors = $this->validateErrors($this->Student);
+                $errors['first_meet_datetime'][0] = null;
 
                 $alert_color = [
                     'family_name' => '', 'given_name' => '',
                     'family_name_kana' => '', 'given_name_kana' => '',
                     'email' => '',
-                    'phone_number' => ''
+                    'phone_number' => '',
+                    'birthdate' => '',
                     ];
                 foreach ($errors as $key => $error) {
                     $alert_color[$key] = '#FADBDA';
@@ -231,25 +474,6 @@ class StudentsController extends AppController{
                 $this->render('edit');
             }
         }
-
-        // $date_error_count = '0';
-        // list($Y_birth, $m_birth, $d_birth) = explode('-', $birthdate);
-        // if (checkdate($m_birth, $d_birth, $Y_birth) === false) {
-        //     $this->Flash->error('誕生日に存在しない日付が入力されました。');
-        //     $date_error_count ++;
-        // }
-        // error_log($firstdate);
-        // debug($birthdate);
-        // list($Y_first, $m_first, $d_first) = explode('-', $firstdate);
-        // if (checkdate($m_first, $d_first, $Y_first) === false) {
-        //     $this->Flash->error('第一希望に存在しない日付が入力されました。');
-        //     $date_error_count ++;
-        // }
-
-        // if ($date_error_count !== 0) {
-        //     return $this->redirect(['action' => 'edit',$id]);
-        // }
-
     }
 
     public function subconfirm($id = null) {
@@ -290,7 +514,7 @@ class StudentsController extends AppController{
                 $this->Flash->success('送信されたデータは正常です');
             } else {
                 // 失敗した場合
-                $this->Flash->error('バリデーションにかかりました');
+                // $this->Flash->error('バリデーションにかかりました');
                 $errors = $this->validateErrors($this->Student);
 
                 $alert_color = [
@@ -336,14 +560,14 @@ class StudentsController extends AppController{
         if ($this->request->is(['post', 'put'])) {
             if ($this->Student->save($this->request->data)) {
                 $this->Flash->success('更新しました');
-                return $this->redirect(['action' => 'subview',$id]);
+                return $this->redirect(['action' => 'view',$id]);
             } else {
             $this->Flash->error('必須項目の編集に誤りがあるため保存できませんでした。');
-            return $this->redirect(['action' => 'subview',$id]);
+            return $this->redirect(['action' => 'view',$id]);
             }
         } else {
             $this->Flash->error('失敗');
-            return $this->redirect(['action' => 'subview',$id]);
+            return $this->redirect(['action' => 'view',$id]);
         }
     }
 
