@@ -101,7 +101,9 @@ $region_name = Configure::read("region_name");
     'empty' => '-',
     'maxYear' => date('Y') - 15,
     'minYear' => date('Y') - 40,
-    'class' => 'form-control'
+    'class' => 'form-control',
+    'style' => 'background-color:'.$alert_color['birthdate'],
+    'error' => false
     ]); ?>
 </div>
 </div>
@@ -229,15 +231,15 @@ $region_name = Configure::read("region_name");
 
 <div class="col-xs-3"></div>
 <div class="form-group text-left col-xs-8">
-    <b>▼週次面談希望曜日時間</b>
+    <b>▼週次面談希望 ／ 曜日時間</b>
 </div>
 
 <div class="form-group col-xs-12">
 <div class="form-inline">
 <?= $this->Form->input('first_preffered_date', [
-    'label' => ['text' => '第一希望', 'class' => 'col-xs-3 h5 text-right'],
+    'label' => ['text' => '第一希望 (毎週)', 'class' => 'col-xs-3 h5 text-right'],
     'type'  => 'text',
-    'placeholder' => '毎週―曜20時',
+    'placeholder' => '―曜20時',
     'class' => 'form-control col-xs-7',
     'style' => 'width:50%'
     ]); ?>
@@ -247,9 +249,9 @@ $region_name = Configure::read("region_name");
 <div class="form-group col-xs-12">
 <div class="form-inline">
 <?= $this->Form->input('second_preffered_date', [
-    'label' => ['text' => '第二希望', 'class' => 'col-xs-3 h5 text-right'],
+    'label' => ['text' => '第二希望 (毎週)', 'class' => 'col-xs-3 h5 text-right'],
     'type'  => 'text',
-    'placeholder' => '毎週―曜20時',
+    'placeholder' => '―曜20時',
     'class' => 'form-control col-xs-7',
     'style' => 'width:50%'
     ]); ?>
@@ -259,9 +261,9 @@ $region_name = Configure::read("region_name");
 <div class="form-group col-xs-12">
 <div class="form-inline">
 <?= $this->Form->input('third_preffered_date', [
-    'label' => ['text' => '第三希望', 'class' => 'col-xs-3 h5 text-right'],
+    'label' => ['text' => '第三希望 (毎週)', 'class' => 'col-xs-3 h5 text-right'],
     'type'  => 'text',
-    'placeholder' => '毎週―曜20時',
+    'placeholder' => '―曜20時',
     'class' => 'form-control col-xs-7',
     'style' => 'width:50%'
     ]); ?>

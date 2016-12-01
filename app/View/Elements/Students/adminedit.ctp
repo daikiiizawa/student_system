@@ -27,7 +27,9 @@ $status_edit = Configure::read("status_edit");
     'maxHour' => time('22'),
     'minHour' => time('8'),
     'interval' => 15,
-    'class' => 'form-control'
+    'class' => 'form-control',
+    'style' => 'background-color:'.$datetime_alert_color['first_meet_datetime'],
+    'error' => false
     ]); ?>
 </div>
 </div>
@@ -45,7 +47,9 @@ $status_edit = Configure::read("status_edit");
     'maxYear' => date('Y') + 1,
     'minYear' => date('Y'),
     'interval' => 15,
-    'class' => 'form-control'
+    'class' => 'form-control',
+    'style' => 'background-color:'.$datetime_alert_color['second_meet_datetime'],
+    'error' => false
     ]); ?>
 </div>
 </div>
@@ -63,7 +67,9 @@ $status_edit = Configure::read("status_edit");
     'maxYear' => date('Y') + 1,
     'minYear' => date('Y'),
     'interval' => 15,
-    'class' => 'form-control'
+    'class' => 'form-control',
+    'style' => 'background-color:'.$datetime_alert_color['third_meet_datetime'],
+    'error' => false
     ]); ?>
 </div>
 </div>
@@ -104,7 +110,9 @@ $status_edit = Configure::read("status_edit");
     'maxYear' => date('Y'),
     'minYear' => date('Y') - 2,
     'interval' => 15,
-    'class' => 'form-control'
+    'class' => 'form-control',
+    'style' => 'background-color:'.$datetime_alert_color['last_contact_datetime'],
+    'error' => false
     ]); ?>
 </div>
 </div>

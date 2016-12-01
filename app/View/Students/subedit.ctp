@@ -28,7 +28,7 @@
                 'style' => 'margin: 40px 0px 70px 0px;'
                 ]); ?>&#010;
             <?= $this->Html->link(
-                '戻る', ['action' => 'subview', $id], [
+                '戻る', ['action' => 'view', $id], [
                 'class' => 'btn-group btn btn-default',
                 'style' => 'margin: 40px 0px 70px 10px;'
                 ]) ;?>
