@@ -524,11 +524,6 @@ class StudentsController extends AppController{
         $purpose_rowcount = substr_count($this->request->data['Student']['detail_purpose'], "\n") + 1;
         $this->set('purpose_rowcount', $purpose_rowcount);
 
-        // 備考に改行がある場合、全て表示させた状態で編集を開始する
-        $comment_rowcount = 0;
-        $comment_rowcount = substr_count($this->request->data['Student']['comment'], "\n") + 1;
-        $this->set('comment_rowcount', $comment_rowcount);
-
         // 日付フォーマット加工(array→string)
         if ($confirm['Student']['birthdate']['year'] != '') {
             $birthdate =    $confirm['Student']['birthdate']['year'].'-'.
