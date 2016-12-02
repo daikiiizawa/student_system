@@ -55,6 +55,11 @@ class StudentsController extends AppController{
         $this->set('direction', $direction);
         $this->set('students', $this->paginate('Student'));
 
+        // 絞込時、該当データが存在しない場合のアラートメッセージ
+        if (count($this->paginate('Student')) == 0) {
+            $this->Flash->error('該当データなし');
+        }
+
         // 絞込ステータス表示用
         $students_status_code = '0';
         if (!empty($this->request->data['Student'])) {
