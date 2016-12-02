@@ -79,6 +79,16 @@ class StudentsController extends AppController{
         $id = $this->request->data['Student']['id'];
         $this->set('id', $id);
 
+        // 受講の目的に改行がある場合、全て表示させた状態で編集を開始する
+        $purpose_rowcount = 0;
+        $purpose_rowcount = substr_count($this->request->data['Student']['detail_purpose'], "\n") + 1;
+        $this->set('purpose_rowcount', $purpose_rowcount);
+
+        // 備考に改行がある場合、全て表示させた状態で編集を開始する
+        $comment_rowcount = 0;
+        $comment_rowcount = substr_count($this->request->data['Student']['comment'], "\n") + 1;
+        $this->set('comment_rowcount', $comment_rowcount);
+
         // バリデーションのエラーメッセージ、エラー塗りつぶし箇所の変数宣言
         $errors = array();
         $datetime_errors = array();
@@ -90,6 +100,7 @@ class StudentsController extends AppController{
             'email' => '',
             'phone_number' => '',
             'birthdate' => '',
+            'postalcode' => ''
             ];
         $this->set('alert_color',$alert_color);
         $datetime_alert_color = [
@@ -116,6 +127,11 @@ class StudentsController extends AppController{
         $id = $this->request->data['Student']['id'];
         $this->set('id', $id);
 
+        // 受講の目的に改行がある場合、全て表示させた状態で編集を開始する
+        $purpose_rowcount = 0;
+        $purpose_rowcount = substr_count($this->request->data['Student']['detail_purpose'], "\n") + 1;
+        $this->set('purpose_rowcount', $purpose_rowcount);
+
         // バリデーションのエラーメッセージ、エラー塗りつぶし箇所の変数宣言
         $errors = array();
         $this->set('errors',$errors);
@@ -125,6 +141,7 @@ class StudentsController extends AppController{
             'email' => '',
             'phone_number' => '',
             'birthdate' => '',
+            'postalcode' => ''
             ];
         $this->set('alert_color',$alert_color);
     }
@@ -164,7 +181,7 @@ class StudentsController extends AppController{
             'email' => '',
             'phone_number' => '',
             'birthdate' => '',
-            'first_meet_datetime' => ''
+            'postalcode' => ''
             ];
         $this->set('alert_color', $alert_color);
         $datetime_alert_color = [
@@ -463,6 +480,7 @@ class StudentsController extends AppController{
                     'email' => '',
                     'phone_number' => '',
                     'birthdate' => '',
+                    'postalcode' => ''
                     ];
                 foreach ($errors as $key => $error) {
                     $alert_color[$key] = '#FADBDA';
@@ -521,7 +539,9 @@ class StudentsController extends AppController{
                     'family_name' => '', 'given_name' => '',
                     'family_name_kana' => '', 'given_name_kana' => '',
                     'email' => '',
-                    'phone_number' => ''
+                    'phone_number' => '',
+                    'birthdate' => '',
+                    'postalcode' => ''
                     ];
                 foreach ($errors as $key => $error) {
                     $alert_color[$key] = '#FADBDA';

@@ -134,9 +134,9 @@ $status_edit = Configure::read("status_edit");
 <?= $this->Form->input('comment', [
     'label' => ['text' => '備考', 'class' => 'col-xs-3 h5 text-right'],
     'type'  => 'text',
-    'rows' => 3,
+    'rows' => $comment_rowcount,
     'class' => 'form-control col-xs-7',
-    'style' => 'width:50%; max-width:400px; max-height:60px'
+    'style' => 'width:50%; max-width:400px; max-height:200px'
     ]); ?>
 </div>
 </div>

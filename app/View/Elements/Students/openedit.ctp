@@ -117,7 +117,9 @@ $region_name = Configure::read("region_name");
     'type'  => 'text',
     'placeholder' => '1234567',
     'onKeyUp' => "AjaxZip3.zip2addr(this,'','pref01','address');",
-    'class' => 'form-control col-xs-7'
+    'class' => 'form-control col-xs-7',
+    'style' => 'background-color:'.$alert_color['postalcode'],
+    'error' => false
     ]); ?>
 </div>
 </div>
@@ -168,10 +170,10 @@ $region_name = Configure::read("region_name");
 <?= $this->Form->input('detail_purpose', [
     'label' => ['text' => '受講の目的(詳細)', 'class' => 'col-xs-3 h5 text-right'],
     'type'  => 'text',
-    'rows' => '2',
+    'rows' => $purpose_rowcount,
     'placeholder' => 'フリー入力(任意)',
     'class' => 'form-control col-xs-7',
-    'style' => 'width:50%; max-width:400px; max-height:60px'
+    'style' => 'width:50%; max-width:400px; max-height:200px'
     ]); ?>
 </div>
 </div>
