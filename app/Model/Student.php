@@ -92,14 +92,9 @@ class Student extends AppModel {
             ],
         ],
         'postalcode' => [
-            'required' => [
-                'rule' => 'notBlank',
-                'message' => '電話番号を入力してください'
-            ],
-        ],
-        'postalcode' => [
             'numeric' => [
                 'rule' => 'numeric',
+                'allowEmpty' => true,
                 'message' => '郵便番号はハイフン無しの半角数字で入力して下さい'
             ],
         ],

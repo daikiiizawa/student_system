@@ -170,6 +170,16 @@ class StudentsController extends AppController{
         $this->set('confirm', $confirm);
         $confirm['Student']['address'] = $confirm['address'];
 
+        // 受講の目的に改行がある場合、全て表示させた状態で編集を開始する
+        $purpose_rowcount = 0;
+        $purpose_rowcount = substr_count($this->request->data['Student']['detail_purpose'], "\n") + 1;
+        $this->set('purpose_rowcount', $purpose_rowcount);
+
+        // 備考に改行がある場合、全て表示させた状態で編集を開始する
+        $comment_rowcount = 0;
+        $comment_rowcount = substr_count($this->request->data['Student']['comment'], "\n") + 1;
+        $this->set('comment_rowcount', $comment_rowcount);
+
         // エラーメッセージ、エラーメッセージ出力時の塗りつぶしの変数宣言
         $errors = array();
         $this->set('errors',$errors);
@@ -508,6 +518,16 @@ class StudentsController extends AppController{
         $this->set('confirm', $confirm);
 
         $confirm['Student']['address'] = $confirm['address'];
+
+        // 受講の目的に改行がある場合、全て表示させた状態で編集を開始する
+        $purpose_rowcount = 0;
+        $purpose_rowcount = substr_count($this->request->data['Student']['detail_purpose'], "\n") + 1;
+        $this->set('purpose_rowcount', $purpose_rowcount);
+
+        // 備考に改行がある場合、全て表示させた状態で編集を開始する
+        $comment_rowcount = 0;
+        $comment_rowcount = substr_count($this->request->data['Student']['comment'], "\n") + 1;
+        $this->set('comment_rowcount', $comment_rowcount);
 
         // 日付フォーマット加工(array→string)
         if ($confirm['Student']['birthdate']['year'] != '') {
