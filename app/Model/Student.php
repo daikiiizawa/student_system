@@ -42,11 +42,13 @@ class Student extends AppModel {
             ],
             'katakana' => [
                 'rule' => ['katakana_only'],
-                'message' => 'フリガナ(姓)は全角カタカナで入力して下さい'
+                'message' => 'フリガナ(姓)は全角カタカナで入力して下さい',
+                'class' => 'furigana_sei'
             ],
             'length' => [
                 'rule' => ['between', 1, 50],
-                'message' => 'フリガナ(姓)を50字以下で入力して下さい'
+                'message' => 'フリガナ(姓)を50字以下で入力して下さい',
+                'class' => 'furigana_sei'
             ],
         ],
         'given_name_kana' => [
@@ -56,11 +58,13 @@ class Student extends AppModel {
             ],
             'katakana' => [
                 'rule' => ['katakana_only'],
-                'message' => 'フリガナ(名)は全角カタカナで入力して下さい'
+                'message' => 'フリガナ(名)は全角カタカナで入力して下さい',
+                'class' => 'furigana_sei'
             ],
             'length' => [
                 'rule' => ['between', 1, 50],
-                'message' => 'フリガナ(名)を50字以下で入力して下さい'
+                'message' => 'フリガナ(名)を50字以下で入力して下さい',
+                'class' => 'furigana_sei'
             ],
         ],
         'email' => [
