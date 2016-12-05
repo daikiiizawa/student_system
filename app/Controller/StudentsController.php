@@ -89,6 +89,10 @@ class StudentsController extends AppController{
         $purpose_rowcount = substr_count($this->request->data['Student']['detail_purpose'], "\n") + 1;
         $this->set('purpose_rowcount', $purpose_rowcount);
 
+        // ajaxの住所出力時のエラー対応
+        $confirm['address'] = '';
+        $this->set('confirm',$confirm);
+
         // 備考に改行がある場合、全て表示させた状態で編集を開始する
         $comment_rowcount = 0;
         $comment_rowcount = substr_count($this->request->data['Student']['comment'], "\n") + 1;
@@ -136,6 +140,10 @@ class StudentsController extends AppController{
         $purpose_rowcount = 0;
         $purpose_rowcount = substr_count($this->request->data['Student']['detail_purpose'], "\n") + 1;
         $this->set('purpose_rowcount', $purpose_rowcount);
+
+        // ajaxの住所出力時のエラー対応
+        $confirm['address'] = '';
+        $this->set('confirm',$confirm);
 
         // バリデーションのエラーメッセージ、エラー塗りつぶし箇所の変数宣言
         $errors = array();
