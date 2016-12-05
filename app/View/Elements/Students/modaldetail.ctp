@@ -1,11 +1,6 @@
 <?php
 $createdDetail = Configure::read("createdDetail");
-$nameDetail = Configure::read("nameDetail");
-$meetingDetail = Configure::read("meetingDetail");
-$admitDetail = Configure::read("admitDetail");
 $yomiDetail = Configure::read("yomiDetail");
-$statusDetail = Configure::read("statusDetail");
-$contactDetail = Configure::read("contactDetail");
 $idDetail = Configure::read("idDetail");
 ?>
 
@@ -27,7 +22,7 @@ $idDetail = Configure::read("idDetail");
             </div>
             <!-- 5.モーダルのボディ -->
             <div class="modal-body">
-                <?= $$detailLabel;?>
+                <small><?= $$detailLabel;?></small>
             </div>
             <!-- 6.モーダルのフッタ -->
             <div class="modal-footer">

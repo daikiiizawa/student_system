@@ -80,12 +80,6 @@ $status = Configure::read("status");
                         'escape' => false
                     ]
                 )));?>
-                <!-- モーダルで項目の詳細説明表示 -->
-                <?= $this->element('Students/modaldetail',[
-                    'modalLabel' => 'name',
-                    'titleLabel' => '氏名',
-                    'detailLabel' => 'nameDetail'
-                ]); ?>
             </th>
 
             <th>
@@ -99,12 +93,6 @@ $status = Configure::read("status");
                         'escape' => false
                     ]
                 )));?>
-                <!-- モーダルで項目の詳細説明表示 -->
-                <?= $this->element('Students/modaldetail',[
-                    'modalLabel' => 'meeting',
-                    'titleLabel' => '面談希望日',
-                    'detailLabel' => 'meetingDetail'
-                ]); ?>
             </th>
             <th>
                 <?= urldecode($this->Html->link(
@@ -117,12 +105,6 @@ $status = Configure::read("status");
                         'escape' => false
                     ]
                 )));?>
-                <!-- モーダルで項目の詳細説明表示 -->
-                <?= $this->element('Students/modaldetail',[
-                    'modalLabel' => 'admit',
-                    'titleLabel' => '入学月',
-                    'detailLabel' => 'admitDetail'
-                ]); ?>
             </th>
             <th>
                 <?= urldecode($this->Html->link(
@@ -153,12 +135,6 @@ $status = Configure::read("status");
                         'escape' => false
                     ]
                 )));?>
-                <!-- モーダルで項目の詳細説明表示 -->
-                <?= $this->element('Students/modaldetail',[
-                    'modalLabel' => 'status',
-                    'titleLabel' => '生徒ステータス',
-                    'detailLabel' => 'statusDetail'
-                ]); ?>
             </th>
             <th>
                 <?= urldecode($this->Html->link(
@@ -171,12 +147,6 @@ $status = Configure::read("status");
                         'escape' => false
                     ]
                 )));?>
-                <!-- モーダルで項目の詳細説明表示 -->
-                <?= $this->element('Students/modaldetail',[
-                    'modalLabel' => 'contact',
-                    'titleLabel' => '最終連絡日',
-                    'detailLabel' => 'contactDetail'
-                ]); ?>
             </th>
             <th>
                 <?= urldecode($this->Html->link(
