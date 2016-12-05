@@ -27,6 +27,7 @@ $programming_lv = Configure::read("programming_lv");
                     'class' => 'form-control col-xs-3',
                     'style' => 'width: 49%;',
                     'placeholder' => '姓',
+                    'error' => false,
                 ]); ?>
                 <?= $this->Form->input('given_name', [
                     'label' => false,
@@ -34,6 +35,7 @@ $programming_lv = Configure::read("programming_lv");
                     'class' => 'form-control',
                     'style' => 'width: 50%; margin-left: 1%',
                     'placeholder' => '名',
+                    'error' => false,
                 ]); ?>
             </div>
         </div>
