@@ -1,4 +1,15 @@
 <?php
+
+// 一覧ページの項目詳細説明文
+$config['createdDetail'] = '登録日について';
+$config['nameDetail'] = '氏名について';
+$config['meetingDetail'] = '面談希望日について';
+$config['admitDetail'] = '入学月について';
+$config['yomiDetail'] = 'ヨミについて';
+$config['statusDetail'] = '生徒ステータスについて';
+$config['contactDetail'] = '最終連絡日について';
+$config['idDetail'] = 'IDについて';
+
 $config['programming_lv'] = [
     '初めてプログラミングに触れる',
     'プログラミングを少し学んだことがある',
