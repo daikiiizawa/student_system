@@ -147,6 +147,7 @@ $region_name = Configure::read("region_name");
     'type'  => 'text',
     'name' => 'address',
     'placeholder' => '千代田区1-2-3',
+    'default' => $confirm['address'],
     'class' => 'form-control col-xs-7',
     'style' => 'width:50%'
     ]); ?>

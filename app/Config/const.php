@@ -1,4 +1,18 @@
 <?php
+
+// 一覧ページの項目詳細説明文
+$config['createdDetail'] = 'エントリーフォームから応募が入った日です。';
+$config['yomiDetail'] =
+    'A：書類・入金ともに回収済み'.nl2br("\n").
+    'B：書類回収済み'.nl2br("\n").
+    'C：口頭ベースで本科入会確定'.nl2br("\n").
+    'D：CAMP入会確定'.nl2br("\n").
+    'E：面談確定'.nl2br("\n").
+    'F：メール連絡済'.nl2br("\n").
+    'G：連絡取れず';
+
+$config['idDetail'] = 'アフィリエイトのIDです。';
+
 $config['programming_lv'] = [
     '初めてプログラミングに触れる',
     'プログラミングを少し学んだことがある',
@@ -10,7 +24,7 @@ $config['purpose'] = ['起業', '転職', 'フリーランス', 'スキルアッ
 $config['pc'] = ['Mac', 'Windows7', 'Windows8', 'Windows10', 'その他'];
 $config['status'] = ['入会前', '学習中', '卒業済', '削除予定', '全表示'];
 $config['status_edit'] = ['入会前', '学習中', '卒業済', '削除予定'];
-$config['yomi'] = ['A', 'B', 'C'];
+$config['yomi'] = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
 $config['month'] = [
     '01月' => '01月',
     '02月' => '02月',

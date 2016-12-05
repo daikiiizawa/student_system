@@ -62,39 +62,12 @@ $status = Configure::read("status");
                         'escape' => false
                     ]
                 )));?>
-
-                <!-- 1.モーダル表示 -->
-                <!-- エレメントにする予定 -->
-                <a data-toggle="modal" data-target="#modal-example">
-                    [？]
-                </a>
-
-                <!-- 2.モーダルの配置 -->
-                <div class="modal" id="modal-example" tabindex="-1">
-                    <div class="modal-dialog modal-sm">
-
-                        <!-- 3.モーダルのコンテンツ -->
-                        <div class="modal-content">
-                            <!-- 4.モーダルのヘッダ -->
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <h4 class="modal-title" id="modal-label">登録日とは</h4>
-                            </div>
-                            <!-- 5.モーダルのボディ -->
-                            <div class="modal-body">
-                                ここに内容を書く
-                            </div>
-                            <!-- 6.モーダルのフッタ -->
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- モーダル終わり -->
-
+                <!-- モーダルで項目の詳細説明表示 -->
+                <?= $this->element('Students/modaldetail',[
+                    'modalLabel' => 'created',
+                    'titleLabel' => '登録日',
+                    'detailLabel' => 'createdDetail'
+                ]); ?>
             </th>
             <th>
                 <?= urldecode($this->Html->link(
@@ -108,6 +81,7 @@ $status = Configure::read("status");
                     ]
                 )));?>
             </th>
+
             <th>
                 <?= urldecode($this->Html->link(
                     '面談希望日',
@@ -143,6 +117,12 @@ $status = Configure::read("status");
                         'escape' => false
                     ]
                 )));?>
+                <!-- モーダルで項目の詳細説明表示 -->
+                <?= $this->element('Students/modaldetail',[
+                    'modalLabel' => 'yomi',
+                    'titleLabel' => 'ヨミ',
+                    'detailLabel' => 'yomiDetail'
+                ]); ?>
             </th>
             <th>
                 <?= urldecode($this->Html->link(
@@ -179,6 +159,12 @@ $status = Configure::read("status");
                         'escape' => false
                     ]
                 )));?>
+                <!-- モーダルで項目の詳細説明表示 -->
+                <?= $this->element('Students/modaldetail',[
+                    'modalLabel' => 'id',
+                    'titleLabel' => 'ID',
+                    'detailLabel' => 'idDetail'
+                ]); ?>
             </th>
             <th></th>
         </thead>
