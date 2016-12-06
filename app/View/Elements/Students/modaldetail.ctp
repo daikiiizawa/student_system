@@ -6,7 +6,7 @@ $idDetail = Configure::read("idDetail");
 
 <!-- 1.モーダル表示(エレメント化予定) -->
 <a data-toggle="modal" data-target="#modal-example-<?= $modalLabel;?>">
-    [？]
+    <span class="glyphicon glyphicon-question-sign"></span>
 </a>
 <!-- 2.モーダルの配置 -->
 <div class="modal" id="modal-example-<?= $modalLabel;?>" tabindex="-1">
