@@ -5,55 +5,63 @@ class User extends AppModel{
   public $validate = [
     'email' => [
       'required' => [
-        'rule' => 'notBlank',
-        'message' => 'メールアドレスを入力してください'
+         'rule' => 'notBlank',
+         'message' => 'メールアドレスを入力してください'
       ],
       'validEmail' => [
-        'rule' => 'email',
-        'message' => '正しいメールアドレスを入力してください'
+         'rule' => 'email',
+         'message' => '正しいメールアドレスを入力してください'
       ],
       'emailExists' => [
-        'rule' => ['isUnique', 'email'],
-        'message' => '入力されたメールアドレスは既に登録されています'
+         'rule' => ['isUnique', 'email'],
+         'message' => '入力されたメールアドレスは既に登録されています'
+      ],
+      'maxlength' => [
+          'rule' => ['between', 1, 255],
+          'message' => 'メールアドレスは255字以下で入力して下さい'
       ],
     ],
 
     'password' => [
       'required' => [
-        'rule' => 'notBlank',
-        'message' => 'パスワードを入力してください'
+          'rule' => 'notBlank',
+          'message' => 'パスワードを入力してください'
       ],
       'numeric' => [
-        'rule' => 'alphaNumeric',
-        'message' => 'パスワードは半角英数字のみ使用できます'
+          'rule' => 'alphaNumeric',
+          'message' => 'パスワードは半角英数字のみ使用できます'
       ],
       'minlength' =>[
-        'rule' => ['minLength', 8],
-        'message' => 'パスワードは8文字以上で入力して下さい'
+          'rule' => ['minLength', 8],
+          'message' => 'パスワードは8文字以上で入力して下さい'
+      ],
+      'maxlength' => [
+            'rule' => ['between', 1, 255],
+            'message' => 'パスワードは255字以下で入力して下さい'
       ],
       'match' => [
-        'rule' => 'passwordConfirm',
-        'message' => 'パスワード(確認)と一致していません'
+          'rule' => 'passwordConfirm',
+          'message' => 'パスワード(確認)と一致していません'
       ],
     ],
 
     'password_confirm' => [
-      'required' => [
-        'rule' => 'notBlank',
-        'message' => 'パスワード(確認)を入力してください'
-      ],
+        'required' => [
+            'rule' => 'notBlank',
+            'message' => 'パスワード(確認)を入力してください'
+        ],
     ],
 
     //パスワード変更時のバリデーション
     'password_current' =>[
-      'required' => [
-        'rule' => 'notBlank',
-        'message' => '現在のパスワードが入力されていません'
-      ],
-      'match' => [
-        'rule' => 'checkCurrentPassword',
-        'message' => '現在のパスワードが間違っています'
-      ]
+        'required' => [
+            'rule' => 'notBlank',
+            'message' => '現在のパスワードが入力されていません'
+          ],
+        'match' => [
+            'rule' => 'checkCurrentPassword',
+            'message' => '現在のパスワードが間違っています'
+        ]
     ],
   ];
 
