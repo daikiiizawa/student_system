@@ -3,6 +3,9 @@
 $week = Configure::read("week");
 $yomi = Configure::read("yomi");
 $status = Configure::read("status");
+$createdDetail = Configure::read("createdDetail");
+$yomiDetail = Configure::read("yomiDetail");
+$idDetail = Configure::read("idDetail");
 ?>
 
 <div class='container'>
@@ -62,12 +65,13 @@ $status = Configure::read("status");
                         'escape' => false
                     ]
                 )));?>
-                <!-- モーダルで項目の詳細説明表示 -->
-                <?= $this->element('Students/modaldetail',[
-                    'modalLabel' => 'created',
-                    'titleLabel' => '登録日',
-                    'detailLabel' => 'createdDetail'
-                ]); ?>
+
+                <!-- ツールチップス -->
+                <span   class="glyphicon glyphicon-question-sign"
+                        data-toggle="tooltip"
+                        data-html="true"
+                        title="<?= $createdDetail;?>">
+                </span>
             </th>
             <th>
                 <?= urldecode($this->Html->link(
@@ -117,12 +121,13 @@ $status = Configure::read("status");
                         'escape' => false
                     ]
                 )));?>
-                <!-- モーダルで項目の詳細説明表示 -->
-                <?= $this->element('Students/modaldetail',[
-                    'modalLabel' => 'yomi',
-                    'titleLabel' => 'ヨミ',
-                    'detailLabel' => 'yomiDetail'
-                ]); ?>
+
+                <!-- ツールチップス -->
+                <span   class="glyphicon glyphicon-question-sign"
+                        data-toggle="tooltip"
+                        data-html="true"
+                        title="<?= $yomiDetail;?>">
+                </span>
             </th>
             <th>
                 <?= urldecode($this->Html->link(
@@ -159,12 +164,12 @@ $status = Configure::read("status");
                         'escape' => false
                     ]
                 )));?>
-                <!-- モーダルで項目の詳細説明表示 -->
-                <?= $this->element('Students/modaldetail',[
-                    'modalLabel' => 'id',
-                    'titleLabel' => 'ID',
-                    'detailLabel' => 'idDetail'
-                ]); ?>
+                <!-- ツールチップス -->
+                <span   class="glyphicon glyphicon-question-sign"
+                        data-toggle="tooltip"
+                        data-html="true"
+                        title="<?= $idDetail;?>">
+                </span>
             </th>
             <th></th>
         </thead>

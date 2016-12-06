@@ -13,6 +13,9 @@
     <?php echo $this->Html->css('bootstrap.min'); ?>
     <?php echo $this->Html->css('bootstrap-custom'); ?>
 
+    <!-- ツールチップス用jQuery -->
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <?php echo $this->Html->script('myscript'); ?>
 
 	<style>
 
